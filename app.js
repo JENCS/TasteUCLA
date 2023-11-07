@@ -79,12 +79,26 @@ app.put('/reviews/:id', async (req, res) => {
         const result = await Review.findByIdAndUpdate(id, req.body);
 
         if (!result) {
-            return res.status(404).send({
-                message: 'Review not found',
-            });
+            return res.status(404).send({ message: 'Review not found' });
         }
 
         return res.status(200).send({ message: 'Review updated successfully' });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).send({ message: error.message });
+    }
+})
+
+app.delete('/reviews/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const result = await Review.findByIdAndDelete(id);
+
+        if (!result) {
+            return res.status(404).send({ message: 'Review not found' });
+        }
+
+        return res.status(200).send({ message: 'Review deleted successfully' });
     } catch (error) {
         console.log(error.message);
         return res.status(500).send({ message: error.message });
