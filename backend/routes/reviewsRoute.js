@@ -1,18 +1,9 @@
 import express from 'express';
-import { PORT, mongoDBURI } from './config.js';
-import mongoose from 'mongoose';
-import { Review } from './models/reviewModel.js';
+import { Review } from '../models/reviewModel.js';
 
-const app = express();
+const router = express.Router();
 
-app.use(express.json());
-
-app.get('/', (req, res) => {
-    console.log(req);
-    return res.status(222).send('TasteUCLA');
-});
-
-app.post('/reviews', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         if (
             !req.body.title ||
@@ -38,7 +29,7 @@ app.post('/reviews', async (req, res) => {
     }
 });
 
-app.get('/reviews', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const reviews = await Review.find({});
 
@@ -50,9 +41,9 @@ app.get('/reviews', async (req, res) => {
         console.log(error.message);
         return res.status(500).send({ message: error.message });
     }
-})
+});
 
-app.get('/reviews/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const review = await Review.findById(id);
@@ -62,9 +53,9 @@ app.get('/reviews/:id', async (req, res) => {
         console.log(error.message);
         return res.status(500).send({ message: error.message });
     }
-})
+});
 
-app.put('/reviews/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         if (
             !req.body.title ||
@@ -87,9 +78,9 @@ app.put('/reviews/:id', async (req, res) => {
         console.log(error.message);
         return res.status(500).send({ message: error.message });
     }
-})
+});
 
-app.delete('/reviews/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const result = await Review.findByIdAndDelete(id);
@@ -103,16 +94,6 @@ app.delete('/reviews/:id', async (req, res) => {
         console.log(error.message);
         return res.status(500).send({ message: error.message });
     }
-})
+});
 
-mongoose
-    .connect(mongoDBURI)
-    .then(() => {
-        console.log('App connected to database');
-        app.listen(PORT, () => {
-            console.log(`Example app listening on port ${PORT}`);
-        });
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+export default router;
