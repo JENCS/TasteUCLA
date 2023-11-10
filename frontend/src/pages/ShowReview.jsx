@@ -32,7 +32,7 @@ const ShowReview = () => {
                 <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
                     <div className='my-4'>
                         <span className='text-xl mr-4 text-gray-500'>Id</span>
-                        <span>{review.id}</span>
+                        <span>{review._id}</span>
                     </div>
                     <div className='my-4'>
                         <span className='text-xl mr-4 text-gray-500'>Title</span>
