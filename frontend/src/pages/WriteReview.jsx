@@ -4,7 +4,7 @@ import Spinner from '../components/Spinner'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const CreateReview = () => {
+const WriteReview = () => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [rating, setRating] = useState('');
@@ -33,7 +33,7 @@ const CreateReview = () => {
     return (
         <div className='p-4'>
             <BackButton />
-            <h1 className='text-3xl my-4'>Create book</h1>
+            <h1 className='text-3xl my-4'>Write a review</h1>
             {loading ? <Spinner /> : ''}
             <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
                 <div className='my-4'>
@@ -71,4 +71,4 @@ const CreateReview = () => {
     );
 }
 
-export default CreateReview
+export default WriteReview
