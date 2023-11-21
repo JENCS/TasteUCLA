@@ -1,4 +1,5 @@
 import "../styles/WriteReview.css";
+import Navbar from "../components/Navbar.jsx";
 import React, { useState } from "react";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
@@ -42,6 +43,7 @@ const WriteReview = () => {
 
   return (
     <div>
+      <Navbar />
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
@@ -89,7 +91,7 @@ const WriteReview = () => {
             className="description-input"
           ></textarea>
         </div>
-        {/* <div>
+        <div>
           <label>Author</label>
           <input
             type="text"
@@ -104,7 +106,7 @@ const WriteReview = () => {
             value={rating}
             onChange={(e) => setRating(e.target.value)}
           />
-        </div> */}
+        </div>
         <div className="submit-container">
           <button onClick={handleSubmitReview} className="submit-btn">
             Submit

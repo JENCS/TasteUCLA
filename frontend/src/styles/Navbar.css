@@ -1,0 +1,119 @@
+a {
+  text-decoration: none;
+}
+
+.navbar {
+  background-color: rgb(5, 29, 49);
+  position: fixed;
+  text-align: center;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar > * {
+  /* background-color: aliceblue; */
+  width: 100%;
+  display: flex;
+}
+
+.navigation-left {
+  padding-left: 40px;
+  gap: 40px;
+}
+
+.navigation-middle {
+  justify-content: center;
+  gap: 140px;
+}
+
+.navigation-right {
+  justify-content: flex-end;
+  padding-right: 50px;
+  gap: 40px;
+}
+
+.navigation-left,
+.navigation-middle,
+.navigation-right > * {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.navigation-middle:hover > * {
+  cursor: pointer;
+}
+
+.input-field {
+  width: 300px;
+  z-index: 2;
+  position: relative;
+}
+
+.search-icon {
+  position: relative;
+  z-index: 1;
+  color: rgb(134, 134, 134);
+  font-size: 32px;
+  left: -45px;
+  top: 9px;
+}
+
+.home-btn {
+  font-size: 40px;
+  position: relative;
+  top: 5px;
+  color: white;
+}
+
+.profile-icon {
+  font-size: 40px;
+  padding: 0;
+  position: relative;
+  right: 0px;
+}
+
+.profile-icon:hover {
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  position: fixed;
+  background-color: rgb(170, 170, 201);
+  left: 85%;
+  top: 70px;
+  width: 15%;
+}
+
+.profile-dropdown > p,
+.sign-out-btn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid rgb(89, 93, 115);
+  color: white;
+}
+
+.profile-dropdown:hover > p {
+  cursor: pointer;
+}
+
+.search-dropdown {
+  box-sizing: border-box;
+  z-index: 0;
+  position: fixed;
+  background-color: rgb(233, 177, 234);
+  left: 120px;
+  top: 61px;
+  width: 312px;
+  height: 300px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.search-dropdown > p {
+  font-size: 22px;
+}
