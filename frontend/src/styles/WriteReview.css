@@ -1,0 +1,135 @@
+input,
+textarea,
+.submit-btn {
+  border: 1px solid rgb(107, 117, 255);
+}
+
+.header {
+  font-size: 40px;
+  text-align: center;
+}
+
+.title-rating {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  font-size: 30px;
+  margin-top: 40px;
+}
+
+.title-container,
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  /* background-color: blue; */
+}
+
+.title-container > label,
+.rating-container > label {
+  margin-left: 8px;
+}
+
+.title-input,
+.rating-input {
+  font-size: 26px;
+  padding: 5px;
+  width: 250px;
+}
+
+.title-input {
+  width: 30vw;
+}
+
+.photo-container {
+  margin-top: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  /* width: 200px;
+  height: 200px; */
+}
+
+.photo-container > label {
+  font-size: 24px;
+}
+
+.photo-input {
+  width: 300px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4px;
+  background-color: rgb(221, 235, 255);
+  border: 0px;
+  border-radius: 20px;
+}
+
+.uploaded-img {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.uploaded-img > img {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+input[type="file"]::file-selector-button {
+  cursor: pointer;
+  background-color: aliceblue;
+  border: 1px solid black;
+  margin-top: 35px;
+  margin-left: 42px;
+  margin-right: 16px;
+}
+
+.description-container {
+  text-align: left;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.description-container > label {
+  margin-left: 8px;
+  font-size: 30px;
+}
+
+.description-input {
+  margin-top: 5px;
+  height: 200px;
+  padding: 8px;
+  font-size: 18px;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.submit-btn {
+  width: 300px;
+  height: 60px;
+  font-size: 24px;
+  margin-top: 60px;
+}
+
+.submit-btn:hover {
+  background-color: rgb(244, 244, 255);
+}
+
+/* #inp {
+  text-align: center;
+  margin: auto;
+} */
