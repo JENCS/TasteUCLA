@@ -1,0 +1,90 @@
+.profile-page {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.img-container-profile {
+  text-align: center;
+  /* background-color: rgb(221, 235, 255); */
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding: 30px 0px;
+  border-radius: 10px; */
+}
+
+.img-container-profile > p {
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+}
+
+.default-profile-img {
+  font-size: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.profile-input {
+  border: none;
+}
+
+.custom-file-upload > [type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* .uploaded-img {
+  max-width: 200px;
+  max-height: 200px;
+} */
+
+.crop-img {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.crop-img > img {
+  width: 100%;
+  height: 100%;
+}
+
+.jiwejfijwe {
+  /* display: inline-block;
+  overflow: hidden;
+  position: relative;
+  max-width: 400px;
+  max-height: 400px; */
+  /* display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto; */
+  /* width: 400px;
+  height: 400px; */
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-info {
+  margin-top: 20px;
+}
+
+.user-info > h1 {
+  font-size: 32px;
+}
+
+.user-info > h3 {
+  font-size: 24px;
+}

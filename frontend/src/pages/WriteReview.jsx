@@ -15,9 +15,13 @@ const WriteReview = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [file, setFile] = useState();
-  function handleChange(e) {
+
+  function uploadImage(e) {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
+  }
+  function removeImage(e) {
+    setFile();
   }
   const handleSubmitReview = () => {
     const data = {
@@ -43,7 +47,7 @@ const WriteReview = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
@@ -73,14 +77,14 @@ const WriteReview = () => {
         </div>
         <div className="photo-container">
           <label>Photo (optional)</label>
-          <input
-            type="file"
-            value={photo}
-            onChange={handleChange}
-            className="photo-input"
-          />
-          <div className="uploaded-img">
-            <img src={file} />
+          <div className="photo-input">
+            <input type="file" onChange={uploadImage} />
+            {file && (
+              <div className="uploaded-img">
+                <img src={file} />
+                <button onClick={removeImage}>Delete</button>
+              </div>
+            )}
           </div>
         </div>
         <div className="description-container">
