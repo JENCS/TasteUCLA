@@ -1,0 +1,182 @@
+
+.root {
+    position: absolute;
+    align-items: center;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    flex-direction: column;
+    outline: solid 1px #aabcd2;
+    outline-offset: -1px;
+    overflow: hidden;
+}
+
+
+.tasteUCLA {
+  color: #1e1e1e;
+  font-size: 41.5102px;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10%;
+  font-size: 30px;
+  width: 218.8717px;
+  height: min-content;
+  flex-direction: column;
+}
+
+.logo{
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  top: 20%;
+  width: 40.5584px;
+  height: 39.6734px;
+  background-color: #9747ff;
+  transform: rotate(45deg);
+}
+
+.username {
+  color: #1e1e1e;
+  font-size: 16.9814px;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 36%;
+  width: 89.5384px;
+  height: 7.5%;
+  flex-direction: column;
+}
+
+.username_textbox{
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 40%;
+  width: 255.4289px;
+  height: 7.5%;
+  outline: solid 1px #9747ff;
+  outline-offset: 0px;
+}
+
+.password {
+  color: #1e1e1e;
+  font-size: 16.9814px;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  position: absolute;
+  top: 51%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 89.5384px;
+  height: min-content;
+  flex-direction: column;
+}
+/**
+width: 89.5384px;
+**/
+
+.password_textbox {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 55%;
+  width: 255.4289px;
+  height: 7.5%;
+  outline: solid 1px #9747ff;
+  outline-offset: 0px;
+}
+
+
+.signIn {
+  color: #1e1e1e;
+  font-size: 16.9814px;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 71%;
+  width: min-content;
+  height: min-content;
+  white-space: nowrap;
+  flex-direction: column;
+}
+
+.signInButton {
+  text-align: center;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 70%;
+  width: 162.267px;
+  height: 39.6233px;
+  outline: solid 1px #9747ff;
+  outline-offset: 0px;
+}
+
+.donTHaveAnAccount {
+  color: #1e1e1e;
+  font-size: 13.2078px;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  letter-spacing: -0.022em;
+  text-align: center;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 81%;
+  width: 144.8138px;
+  height: min-content;
+  flex-direction: column;
+}
+
+.signUp {
+  color: #1e1e1e;
+  font-size: 16.9814px;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 85%;
+  width: min-content;
+  height: min-content;
+  white-space: nowrap;
+  flex-direction: column;
+}
+
+.signUpButton {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 85%;
+  width: 145.2855px;
+  height: 26.4156px;
+  outline: solid 1px #9747ff;
+  outline-offset: 0px;
+}
