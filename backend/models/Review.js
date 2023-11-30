@@ -20,7 +20,7 @@ const reviewSchema = new mongoose.Schema(
             required: false
         },
         img: {
-            type: buffer,
+            type: mongoose.Types.ObjectId,
             required: false
         }
     },

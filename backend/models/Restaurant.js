@@ -7,7 +7,7 @@ const restaurantSchema = new mongoose.Schema(
             required: true
         },
         img: {
-            type: buffer,
+            type: mongoose.Types.ObjectId,
             required: true
         },
         reviews: [Schema.Types.ObjectId]
