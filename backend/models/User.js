@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import mongoose from "mongoose";
-=======
-import mongoose from "mongoose"
->>>>>>> main
 
 const userSchema = new mongoose.Schema(
     {
@@ -12,25 +8,21 @@ const userSchema = new mongoose.Schema(
         },
         password: {
             type: String,
-<<<<<<< HEAD
             required: true
         },
         reviews: [mongoose.Types.ObjectId],
         profile_picture: {
             type: mongoose.Types.ObjectId,
             required: false
+        },
+        active: {
+            type: Boolean,
+            default: false,
+            required: true
         }
     },
     {
         timestamps: true
-=======
-            required: true,
-        },
-        active: {
-            type: Boolean,
-            default: true
-        }
->>>>>>> main
     }
 )
 

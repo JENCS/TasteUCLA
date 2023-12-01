@@ -6,8 +6,8 @@ const restaurantSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        img: {
-            type: mongoose.Types.ObjectId,
+        image: {
+            type: Buffer,
             required: true
         },
         reviews: [Schema.Types.ObjectId]

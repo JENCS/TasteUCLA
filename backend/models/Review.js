@@ -11,15 +11,21 @@ const reviewSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        restaurant: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true
+        },
         rating: {
             type: Number,
             required: true,
         },
         text: {
-            type: String
+            type: String,
+            required: false
         },
-        img: {
-            type: Buffer
+        image: {
+            type: Buffer,
+            required: false
         }
     },
     {
