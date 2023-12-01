@@ -39,7 +39,7 @@ function Locations() {
               <div class={classes.grid_item}>12</div>
             </div>
             <div className={classes.CentralCampus_title}>South Campus</div>
-            <div class={classes.CentralCampus_reviews_grid}>
+            <div class={classes.SouthCampus_reviews_grid}>
             <div class={classes.grid_item}>1</div>
               <div class={classes.grid_item}>2</div>
               <div class={classes.grid_item}>3</div>
