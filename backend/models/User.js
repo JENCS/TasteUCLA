@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import mongoose from "mongoose";
+=======
+import mongoose from "mongoose"
+>>>>>>> main
 
 const userSchema = new mongoose.Schema(
     {
@@ -8,6 +12,7 @@ const userSchema = new mongoose.Schema(
         },
         password: {
             type: String,
+<<<<<<< HEAD
             required: true
         },
         reviews: [mongoose.Types.ObjectId],
@@ -18,6 +23,14 @@ const userSchema = new mongoose.Schema(
     },
     {
         timestamps: true
+=======
+            required: true,
+        },
+        active: {
+            type: Boolean,
+            default: true
+        }
+>>>>>>> main
     }
 )
 

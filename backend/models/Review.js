@@ -9,23 +9,21 @@ const reviewSchema = new mongoose.Schema(
         },
         title: {
             type: String,
-            required: true
+            required: true,
         },
         rating: {
             type: Number,
-            required: true
+            required: true,
         },
         text: {
-            type: String,
-            required: false
+            type: String
         },
         img: {
-            type: mongoose.Types.ObjectId,
-            required: false
+            type: Buffer
         }
     },
     {
-        timestamps: true
+        timestamps: true,
     }
 )
 

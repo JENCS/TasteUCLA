@@ -2,7 +2,6 @@ import { useState } from 'react';
 import resets from '../styles/_resets.module.css';
 import classes from '../styles/LoginPage.module.css';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 
 // search username and check password
 function login(username, password) {
@@ -12,7 +11,7 @@ function login(username, password) {
     if (password != "1234")
       alert("incorrect password");
     else {
-      window.location.href = '/signup';
+      window.location.href = '/';
     }
   }
 }
@@ -39,7 +38,7 @@ function LoginPage() {
       </div>
       <div className={classes.signUp}>Sign up</div>
       <div className={classes.signUpButton}>
-        <Button name= "signup_button" style={{ width:"145.2855px"}} href = "/signup"></Button>
+        <Button name= "signup_button" style={{ width:"145.2855px"}} href = "/sign-up"></Button>
       </div>
     </div>
   );
