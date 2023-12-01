@@ -5,7 +5,6 @@ import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import '../styles/Home.css'; 
 
-
 const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,10 +32,10 @@ const Home = () => {
           <div className="reviews-grid">
             {reviews.map((review) => (
               <Link to={`/reviews/details/${review._id}`} key={review._id} className="review-card">
+                <img src="/munch.jpeg" alt={"image can't load"} />
                 <h3>{review.title}</h3>
-                <p>{review.subtitle}</p>
-                <img src={review.imageUrl} alt={review.title} />
-                <p className="review-content">{review.content}</p>
+                <p className="review-rating">Rating by {review.author}: {review.rating}</p>
+                <p>{review.description}description here!!!</p>
               </Link>
             ))}
           </div>
