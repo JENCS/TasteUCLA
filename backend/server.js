@@ -1,7 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
 import mongoose from 'mongoose'
-import reviewRoute from './routes/reviewRoute.js'
+import userRoutes from './routes/userRoutes.js'
+import reviewRoutes from './routes/reviewRoutes.js'
 import cors from 'cors'
 import corsOptions from './config/corsOptions.js'
 
@@ -13,8 +14,8 @@ app.use(express.json())
 
 app.use(cors(corsOptions))
 
-app.use('/users', userRoute)
-app.use('/reviews', reviewRoute)
+app.use('/users', userRoutes)
+app.use('/reviews', reviewRoutes)
 
 mongoose
     .connect(process.env.DATABASE_URI)
