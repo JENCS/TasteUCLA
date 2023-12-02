@@ -26,6 +26,7 @@ const Home = () => {
       <Navbar />
       <div className="home-container">
         <h1 className="home-title">TasteUCLA</h1>
+        <div className="home-logo"></div>
         {loading ? (
           <Spinner />
         ) : (
