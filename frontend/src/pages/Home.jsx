@@ -35,7 +35,9 @@ const Home = () => {
               <Link to={`/reviews/details/${review._id}`} key={review._id} className="review-card">
                 <img src="/munch.jpeg" alt={"image can't load"} />
                 <h3>{review.title}</h3>
-                <p className="review-rating">Rating by {review.author}: {review.rating}</p>
+                {review.rating && (
+                  <p className="review-rating">Rating by {review.author ? review.author : 'Anonymous'}: {review.rating}</p>
+                )}
                 <p>{review.description}description here!!!</p>
               </Link>
             ))}
