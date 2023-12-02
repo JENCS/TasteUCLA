@@ -1,5 +1,5 @@
 import express from "express";
-import { Review } from "../models/reviewModel.js";
+import { Review } from "../models/Review.js";
 
 const router = express.Router();
 
@@ -14,7 +14,6 @@ router.post("/", async (req, res) => {
       title: req.body.title,
       author: req.body.author,
       rating: req.body.rating,
-      image: req.body.file,
     };
 
     const review = await Review.create(newReview);
@@ -22,7 +21,7 @@ router.post("/", async (req, res) => {
     return res.status(201).send(review);
   } catch (error) {
     console.log(error.message);
-    return res.status(500).send({ message: message.error });
+    return res.status(500).send({ message: error.message });
   }
 });
 
