@@ -35,7 +35,7 @@ const Home = () => {
                 key={review._id}
                 className="review-card"
               >
-                <img src="/munch.jpeg" alt={"image can't load"} />
+                <img src={review.image} alt={"image can't load"} />
                 <h3>{review.title}</h3>
                 <p className="review-rating">
                   Rating by {review.author}: {review.rating}

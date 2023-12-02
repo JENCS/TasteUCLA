@@ -38,7 +38,6 @@ const WriteReview = () => {
       title,
       author,
       rating,
-      file,
       description,
     };
     setLoading(true);
@@ -51,6 +50,7 @@ const WriteReview = () => {
       .catch((error) => {
         setLoading(false);
         alert("An error occurred. Please check the console.");
+        console.log(file);
         console.log(error);
       });
   };
