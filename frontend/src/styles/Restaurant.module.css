@@ -1,0 +1,130 @@
+.root {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    flex-direction: column;
+    outline: solid 1px #aabcd2;
+    outline-offset: -1px;
+    overflow: hidden;
+  }
+
+.restaurant_name{
+  color: #1e1e1e;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  top: 80px;
+  font-size: 50px;
+}
+
+.restaurant_location{
+  color: #1e1e1e;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  top: 80px;
+  font-size: 40px;
+}
+
+.logo{
+  position: relative;
+  outline: solid #1e1e1e;
+  width: 700px;
+  height: 500px;
+  margin-left: auto;
+  margin-right: 50px;
+  top: 120px;
+}
+
+.row{
+  display: flex;
+  margin-bottom: 150px;
+}
+
+.container{
+  position: relative;
+}
+
+.rating{
+  color: #1e1e1e;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  top: 80px;
+  font-size: 40px;
+}
+
+.description{
+  color: #1e1e1e;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  top: 80px;
+  font-size: 40px;
+}
+
+.reviews_container{
+  display: flex;
+}
+
+.reviews_title{
+  color: #1e1e1e;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  font-size: 40px;
+}
+
+.reviews_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(800px, 1375px));
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+} 
+
+.grid_item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  padding: 100px;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
