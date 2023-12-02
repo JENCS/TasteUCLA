@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Home from "./pages/Home";
@@ -15,10 +17,35 @@ import Locations from "./pages/Locations";
 
 const App = () => {
   const [login, setLogin] = useState(true);
+  const navigate = useNavigate();
+  const [user, setUser] = useState("");
+  const [passwd, setPasswd] = useState("");
 
-  const changeLoginState = () => {
-    setLogin(!login);
+  const changeLoginState = (state) => {
+    setLogin(state);
     console.log("changed");
+  };
+
+  const checkLoginInfo = (username, password) => {
+    if (username != "jencs") {
+      alert("Username does not exist");
+    } else {
+      if (password != "1234") {
+        alert("incorrect password");
+      } else {
+        console.log("HERE");
+        // history.pushState({}, "", "/");
+        // navigate("/reviews");
+        window.location.href = "/";
+        changeLoginState(true);
+      }
+    }
+  };
+
+  const deleteAccount = () => {
+    console.log("Deleting account...");
+    window.location.href = "/";
+    changeLoginState(false);
   };
 
   return (
@@ -32,13 +59,21 @@ const App = () => {
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route
           path="/login"
-          element={<LoginPage changeLoginState={changeLoginState} />}
+          element={
+            <LoginPage
+              changeLoginState={changeLoginState}
+              checkLoginInfo={checkLoginInfo}
+            />
+          }
         />
         <Route
           path="/sign-up"
           element={<SignUpPage changeLoginState={changeLoginState} />}
         />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={<Profile deleteAccount={deleteAccount} />}
+        />
         <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
       </Routes>

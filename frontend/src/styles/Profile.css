@@ -48,12 +48,15 @@
 } */
 
 .crop-img {
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
   border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
 }
 
 .crop-img > img {
@@ -79,12 +82,65 @@
 
 .user-info {
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-.user-info > h1 {
-  font-size: 32px;
+.user-info > * > h1 {
+  font-size: 40px;
 }
 
-.user-info > h3 {
+.username-container,
+.password-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.password-container {
+  margin-top: 12px;
+}
+
+.pencil,
+.pencil-two {
+  font-size: 18px;
+  position: relative;
+  top: 14px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.pencil-two {
+  top: 10px;
+}
+
+.bio-container {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 14px;
+}
+
+.bio-container > label {
+  margin-right: auto;
+  margin-left: 20px;
   font-size: 24px;
+}
+
+.bio-text-field {
+  font-size: 18px;
+  margin-top: 4px;
+  padding: 10px;
+  min-height: 150px;
+}
+
+.delete-btn {
+  margin-top: 70px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+.delete-btn:hover {
+  background-color: rgb(243, 242, 242);
 }

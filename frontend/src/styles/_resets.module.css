@@ -23,7 +23,7 @@
 }
 
 .clapyResets p:empty::before {
-  content: '';
+  content: "";
   display: inline-block;
 }
 
