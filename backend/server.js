@@ -14,6 +14,11 @@ app.use(express.json())
 
 app.use(cors(corsOptions))
 
+app.get('/', (req, res) => {
+    console.log(req)
+    return res.status(222).send('TasteUCLA')
+})
+app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
 app.use('/reviews', reviewRoutes)
 
@@ -28,8 +33,3 @@ mongoose
     .catch((error) => {
         console.log(error)
     })
-
-app.get('/', (req, res) => {
-    console.log(req)
-    return res.status(222).send('TasteUCLA')
-})
