@@ -10,7 +10,11 @@ function Locations() {
             <div className={classes.Locations_title}>Restaurant Locations</div>
             <div className={classes.NorthCampus_title}>North Campus</div>
             <div class={classes.NorthCampus_reviews_grid}>
-              <div class={classes.grid_item}>1</div>
+              <div class={classes.grid_item}>
+                <a href="/locations/restaurant">
+                <img src="123.jpeg"></img>
+                </a>
+                </div>
               <div class={classes.grid_item}>2</div>
               <div class={classes.grid_item}>3</div>
               <div class={classes.grid_item}>4</div>

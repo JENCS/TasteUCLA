@@ -1,0 +1,43 @@
+.root {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left:0;
+    right:0;
+    flex-direction: column;
+    outline: solid 1px #aabcd2;
+    outline-offset: -1px;
+    overflow: hidden;
+  }
+
+.restaurant_name{
+  color: #1e1e1e;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  top: 80px;
+  font-size: 30px;
+}
+
+.restaurant_location{
+  color: #1e1e1e;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  top: 80px;
+  font-size: 30px;
+}
