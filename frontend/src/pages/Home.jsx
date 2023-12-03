@@ -36,7 +36,7 @@ const Home = () => {
                 <img src="/munch.jpeg" alt={"image can't load"} />
                 <h3>{review.title}</h3>
                 {review.rating && (
-                  <p className="review-rating">Rating by {review.author ? review.author : 'Anonymous'}: {review.rating}</p>
+                  <p className="review-rating">Rating by {review.author}: {review.rating}</p>
                 )}
                 <p>{review.description}description here!!!</p>
               </Link>
