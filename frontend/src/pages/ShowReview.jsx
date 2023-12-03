@@ -23,14 +23,15 @@ const ShowReview = () => {
         // const srcBlob = URL.createObjectURL(file);
         // const img = new Image();
 
-        const mimeType = "image/png";
-        const b64 = Buffer.from(res.data.image).toString("base64");
-        setImageDisplay(`data:${mimeType};base64,${b64}`);
+        if (res.data.image) {
+          const mimeType = "image/png";
+          const b64 = Buffer.from(res.data.image).toString("base64");
+          setImageDisplay(`data:${mimeType};base64,${b64}`);
+        }
 
         // img.src = `data:${mimeType};base64,${b64}`;
         // document.body.appendChild(img);
         // setImageDisplay(srcBlob);
-        console.log(srcBlob);
         setLoading(false);
       })
       .catch((error) => {

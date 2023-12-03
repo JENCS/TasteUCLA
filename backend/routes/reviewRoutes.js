@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
       title: req.body.title,
       author: req.body.author,
       rating: req.body.rating,
+      description: req.body.description,
       image: req.body.image,
     };
 
