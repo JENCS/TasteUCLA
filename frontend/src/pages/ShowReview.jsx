@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
+import { Buffer } from "buffer";
 
 const ShowReview = () => {
   const [review, setReview] = useState({});
@@ -17,13 +18,18 @@ const ShowReview = () => {
       .then((res) => {
         setReview(res.data);
         const blob = new Blob([review.image]);
-        const file = new File([review.image], "my_name", { type: "image/png" });
+        const file = new File([blob], "my_name", { type: "image/png" });
         const srcBlob = URL.createObjectURL(file);
         const img = new Image();
-        img.src = srcBlob;
+
+        const mimeType = "image/png";
+        const b64 = Buffer.from(review.image).toString("base64");
+        img.src = `data:${mimeType};base64,${b64}`;
+
+        //img.src = srcBlob;
         document.body.appendChild(img);
         setImageDisplay(srcBlob);
-        console.log(file);
+        console.log(srcBlob);
         setLoading(false);
       })
       .catch((error) => {
