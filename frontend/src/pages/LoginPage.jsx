@@ -2,16 +2,22 @@ import { useState } from 'react';
 import resets from '../styles/_resets.module.css';
 import classes from '../styles/LoginPage.module.css';
 import Button from '@mui/material/Button';
+import axios from 'axios';
 
 // search username and check password
-function login(username, password) {
-  if (username != "jencs")
-    alert("Username does not exist");
-  else {
-    if (password != "1234")
-      alert("incorrect password");
-    else {
+async function login(username, password) {
+  try {
+    const response = await axios.post('http://localhost:5555/auth', { username, password });
+
+    if (response.data.accessToken) {
       window.location.href = '/';
+    }
+  } catch (error) {
+    if (error.response) {
+      console.error("Login error:", error.response.data);
+      alert(error.response.data.message);
+    } else {
+        console.error("Network error:", error.message);
     }
   }
 }
