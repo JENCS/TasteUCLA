@@ -1,10 +1,12 @@
 import 'dotenv/config'
 import express from 'express'
 import mongoose from 'mongoose'
+import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
 import cors from 'cors'
 import corsOptions from './config/corsOptions.js'
+import cookieParser from 'cookie-parser'
 
 const app = express();
 
@@ -13,6 +15,8 @@ const PORT = process.env.PORT
 app.use(express.json())
 
 app.use(cors(corsOptions))
+
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
     console.log(req)
