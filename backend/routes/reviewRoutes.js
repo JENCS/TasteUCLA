@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
       title: req.body.title,
       author: req.body.author,
       rating: req.body.rating,
-      // image: req.body.file,
+      image: req.body.image,
     };
 
     const review = await Review.create(newReview);

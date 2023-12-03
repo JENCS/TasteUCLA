@@ -4,6 +4,7 @@ import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
 import * as fs from "fs";
 
 const WriteReview = () => {
@@ -14,16 +15,20 @@ const WriteReview = () => {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
+  const [image, setImage] = useState(null);
 
   async function uploadImage(e) {
     console.log(e.target.files);
     setFile(e.target.files[0]);
+    // setImage(file);
     setPhoto(URL.createObjectURL(e.target.files[0]));
     console.log("UPLOADED");
     const promise = e.target.files[0].arrayBuffer();
     promise.then((value) => {
       console.log(value);
+      setImage(Buffer.from(value));
+      console.log(typeof image);
     });
 
     // imageBuffer = fs.readFileSync(file);
@@ -34,11 +39,13 @@ const WriteReview = () => {
     setPhoto();
   }
   const handleSubmitReview = () => {
+    // const reader = new FileReader();
     const data = {
       title,
       author,
       rating,
       description,
+      image,
     };
     setLoading(true);
     axios

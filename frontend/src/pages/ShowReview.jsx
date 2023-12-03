@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 const ShowReview = () => {
   const [review, setReview] = useState({});
   const [loading, setLoading] = useState(false);
+  const [imageDisplay, setImageDisplay] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -15,6 +16,14 @@ const ShowReview = () => {
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
         setReview(res.data);
+        const blob = new Blob([review.image]);
+        const file = new File([review.image], "my_name", { type: "image/png" });
+        const srcBlob = URL.createObjectURL(file);
+        const img = new Image();
+        img.src = srcBlob;
+        document.body.appendChild(img);
+        setImageDisplay(srcBlob);
+        console.log(file);
         setLoading(false);
       })
       .catch((error) => {
@@ -42,10 +51,11 @@ const ShowReview = () => {
             <span className="text-xl mr-4 text-gray-500">Author</span>
             <span>{review.author}</span>
           </div>
-          {true && (
+          {imageDisplay && (
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Photo</span>
-              <span>{review.file}</span>
+              <img src={imageDisplay} />
+              <div>{imageDisplay}</div>
             </div>
           )}
           <div className="my-4">

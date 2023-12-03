@@ -4,7 +4,7 @@ const reviewSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
       ref: "User",
     },
     title: {
@@ -23,10 +23,10 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    // image: {
-    //   type: File,
-    //   required: false,
-    // },
+    image: {
+      type: Buffer,
+      required: false,
+    },
   },
   {
     timestamps: true,

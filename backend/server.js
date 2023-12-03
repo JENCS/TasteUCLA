@@ -1,35 +1,39 @@
-import 'dotenv/config'
-import express from 'express'
-import mongoose from 'mongoose'
-import userRoutes from './routes/userRoutes.js'
-import reviewRoutes from './routes/reviewRoutes.js'
-import cors from 'cors'
-import corsOptions from './config/corsOptions.js'
+import "dotenv/config";
+import express from "express";
+import mongoose from "mongoose";
+import userRoutes from "./routes/userRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
+import cors from "cors";
+import corsOptions from "./config/corsOptions.js";
+import bodyParser from "body-parser";
 
 const app = express();
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 
-app.use(express.json())
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
-app.use(cors(corsOptions))
+app.use(express.json());
 
-app.use('/users', userRoutes)
-app.use('/reviews', reviewRoutes)
+app.use(cors(corsOptions));
+
+app.use("/users", userRoutes);
+app.use("/reviews", reviewRoutes);
 
 mongoose
-    .connect(process.env.DATABASE_URI)
-    .then(() => {
-        console.log('Server connected to database')
-        app.listen(PORT, () => {
-            console.log(`Server listening on port ${PORT}`)
-        })
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+  .connect(process.env.DATABASE_URI)
+  .then(() => {
+    console.log("Server connected to database");
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
-app.get('/', (req, res) => {
-    console.log(req)
-    return res.status(222).send('TasteUCLA')
-})
+app.get("/", (req, res) => {
+  console.log(req);
+  return res.status(222).send("TasteUCLA");
+});
