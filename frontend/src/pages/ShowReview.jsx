@@ -1,3 +1,4 @@
+import "../styles/ShowReview.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -17,18 +18,18 @@ const ShowReview = () => {
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
         setReview(res.data);
-        const blob = new Blob([review.image]);
-        const file = new File([blob], "my_name", { type: "image/png" });
-        const srcBlob = URL.createObjectURL(file);
-        const img = new Image();
+        // const blob = new Blob([review.image]);
+        // const file = new File([blob], "my_name", { type: "image/png" });
+        // const srcBlob = URL.createObjectURL(file);
+        // const img = new Image();
 
         const mimeType = "image/png";
-        const b64 = Buffer.from(review.image).toString("base64");
-        img.src = `data:${mimeType};base64,${b64}`;
+        const b64 = Buffer.from(res.data.image).toString("base64");
+        setImageDisplay(`data:${mimeType};base64,${b64}`);
 
-        //img.src = srcBlob;
-        document.body.appendChild(img);
-        setImageDisplay(srcBlob);
+        // img.src = `data:${mimeType};base64,${b64}`;
+        // document.body.appendChild(img);
+        // setImageDisplay(srcBlob);
         console.log(srcBlob);
         setLoading(false);
       })
@@ -60,8 +61,8 @@ const ShowReview = () => {
           {imageDisplay && (
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Photo</span>
-              <img src={imageDisplay} />
-              <div>{imageDisplay}</div>
+              <img className="review-image" src={imageDisplay} />
+              {/* <div>{imageDisplay}</div> */}
             </div>
           )}
           <div className="my-4">
