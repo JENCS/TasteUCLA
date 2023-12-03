@@ -7,6 +7,23 @@ import axios from "axios";
 import "../styles/LoginPage.css";
 
 // search username and check password
+async function login(username, password) {
+  try {
+    const response = await axios.post('http://localhost:5555/auth', { username, password });
+
+    if (response.data.accessToken) {
+      window.location.href = '/';
+    }
+  } catch (error) {
+    if (error.response) {
+      console.error("Login error:", error.response.data);
+      alert(error.response.data.message);
+    } else {
+        console.error("Network error:", error.message);
+    }
+  }
+}
+
 
 function LoginPage({ changeLoginState, checkLoginInfo }) {
   const [loginPath, setLoginPath] = useState("/login");

@@ -32,6 +32,7 @@ const Home = () => {
     <div>
       <div className="home-container">
         <h1 className="home-title">TasteUCLA</h1>
+        <div className="home-logo"></div>
         {loading ? (
           <Spinner />
         ) : (
@@ -56,6 +57,10 @@ const Home = () => {
                   Rating by {review.author}: {review.rating}
                 </p>
                 <p>{review.description}</p>
+                {review.rating && (
+                  <p className="review-rating">Rating by {review.author}: {review.rating}</p>
+                )}
+                <p>{review.description}description here!!!</p>
               </Link>
             ))}
           </div>

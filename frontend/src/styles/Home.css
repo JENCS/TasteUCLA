@@ -8,8 +8,16 @@
 .home-title {
     margin-top: 100px;
     margin-left: 50px;
-    font-size: 44px;
+    font-size: 50px;
     text-align: left;
+}
+
+.home-logo{
+    margin-left: 150px;
+    width: 40.5584px;
+    height: 39.6734px;
+    background-color: #9747ff;
+    transform: rotate(45deg);
 }
   
 .reviews-grid {
