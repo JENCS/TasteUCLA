@@ -1,10 +1,12 @@
 import 'dotenv/config'
 import express from 'express'
 import mongoose from 'mongoose'
+import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
 import cors from 'cors'
 import corsOptions from './config/corsOptions.js'
+import cookieParser from 'cookie-parser'
 
 const app = express();
 
@@ -14,6 +16,13 @@ app.use(express.json())
 
 app.use(cors(corsOptions))
 
+app.use(cookieParser())
+
+app.get('/', (req, res) => {
+    console.log(req)
+    return res.status(222).send('TasteUCLA')
+})
+app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
 app.use('/reviews', reviewRoutes)
 
@@ -28,8 +37,3 @@ mongoose
     .catch((error) => {
         console.log(error)
     })
-
-app.get('/', (req, res) => {
-    console.log(req)
-    return res.status(222).send('TasteUCLA')
-})
