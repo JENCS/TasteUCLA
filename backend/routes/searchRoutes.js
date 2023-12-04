@@ -4,7 +4,7 @@ import * as searchController from "../controllers/searchController.js"
 const router = express.Router()
 
 router.route('/')
-    .get(searchController.searchDatabase)
+    .get(searchController.searchGlobal)
 
 router.route('/restaurants')
     .get(searchController.searchRestaurants)
