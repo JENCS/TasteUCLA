@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
+import searchRoutes from './routes/searchRoutes.js'
 import cors from 'cors'
 import corsOptions from './config/corsOptions.js'
 import cookieParser from 'cookie-parser'
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
 app.use('/reviews', reviewRoutes)
+app.use('/search', searchRoutes)
 
 mongoose
     .connect(process.env.DATABASE_URI)
