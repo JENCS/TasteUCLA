@@ -34,7 +34,7 @@ function Restaurant() {
             <div className={classes.description}>{restaurant_description}</div>
           </div> 
           <div className={classes.logo}>
-          <img src={"/logos/CentralCampus/bruin.png"} width = {"500px"}alt={"image can't load"} />
+          <img src={"/logos/CentralCampus/epic.png"} width = {"500px"}alt={"image can't load"} />
           </div>
         </div>
         <div className={classes.reviews_header}>Reviews:</div>
@@ -45,7 +45,7 @@ function Restaurant() {
                 <div class={classes.user_container}>
                   <div class={classes.username}>{"user"}</div>
                   <div class={classes.profile_pic}>
-                  <img src={"/a.png"} border-radius={"50%"} alt={"image can't load"}/>
+                  <img src={"/logos/CentralCampus/lollicup.png"} border-radius={"50%"} alt={"image can't load"}/>
                   </div>
                 </div>
                 <div class={classes.rating_desc_container}>

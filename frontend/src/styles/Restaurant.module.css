@@ -7,14 +7,14 @@
     outline: solid 1px #aabcd2;
     outline-offset: -1px;
     overflow: hidden;
+    background-color: #E2F1F5;
   }
 
 .restaurant_name{
   color: #1e1e1e;
   line-height: 150%;
-  font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-weight:bold;
+  font-family: "Gill Sans";
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -81,8 +81,7 @@
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: "Optima";
   letter-spacing: -0.023em;
   display: flex;
   text-align: left;
@@ -123,8 +122,8 @@
 } 
 
 .reviews_grid_item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid black;
+  background-color: #FFFF;
+  border: 3px solid #DED0F5;
   padding: 30px;
   font-size: 30px;
   margin-bottom: 50px;
@@ -244,7 +243,7 @@
 
 .comments_grid_item {
   background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid black;
+  border: 3px solid #DED0F5;
   padding: 30px;
   font-size: 30px;
   margin-bottom: 20px;

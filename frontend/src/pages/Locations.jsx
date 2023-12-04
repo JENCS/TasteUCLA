@@ -9,14 +9,12 @@ function Locations() {
   const [NorthCampusRestaurants, setNorthCampusRestaurants] = useState([]);
   const [CentralCampusRestaurants, setCentralCampusRestaurants] = useState([]);
   const [SouthCampusRestaurants, setSouthCampusRestaurants] = useState([]);
-  
-  const [NorthCampusImages, setNorthCampusImages] = useState([]);
 
   useEffect(() => {
     setNorthCampusRestaurants([
-      {name: "Cafe 451", img: "/logos/NorthCampus/451.png",},
+      {name: "Café 451", img: "/logos/NorthCampus/451.png",},
       {name: "All Rise Pizza", img: "/logos/NorthCampus/allrise.png",},
-      {name: "Anderson Cafe", img: "/logos/NorthCampus/anderson.png",},
+      {name: "Anderson Café", img: "/logos/NorthCampus/anderson.png",},
       {name: "Burger Assembly", img: "/logos/NorthCampus/assembly.png",},
       {name: "Epazote", img: "/logos/NorthCampus/epazote.png",},
       {name: "Fusion", img: "/logos/NorthCampus/fusion.png",},
@@ -43,10 +41,10 @@ function Locations() {
     setSouthCampusRestaurants([
       {name: "Blaze Pizza", img: "/logos/SouthCampus/blaze.png",},
       {name: "Fusion", img: "/logos/SouthCampus/fusion.png",},
-      {name: "ScrubJay Cafe", img: "/logos/SouthCampus/scrubjay.png",},
+      {name: "ScrubJay Café", img: "/logos/SouthCampus/scrubjay.png",},
       {name: "Southern Lights", img: "/logos/SouthCampus/southern.png",},
       {name: "Subway", img: "/logos/SouthCampus/subway.png",},
-      {name: "Cafe Synapse", img: "/logos/SouthCampus/synapse.png",},
+      {name: "Café Synapse", img: "/logos/SouthCampus/synapse.png",},
       {name: "Yoshinoya", img: "/logos/SouthCampus/yoshinoya.png",},
       
     ]);
