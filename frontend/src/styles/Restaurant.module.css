@@ -45,8 +45,8 @@
 .logo{
   position: relative;
   outline: solid #1e1e1e;
-  width: 700px;
-  height: 500px;
+  width: max-content;
+  height: max-content;
   margin-left: auto;
   margin-right: 50px;
   top: 120px;

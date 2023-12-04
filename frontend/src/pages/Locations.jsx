@@ -12,7 +12,7 @@ function Locations() {
             <div class={classes.NorthCampus_reviews_grid}>
               <div class={classes.grid_item}>
                 <a href="/locations/restaurant">
-                <img src="123.jpeg"></img>
+                <img src={""} alt={"image can't load"} />
                 </a>
                 </div>
               <div class={classes.grid_item}>2</div>
