@@ -1,5 +1,6 @@
 import classes from '../styles/Restaurant.module.css';
 import { useState,  useEffect } from 'react';
+import BackButton from '../components/BackButton';
 
 function Restaurant() {
   const [restaurant_name, setRestaurantName] = useState("");
@@ -21,6 +22,7 @@ function Restaurant() {
     setRestaurantRating(5);
     setRestaurantDescription("Fresh taste of the Mediterranean and great selection of freshly prepared pizzas, salads, sandwiches and pastas.");
 
+
     
   });
   
@@ -29,6 +31,8 @@ function Restaurant() {
         <div className={classes.row}>
           <div className={classes.container}>
             <div className={classes.restaurant_name}>{restaurant_name}</div>
+            <BackButton destination='/locations'/>
+
             <div className={classes.restaurant_location}>{restaurant_location}</div>
             <div className={classes.rating}>{"Overall Rating:  " + restaurant_rating}</div>
             <div className={classes.description}>{restaurant_description}</div>
