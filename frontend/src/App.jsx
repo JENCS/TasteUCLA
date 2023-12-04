@@ -15,11 +15,13 @@ import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
 
 const App = () => {
-  const [login, setLogin] = useState(true);
+  // const [token, setToken] = useState(null);
+  const [login, setLogin] = useState(false);
 
-  const changeLoginState = () => {
-    setLogin(!login);
+  const changeLoginState = (state) => {
+    setLogin(state);
     console.log("changed");
+    console.log(login);
   };
 
   return (
