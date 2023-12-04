@@ -138,7 +138,6 @@
 .profile_pic{
   height: 200px;
   width: 200px;
-  background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
   top: 120px;
@@ -166,10 +165,16 @@
   margin-right: 50px;
 
 }
-/*
-margin-right: 1100px;
+
+.review_image{
+  position: relative;
+  outline: solid #1e1e1e;
+  width: max-content;
+  height: max-content;
+  margin-bottom: 20px;
   margin-left: auto;
-*/
+  margin-right: auto;
+}
 
 .review_rating{
   color: #1e1e1e;

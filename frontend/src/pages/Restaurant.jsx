@@ -34,7 +34,7 @@ function Restaurant() {
             <div className={classes.description}>{restaurant_description}</div>
           </div> 
           <div className={classes.logo}>
-          <img src={""} alt={"image can't load"} />
+          <img src={"/logos/CentralCampus/bruin.png"} width = {"500px"}alt={"image can't load"} />
           </div>
         </div>
         <div className={classes.reviews_header}>Reviews:</div>
@@ -44,11 +44,14 @@ function Restaurant() {
               <div className={classes.review_content}>
                 <div class={classes.user_container}>
                   <div class={classes.username}>{"user"}</div>
-                  <span class={classes.profile_pic}>
-                    
-                  </span>
+                  <div class={classes.profile_pic}>
+                  <img src={"/a.png"} border-radius={"50%"} alt={"image can't load"}/>
+                  </div>
                 </div>
                 <div class={classes.rating_desc_container}>
+                  <div class={classes.review_image}>
+                  <img src={"/logos/CentralCampus/bruin.png"} width = {"300px"}alt={"image can't load"} />
+                  </div>
                   <div class={classes.review_rating}>Rating: </div>
                   <div class={classes.review_title}>A Flavorful Journey at Chipotle</div>
                   <div class={classes.review_description}>
