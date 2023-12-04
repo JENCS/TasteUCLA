@@ -12,6 +12,7 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import Profile from "./pages/Profile";
 import UserReviews from "./pages/UserReviews.jsx";
 import Locations from "./pages/Locations";
+import Restaurant from "./pages/Restaurant";
 
 const App = () => {
   const [login, setLogin] = useState(true);
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
+        <Route path="/locations/restaurant" element={<Restaurant />} />
       </Routes>
     </>
   );
