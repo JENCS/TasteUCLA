@@ -1,9 +1,6 @@
-import Button from '@mui/material/Button';
 import classes from '../styles/Locations.module.css';
 import { useState, useEffect } from 'react';
-import nc from "/logos/NorthCampus/451.png"
-import nc2 from "/logos/NorthCampus/allrise.png"
-
+import Navbar from "../components/Navbar.jsx";
 
 function Locations() {
   const [NorthCampusRestaurants, setNorthCampusRestaurants] = useState([]);
@@ -52,6 +49,7 @@ function Locations() {
 
     return (
         <div className={`${classes.root}`}>
+            
             <div className={classes.Locations_title}>Restaurant Locations</div>
             <div className={classes.NorthCampus_title}>North Campus</div>
             <div class={classes.NorthCampus_reviews_grid}>
