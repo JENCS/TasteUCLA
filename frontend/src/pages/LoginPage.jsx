@@ -5,33 +5,37 @@ import classes from "../styles/LoginPage.module.css";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
-function LoginPage({ changeLoginState, changeToken }) {
+function LoginPage({ loginUser }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
 
-  // search username and check password
-  async function login(username, password) {
-    try {
-      const response = await axios.post("http://localhost:5555/auth", {
-        username,
-        password,
-      });
+  // // search username and check password
+  // async function login(username, password) {
+  //   try {
+  //     const response = await axios.post("http://localhost:5555/auth", {
+  //       username,
+  //       password,
+  //     });
 
-      if (response.data.accessToken) {
-        // window.location.href = "/";
-        navigate("/");
-        changeLoginState(true);
-        // changeToken(response.data.accessToken);
-      }
-    } catch (error) {
-      if (error.response) {
-        console.error("Login error:", error.response.data);
-        alert(error.response.data.message);
-      } else {
-        console.error("Network error:", error.message);
-      }
-    }
+  //     if (response.data.accessToken) {
+  //       // window.location.href = "/";
+  //       navigate("/");
+  //       changeLoginState(true);
+  //       // changeToken(response.data.accessToken);
+  //     }
+  //   } catch (error) {
+  //     if (error.response) {
+  //       console.error("Login error:", error.response.data);
+  //       alert(error.response.data.message);
+  //     } else {
+  //       console.error("Network error:", error.message);
+  //     }
+  //   }
+  // }
+
+  function callLoginFunction(user, pass) {
+    loginUser(user, pass);
   }
 
   return (
@@ -74,7 +78,7 @@ function LoginPage({ changeLoginState, changeToken }) {
         <Button
           name="signin_button"
           style={{ width: "162.267px" }}
-          onClick={() => login(user, pass)}
+          onClick={() => callLoginFunction(user, pass)}
         ></Button>
       </div>
       <div className={classes.signUp}>Sign up</div>
