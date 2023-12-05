@@ -1,9 +1,9 @@
 import "../styles/Profile.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
-import { FaPencilAlt } from "react-icons/fa";
+import axios from "axios";
 
-export default function Profile({ token }) {
+export default function Profile() {
   const [file, setFile] = useState(null);
   const [username, setUsername] = useState("Username");
   const [bio, setBio] = useState("");

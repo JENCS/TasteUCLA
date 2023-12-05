@@ -1,0 +1,22 @@
+.my-reviews-container {
+  margin-top: 70px;
+}
+
+.my-reviews-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 25vw;
+  /* background-color: blue; */
+}
+
+.my-reviews-header > * {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.my-reviews-title {
+  font-size: 40px;
+  margin-right: auto;
+}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar.jsx";
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
@@ -24,7 +23,6 @@ const Home = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
       <div className="home-container">
         <h1 className="home-title">TasteUCLA</h1>
         <div className="home-logo"></div>
@@ -38,7 +36,15 @@ const Home = () => {
                 key={review._id}
                 className="review-card"
               >
-                <img src="/munch.jpeg" alt={"image can't load"} />
+                {/* {review.image && (
+                  <img
+                    src={
+                      "data:image/png;base64," +
+                      Buffer.from(review.image).toString("base64")
+                    }
+                    alt={"image can't load"}
+                  />
+                )} */}
                 <h3>{review.title}</h3>
                 {review.rating && (
                   <p className="review-rating">
