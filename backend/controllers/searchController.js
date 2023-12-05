@@ -15,7 +15,7 @@ const searchGlobal = asyncHandler(async (req, res) => {
         return res.status(400).send();
     }
 
-    let query = req.body.query;
+    let query = req.params.query;
     let searchResults;
 
     await searchDatabase(query, query, query).then( (result) => {
@@ -78,7 +78,7 @@ async function searchDatabase(restaurantQuery, userQuery, reviewQuery) {
 }
 
 function isValidQuery(queryReq) {
-    return !((typeof queryReq?.body?.query !== "string") || (queryReq.body.query.match("[^a-zA-z0-9]") !== null));
+    return !((typeof queryReq?.params?.query !== "string") || (queryReq.params.query.match("[^a-zA-z0-9]") !== null));
 }
 
 export { searchGlobal, searchRestaurants, searchUsers, searchReviews };

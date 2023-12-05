@@ -3,7 +3,7 @@ import * as searchController from "../controllers/searchController.js"
 
 const router = express.Router()
 
-router.route('/')
+router.route('/:query')
     .get(searchController.searchGlobal)
 
 export default router
