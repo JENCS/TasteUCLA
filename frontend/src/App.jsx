@@ -36,6 +36,7 @@ const App = () => {
     await axios.patch(
       "http://localhost:5555/users/me",
       {
+        profile_picture: picture,
         bio: bio,
       },
       {
