@@ -5,13 +5,39 @@ import { useEffect } from "react";
 import { LiaSearchSolid } from "react-icons/lia";
 import { AiFillHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
+import axios from "axios";
 
 export default function Navbar({ loggedIn, changeLoginState }) {
-  const searchBar = () => {};
   const [searchInput, setSearchInput] = useState("");
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [searchDropdown, setSearchDropdown] = useState(false);
   const [reviewRedirect, setReviewRedirect] = useState("/login");
+  const [query, setQuery] = useState("");
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const search = () => {
+
+    /*
+    const data = {
+      query
+    };
+    */
+    console.log(query)
+    axios
+      .get(`http://localhost:5555/search/${query}`)
+      .then((res) => {
+        setSearchResults(res);
+      })
+      .catch((error) => {
+        alert("An error occurred. Please check the console.");
+        console.log(error);
+      });
+  };
 
   function profileMenu() {
     setProfileDropdown(!profileDropdown);
@@ -48,9 +74,10 @@ export default function Navbar({ loggedIn, changeLoginState }) {
               type="text"
               placeholder="Search here"
               className="input-field"
+              onChange={(e) => setQuery(e.target.value)}
               onClick={() => searchMenu()}
             />
-            <LiaSearchSolid className="search-icon" onClick={removeMenus} />
+            <LiaSearchSolid className="search-icon" onClick={search} />
             {searchDropdown && (
               <div className="search-dropdown">
                 <p>Search by tag</p>
