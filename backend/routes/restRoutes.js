@@ -3,7 +3,7 @@ import * as restController from "../controllers/restController.js"
 
 const router = express.Router()
 
-// @route /users/:id
+// @route /locations/:id
 router.route('/:id')
     .get(restController.getRestaurant)
 

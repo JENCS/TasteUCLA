@@ -11,7 +11,7 @@ function Locations() {
     {name: "Epazote", img: "/logos/NorthCampus/epazote.png", id: "656e8b776c581d194c6d6c09"},
     {name: "Fusion", img: "/logos/NorthCampus/fusion.png", id: "656e8b776c581d194c6d6c0a"},
     {name: "Jimmy's", img: "/logos/NorthCampus/jimmys.png", id: "656e8b776c581d194c6d6c0b"},
-    {name: "Northern Lights", img: "/logos/NorthCampus/northern.png", id: "656e8b776c581d194c6d6c0c"}
+    {name: "Northern Lights Café", img: "/logos/NorthCampus/northern.png", id: "656e8b776c581d194c6d6c0c"}
   ]
 
   const CentralCampusRestaurants = [
@@ -34,11 +34,10 @@ function Locations() {
     {name: "Blaze Pizza", img: "/logos/SouthCampus/blaze.png", id: "656e8d3df40395536ccb0935"},
     {name: "Fusion", img: "/logos/SouthCampus/fusion.png", id: "656e8d3df40395536ccb0936"},
     {name: "ScrubJay Café", img: "/logos/SouthCampus/scrubjay.png", id: "656e8d3df40395536ccb0937"},
-    {name: "Southern Lights", img: "/logos/SouthCampus/southern.png", id: "656e8d3df40395536ccb0938"},
+    {name: "Southern Lights Café", img: "/logos/SouthCampus/southern.png", id: "656e8d3df40395536ccb0938"},
     {name: "Subway", img: "/logos/SouthCampus/subway.png", id: "656e8d3df40395536ccb0939"},
     {name: "Café Synapse", img: "/logos/SouthCampus/synapse.png", id: "656e8d3df40395536ccb093a"},
     {name: "Yoshinoya", img: "/logos/SouthCampus/yoshinoya.png", id: "656e8d3df40395536ccb093b"},
-    
   ]
 
     return (
