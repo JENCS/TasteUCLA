@@ -39,23 +39,17 @@ const createUser = asyncHandler(async (req, res) => {
 // @route PATCH /users
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, username, password } = req.body
-    if (!id || !username || !password) {
-        return res.status(400).json({ message: "All fields are required" })
-    }
+    const { id, profile_picture, bio } = req.body
     const user = await User.findById(id).exec()
     if (!user) {
         return res.status(400).json({ message: "User not found" })
     }
-    const match = await bcrypt.compare(password, user.password)
-    if (!match) {
-        return res.status(400).json({ message: "Wrong password" })
+    if (profile_picture) {
+        user.profile_picture = profile_picture
     }
-    const duplicate = await User.findOne({ username }).lean().exec()
-    if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: "Duplicate username" })
+    if (bio) {
+        user.bio = bio
     }
-    user.username = username
     const updatedUser = await user.save()
     res.json({ message: `${updatedUser.username} updated` })
 })
