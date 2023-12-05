@@ -8,6 +8,7 @@ import searchRoutes from './routes/searchRoutes.js'
 import cors from 'cors'
 import corsOptions from './config/corsOptions.js'
 import cookieParser from 'cookie-parser'
+import restRoutes from './routes/restRoutes.js'
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/auth', authRoutes)
 app.use('/users', userRoutes)
 app.use('/reviews', reviewRoutes)
 app.use('/search', searchRoutes)
+app.use('/locations', restRoutes)
 
 mongoose
     .connect(process.env.DATABASE_URI)
@@ -39,3 +41,5 @@ mongoose
     .catch((error) => {
         console.log(error)
     })
+
+   
