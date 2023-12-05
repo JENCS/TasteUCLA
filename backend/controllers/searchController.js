@@ -12,7 +12,7 @@ const SEARCH_RESULT_CAP = 100;
 const searchGlobal = asyncHandler(async (req, res) => {
     
     if (!isValidQuery(req)) {
-        return res.status(400).json({ message: "Invalid query" });
+        return res.status(400).send();
     }
 
     let query = req.body.query;
@@ -22,7 +22,7 @@ const searchGlobal = asyncHandler(async (req, res) => {
         searchResults = result;
     });
 
-    res.send({ data: searchResults, hits: searchResults.length});
+    res.status(200).send({ message: "Success", data: searchResults, hits: searchResults.length });
 })
 
 // @desc Get search hits on restaurants
