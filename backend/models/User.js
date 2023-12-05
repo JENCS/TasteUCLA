@@ -15,14 +15,9 @@ const userSchema = new mongoose.Schema(
             type: mongoose.Types.ObjectId,
             required: false
         },
-        active: {
-            type: Boolean,
-            default: false,
-            required: true
+        bio: {
+            type: String
         }
-    },
-    {
-        timestamps: true
     }
 )
 
