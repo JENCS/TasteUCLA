@@ -39,11 +39,12 @@ const createUser = asyncHandler(async (req, res) => {
 // @route PATCH /users
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
-    const { id, profile_picture, bio } = req.body
-    const user = await User.findById(id).exec()
+    const username = req.user
+    const user = await User.findOne({ username }).exec()
     if (!user) {
         return res.status(400).json({ message: "User not found" })
     }
+    const { profile_picture, bio } = req.body
     if (profile_picture) {
         user.profile_picture = profile_picture
     }
