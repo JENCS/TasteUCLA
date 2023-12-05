@@ -19,6 +19,10 @@ import axios from "axios";
 const App = () => {
   const [login, setLogin] = useState(false);
   const [token, setToken] = useState(null);
+  const [userData, setUserData] = useState(null);
+
+  const [user, setUser] = useState("");
+
   const navigate = useNavigate();
 
   const changeLoginState = (state) => {
@@ -42,6 +46,24 @@ const App = () => {
         setToken(response.data.accessToken);
         console.log(response.data.accessToken);
         // changeToken(response.data.accessToken);
+
+        axios
+          .get("http://localhost:5555/users/me", {
+            headers: {
+              Authorization: `Bearer ${response.data.accessToken}`,
+            },
+          })
+          .then((res) => {
+            //setReviews(res.data.username); // Adjust this accordingly
+            //setUser(res.data.username);
+            setUserData(res.data);
+            // setBio(res.data.bio);
+            //setLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error fetching reviews:", error);
+            //setLoading(false);
+          });
       }
     } catch (error) {
       if (error.response) {
@@ -67,7 +89,7 @@ const App = () => {
           path="/sign-up"
           element={<SignUpPage changeLoginState={changeLoginState} />}
         />
-        <Route path="/profile" element={<Profile token={token} />} />
+        <Route path="/profile" element={<Profile userData={userData} />} />
         <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/locations/restaurant" element={<Restaurant />} />

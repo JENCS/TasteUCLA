@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import axios from "axios";
 
-export default function Profile() {
-  const [file, setFile] = useState(null);
-  const [username, setUsername] = useState("Username");
-  const [bio, setBio] = useState("");
+export default function Profile({ userData }) {
+  const [file, setFile] = useState(userData.profile_picture);
+  const [username, setUsername] = useState(userData.username);
+  const [bio, setBio] = useState(userData.bio);
 
   function uploadImage(e) {
     console.log(e.target.files);
@@ -14,6 +14,12 @@ export default function Profile() {
   }
   function removeImage(e) {
     setFile(null);
+  }
+  function saveProfile() {
+    setBio(bio);
+    axios.patch("http://localhost:5555/users/me", {
+      bio: bio,
+    });
   }
   function deleteAccount() {
     console.log("deleting user...");
@@ -42,7 +48,9 @@ export default function Profile() {
         <textarea className="bio" value={bio}></textarea>
       </div>
       <div className="lower-btns">
-        <button className="save-profile-btn">Save Profile</button>
+        <button className="save-profile-btn" onClick={saveProfile}>
+          Save Profile
+        </button>
         <button className="delete-account-btn" onClick={deleteAccount}>
           Delete Account
         </button>
