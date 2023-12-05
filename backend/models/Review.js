@@ -26,7 +26,14 @@ const reviewSchema = new mongoose.Schema(
         image: {
             type: Buffer,
             required: false
-        }
+        },
+        comments: [
+            {
+                body: String,
+                date: Date,
+                user: mongoose.Schema.Types.ObjectId
+            }
+        ]
     },
     {
         timestamps: true,
