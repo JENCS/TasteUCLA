@@ -77,4 +77,17 @@ const deleteUser = asyncHandler(async (req, res) => {
     res.json(reply)
 })
 
-export { getAllUsers, createUser, updateUser, deleteUser }
+const getUser = asyncHandler(async (req, res) => {
+    const { id } = req.params
+    const user = await User.findById(id).select("-password").lean()
+    res.status(202).json(user)
+})
+
+const getProfile = asyncHandler(async (req, res) => {
+    const username = req.user
+    console.log(username)
+    const foundUser = await User.findOne({ username }).select("-password").exec()
+    res.status(202).json(foundUser)
+})
+
+export { getAllUsers, createUser, updateUser, deleteUser, getUser, getProfile }
