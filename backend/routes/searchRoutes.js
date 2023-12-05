@@ -3,15 +3,7 @@ import * as searchController from "../controllers/searchController.js"
 
 const router = express.Router()
 
-router.route('/')
+router.route('/:query')
     .get(searchController.searchGlobal)
 
-router.route('/restaurants')
-    .get(searchController.searchRestaurants)
-
-router.route('/users')
-    .get(searchController.searchUsers)
-
-router.route('/reviews')
-    .get(searchController.searchReviews)
 export default router

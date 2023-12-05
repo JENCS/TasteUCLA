@@ -12,17 +12,17 @@ const SEARCH_RESULT_CAP = 100;
 const searchGlobal = asyncHandler(async (req, res) => {
     
     if (!isValidQuery(req)) {
-        return res.status(400).json({ message: "Invalid query" });
+        return res.status(400).send();
     }
 
-    let query = req.body.query;
+    let query = req.params.query;
     let searchResults;
 
     await searchDatabase(query, query, query).then( (result) => {
         searchResults = result;
     });
 
-    res.send({ data: searchResults, hits: searchResults.length});
+    res.status(200).send({ message: "Success", data: searchResults, hits: searchResults.length });
 })
 
 // @desc Get search hits on restaurants
@@ -78,7 +78,7 @@ async function searchDatabase(restaurantQuery, userQuery, reviewQuery) {
 }
 
 function isValidQuery(queryReq) {
-    return !((typeof queryReq?.body?.query !== "string") || (queryReq.body.query.match("[^a-zA-z0-9]") !== null));
+    return !((typeof queryReq?.params?.query !== "string") || (queryReq.params.query.match("[^a-zA-z0-9]") !== null));
 }
 
 export { searchGlobal, searchRestaurants, searchUsers, searchReviews };
