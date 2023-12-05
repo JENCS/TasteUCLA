@@ -7,6 +7,20 @@ import { AiFillHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import axios from "axios";
 
+function debounce(func, wait) {
+  let timeout;
+
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 export default function Navbar({ loggedIn, changeLoginState }) {
   const [searchInput, setSearchInput] = useState("");
   const [profileDropdown, setProfileDropdown] = useState(false);
@@ -15,23 +29,24 @@ export default function Navbar({ loggedIn, changeLoginState }) {
   const [query, setQuery] = useState("");
 
   const [searchResults, setSearchResults] = useState([]);
+  const [isDebouncing, setIsDebouncing] = useState(false);
+
+  const debouncedSearch = debounce(() => {
+    setIsDebouncing(false);
+    search();
+  }, 500);
 
   const handleSearchInput = (event) => {
     setSearchInput(event.target.value);
   };
 
   const search = () => {
-
-    /*
-    const data = {
-      query
-    };
-    */
     console.log(query)
     axios
       .get(`http://localhost:5555/search/${query}`)
       .then((res) => {
-        setSearchResults(res);
+        setSearchResults(res.data.data);
+        console.log(res.data.data)
       })
       .catch((error) => {
         alert("An error occurred. Please check the console.");
@@ -62,6 +77,24 @@ export default function Navbar({ loggedIn, changeLoginState }) {
     }
   });
 
+  useEffect(() => {
+    if (query !== '' && isDebouncing) {
+      debouncedSearch();
+    }
+  }, [query, isDebouncing]);
+
+  useEffect(() => {
+    const closeDropdown = () => {
+      setSearchDropdown(false);
+    };
+
+    document.addEventListener('click', closeDropdown);
+
+    return () => {
+      document.removeEventListener('click', closeDropdown);
+    };
+  }, []);
+
   return (
     <>
       <div className="navbar">
@@ -74,13 +107,30 @@ export default function Navbar({ loggedIn, changeLoginState }) {
               type="text"
               placeholder="Search here"
               className="input-field"
-              onChange={(e) => setQuery(e.target.value)}
-              onClick={() => searchMenu()}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setIsDebouncing(true);
+              }}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent the click from bubbling to document
+                searchMenu();
+              }}
             />
             <LiaSearchSolid className="search-icon" onClick={search} />
             {searchDropdown && (
               <div className="search-dropdown">
-                <p>Search by tag</p>
+                {searchResults.length > 0 ? (
+                  searchResults.map((result, index) => (
+                    <Link 
+                    to={`/locations/${result.id}`}
+                    key={index}
+                    className="search-result-item">
+                      {result.name && <p>{result.name}</p>}
+                    </Link>
+                  ))
+                ) : (
+                  <p>No results found</p>
+                )}
               </div>
             )}
           </div>
