@@ -28,7 +28,7 @@ export default function Navbar({ loggedIn, changeLoginState }) {
   const [reviewRedirect, setReviewRedirect] = useState("/login");
   const [query, setQuery] = useState("");
 
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState({ restaurants: [], users: [], reviews: [] });
   const [isDebouncing, setIsDebouncing] = useState(false);
 
   const debouncedSearch = debounce(() => {
@@ -45,8 +45,8 @@ export default function Navbar({ loggedIn, changeLoginState }) {
     axios
       .get(`http://localhost:5555/search/${query}`)
       .then((res) => {
-        setSearchResults(res.data.data);
-        console.log(res.data.data)
+        setSearchResults(res.data);
+        console.log(res.data)
       })
       .catch((error) => {
         alert("An error occurred. Please check the console.");
@@ -119,16 +119,27 @@ export default function Navbar({ loggedIn, changeLoginState }) {
             <LiaSearchSolid className="search-icon" onClick={search} />
             {searchDropdown && (
               <div className="search-dropdown">
-                {searchResults.length > 0 ? (
-                  searchResults.map((result, index) => (
-                    <Link 
-                    to={`/locations/${result.id}`}
-                    key={index}
-                    className="search-result-item">
-                      {result.name && <p>{result.name}</p>}
-                    </Link>
-                  ))
-                ) : (
+                {searchResults.restaurants.length > 0 && (
+                  <div>
+                    <h3>Restaurants</h3>
+                    {searchResults.restaurants.map((restaurant, index) => (
+                      <Link to={`/locations/${restaurant.id}`} key={index}>
+                        <p>{restaurant.name}</p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                {searchResults.reviews.length > 0 && (
+                  <div>
+                    <h3>Reviews</h3>
+                    {searchResults.reviews.map((review, index) => (
+                      <Link to={`/reviews/details/${review.id}`} key={index}>
+                        <p>{review.title}</p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                {searchResults.restaurants.length === 0 && searchResults.restaurants.length === 0 && searchResults.restaurants.length === 0 && (
                   <p>No results found</p>
                 )}
               </div>
