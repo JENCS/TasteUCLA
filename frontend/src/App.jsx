@@ -31,6 +31,63 @@ const App = () => {
     console.log(login);
   };
 
+  async function updateProfileInfo(picture, bio) {
+    console.log(token);
+    await axios.patch(
+      "http://localhost:5555/users/me",
+      {
+        bio: bio,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    await axios
+      .get("http://localhost:5555/users/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUserData(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
+      });
+  }
+
+  // const updateProfileInfo = (picture, bio) => {
+  //   console.log(token);
+  //   axios.patch(
+  //     "http://localhost:5555/users/me",
+  //     {
+  //       bio: bio,
+  //     },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     }
+  //   );
+  //   console.log(userData);
+
+  //   axios
+  //     .get("http://localhost:5555/users/me", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       setUserData(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching reviews:", error);
+  //     });
+  // };
+
   // search username and check password
   async function loginUser(username, password) {
     try {
@@ -54,15 +111,10 @@ const App = () => {
             },
           })
           .then((res) => {
-            //setReviews(res.data.username); // Adjust this accordingly
-            //setUser(res.data.username);
             setUserData(res.data);
-            // setBio(res.data.bio);
-            //setLoading(false);
           })
           .catch((error) => {
             console.error("Error fetching reviews:", error);
-            //setLoading(false);
           });
       }
     } catch (error) {
@@ -89,7 +141,15 @@ const App = () => {
           path="/sign-up"
           element={<SignUpPage changeLoginState={changeLoginState} />}
         />
-        <Route path="/profile" element={<Profile userData={userData} />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              userData={userData}
+              updateProfileInfo={updateProfileInfo}
+            />
+          }
+        />
         <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/locations/:id" element={<Restaurant />} />
