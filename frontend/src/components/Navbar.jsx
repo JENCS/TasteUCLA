@@ -5,13 +5,54 @@ import { useEffect } from "react";
 import { LiaSearchSolid } from "react-icons/lia";
 import { AiFillHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
+import axios from "axios";
+
+function debounce(func, wait) {
+  let timeout;
+
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
 
 export default function Navbar({ loggedIn, changeLoginState }) {
-  const searchBar = () => {};
   const [searchInput, setSearchInput] = useState("");
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [searchDropdown, setSearchDropdown] = useState(false);
   const [reviewRedirect, setReviewRedirect] = useState("/login");
+  const [query, setQuery] = useState("");
+
+  const [searchResults, setSearchResults] = useState({ restaurants: [], users: [], reviews: [] });
+  const [isDebouncing, setIsDebouncing] = useState(false);
+
+  const debouncedSearch = debounce(() => {
+    setIsDebouncing(false);
+    search();
+  }, 500);
+
+  const handleSearchInput = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const search = () => {
+    console.log(query)
+    axios
+      .get(`http://localhost:5555/search/${query}`)
+      .then((res) => {
+        setSearchResults(res.data);
+        console.log(res.data)
+      })
+      .catch((error) => {
+        alert("An error occurred. Please check the console.");
+        console.log(error);
+      });
+  };
 
   function profileMenu() {
     setProfileDropdown(!profileDropdown);
@@ -36,6 +77,24 @@ export default function Navbar({ loggedIn, changeLoginState }) {
     }
   });
 
+  useEffect(() => {
+    if (query !== '' && isDebouncing) {
+      debouncedSearch();
+    }
+  }, [query, isDebouncing]);
+
+  useEffect(() => {
+    const closeDropdown = () => {
+      setSearchDropdown(false);
+    };
+
+    document.addEventListener('click', closeDropdown);
+
+    return () => {
+      document.removeEventListener('click', closeDropdown);
+    };
+  }, []);
+
   return (
     <>
       <div className="navbar">
@@ -48,12 +107,41 @@ export default function Navbar({ loggedIn, changeLoginState }) {
               type="text"
               placeholder="Search here"
               className="input-field"
-              onClick={() => searchMenu()}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setIsDebouncing(true);
+              }}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent the click from bubbling to document
+                searchMenu();
+              }}
             />
-            <LiaSearchSolid className="search-icon" onClick={removeMenus} />
+            <LiaSearchSolid className="search-icon" onClick={search} />
             {searchDropdown && (
               <div className="search-dropdown">
-                <p>Search by tag</p>
+                {searchResults.restaurants.length > 0 && (
+                  <div>
+                    <h3>Restaurants</h3>
+                    {searchResults.restaurants.map((restaurant, index) => (
+                      <Link to={`/locations/${restaurant.id}`} key={index}>
+                        <p>{restaurant.name}</p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                {searchResults.reviews.length > 0 && (
+                  <div>
+                    <h3>Reviews</h3>
+                    {searchResults.reviews.map((review, index) => (
+                      <Link to={`/reviews/details/${review.id}`} key={index}>
+                        <p>{review.title}</p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                {searchResults.restaurants.length === 0 && searchResults.restaurants.length === 0 && searchResults.restaurants.length === 0 && (
+                  <p>No results found</p>
+                )}
               </div>
             )}
           </div>
