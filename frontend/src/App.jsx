@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import UserReviews from "./pages/UserReviews.jsx";
 import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
+import SearchResults from "./pages/SearchResults.jsx";
 
 const App = () => {
   const [login, setLogin] = useState(true);
@@ -43,6 +44,7 @@ const App = () => {
         <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/locations/:id" element={<Restaurant />} />
+        <Route path="/search-results/:query" element={<SearchResults />} />
       </Routes>
     </>
   );

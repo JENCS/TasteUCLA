@@ -1,0 +1,31 @@
+.root {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    margin-top: 70px;
+    flex-direction: column;
+    outline: solid 1px #aabcd2;
+    outline-offset: -1px;
+    overflow: hidden;
+    background-color: #E2F1F5;
+}
+
+.searchResults_title{
+    color: #1e1e1e;
+    line-height: 150%;
+    font-weight: 500;
+    letter-spacing: -0.023em;
+    display: flex;
+    text-align: center;
+    position: relative;
+    margin-left: 20px;
+    margin-right: auto;
+    margin-bottom: 30px;
+    top: 10px;
+    font-size: 30px;
+}
+
+.results_container{
+    overflow-x: scroll;
+}
