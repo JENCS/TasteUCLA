@@ -45,13 +45,14 @@ const Home = () => {
                     alt={"image can't load"}
                   />
                 )} */}
+                {review.imageUrl && <img src={review.imageUrl} alt="Review" />}
                 <h3>{review.title}</h3>
                 {review.rating && (
                   <p className="review-rating">
-                    Rating by {review.author}: {review.rating}
+                    Rating by {review.username}: {review.rating}
                   </p>
                 )}
-                <p>{review.description}description here!!!</p>
+                <p>{review.text}description here!!!</p>
               </Link>
             ))}
           </div>
