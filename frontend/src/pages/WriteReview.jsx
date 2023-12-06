@@ -2,11 +2,12 @@ import "../styles/WriteReview.css";
 import React, { useState } from "react";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 
-const WriteReview = () => {
+const WriteReview = ({ createReview }) => {
   // const [title, setTitle] = useState("");
   // const [author, setAuthor] = useState("");
   // const [photo, setPhoto] = useState();
@@ -58,48 +59,68 @@ const WriteReview = () => {
   //     });
   // };
 
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState("");
   const [rating, setRating] = useState("");
-  const [text, setText] = useState('')
-  const [image, setImage] = useState(null)
+  const [text, setText] = useState("");
+  const [image, setImage] = useState(null);
+  const [imageDisplay, setImageDisplay] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [restaurant, setRestaurant] = useState("Bruin Buzz");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('text', text)
-    formData.append('image', image)
-
-    setLoading(true)
-    axios
-      .post('/api/reviews', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`,
-        },
-      })
-      .then(() => {
-        setLoading(false)
-        navigate('/')
-      })
-      .catch((error) => {
-        setLoading(false);
-        alert("An error occurred. Please check the console.");
-        console.log(file);
-        console.log(error);
-      });
+  function uploadImage(e) {
+    setImage(e.target.files[0]);
+    setImageDisplay(URL.createObjectURL(e.target.files[0]));
   }
+
+  function removeImage(e) {
+    setImage(null);
+    setImageDisplay();
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("text", text);
+    formData.append("image", image);
+    formData.append("rating", rating);
+    formData.append("restaurant", restaurant);
+
+    createReview(formData);
+
+    // setLoading(true);
+    // axios
+    //   .post("/api/reviews", formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //   .then(() => {
+    //     setLoading(false);
+    //     navigate("/");
+    //   })
+    //   .catch((error) => {
+    //     setLoading(false);
+    //     alert("An error occurred. Please check the console.");
+    //     console.log(error);
+    //   });
+  };
 
   return (
     <div>
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
-      {/* <div>
-        <div className="title-rating">
+      <Link to="/locations">
+        <div className="choose-restaurant-container">
+          <label>Choose Restaurant</label>
+        </div>
+      </Link>
+      <div>
+        {/* <div className="title-rating">
           <div className="title-container">
             <label>Title</label>
             <input
@@ -142,41 +163,28 @@ const WriteReview = () => {
             className="description-input"
           ></textarea>
         </div>
-        <div>
-          <label>Author</label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Stars</label>
-          <input
-            type="number"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-          />
-        </div>
         <div className="submit-container">
           <button onClick={handleSubmitReview} className="submit-btn">
             Submit
           </button>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="title-rating">
           <div className="title-container">
-            <label>
-              Title
-              <textarea value={text} onChange={(e) => setTitle(e.target.value)} />
-            </label>
+            <label>Title</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="title-input"
+            />
           </div>
           <div className="rating-container">
             <label>Rating</label>
             <input
               type="number"
-              step=".1"
+              step="1"
               min="0"
               max="10"
               value={rating}
@@ -187,22 +195,28 @@ const WriteReview = () => {
         </div>
         <div className="photo-container">
           <label>Photo (optional)</label>
+
           <div className="photo-input">
-            <label>
-              <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
-            </label>
+            {image && (
+              <div className="uploaded-img">
+                <img src={imageDisplay} />
+              </div>
+            )}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => uploadImage(e)}
+            />
+            {image && <button onClick={removeImage}>Delete</button>}
           </div>
         </div>
-        <div>
-          <label>
-            Restaurant: NEED A DROPDOWN MENU
-          </label>
-        </div>
         <div className="description-container">
-          <label>
-            Description
-            <textarea value={text} onChange={(e) => setText(e.target.value)} className="description-input" />
-          </label>
+          <label>Description</label>
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            className="description-input"
+          />
         </div>
         <div className="submit-container">
           <button type="submit" className="submit-btn">

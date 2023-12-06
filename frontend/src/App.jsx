@@ -17,6 +17,8 @@ import Restaurant from "./pages/Restaurant";
 import SearchResults from "./pages/SearchResults.jsx";
 import axios from "axios";
 
+// get(path.join("http://localhost:5555", imageUrl))
+
 const App = () => {
   const [login, setLogin] = useState(false);
   const [token, setToken] = useState(null);
@@ -86,6 +88,7 @@ const App = () => {
           })
           .then((res) => {
             setUserData(res.data);
+            console.log(res.data);
           })
           .catch((error) => {
             console.error("Error fetching reviews:", error);
@@ -105,6 +108,25 @@ const App = () => {
     axios.post("http://localhost:5555/auth/logout");
   }
 
+  async function createReview(formData) {
+    axios
+      .post("http://localhost:5555/reviews", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(() => {
+        //setLoading(false);
+        navigate("/");
+      })
+      .catch((error) => {
+        //setLoading(false);
+        alert("An error occurred. Please check the console.");
+        console.log(error);
+      });
+  }
+
   return (
     <>
       <Navbar
@@ -115,7 +137,10 @@ const App = () => {
       />
       <Routes>
         <Route path="/" element={<Home loggedIn={login} />} />
-        <Route path="/reviews/create" element={<WriteReview />} />
+        <Route
+          path="/reviews/create"
+          element={<WriteReview createReview={createReview} />}
+        />
         <Route path="/reviews/details/:id" element={<ShowReview />} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
