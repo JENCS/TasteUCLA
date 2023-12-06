@@ -58,32 +58,32 @@ const WriteReview = () => {
   //     });
   // };
 
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState("");
   const [rating, setRating] = useState("");
-  const [text, setText] = useState('')
-  const [image, setImage] = useState(null)
+  const [text, setText] = useState("");
+  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('text', text)
-    formData.append('image', image)
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("text", text);
+    formData.append("image", image);
 
-    setLoading(true)
+    setLoading(true);
     axios
-      .post('/api/reviews', formData, {
+      .post("/api/reviews", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
-        setLoading(false)
-        navigate('/')
+        setLoading(false);
+        navigate("/");
       })
       .catch((error) => {
         setLoading(false);
@@ -91,7 +91,7 @@ const WriteReview = () => {
         console.log(file);
         console.log(error);
       });
-  }
+  };
 
   return (
     <div>
@@ -142,22 +142,6 @@ const WriteReview = () => {
             className="description-input"
           ></textarea>
         </div>
-        <div>
-          <label>Author</label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Stars</label>
-          <input
-            type="number"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-          />
-        </div>
         <div className="submit-container">
           <button onClick={handleSubmitReview} className="submit-btn">
             Submit
@@ -169,7 +153,10 @@ const WriteReview = () => {
           <div className="title-container">
             <label>
               Title
-              <textarea value={text} onChange={(e) => setTitle(e.target.value)} />
+              <textarea
+                value={text}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </label>
           </div>
           <div className="rating-container">
@@ -189,19 +176,25 @@ const WriteReview = () => {
           <label>Photo (optional)</label>
           <div className="photo-input">
             <label>
-              <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
             </label>
           </div>
         </div>
         <div>
-          <label>
-            Restaurant: NEED A DROPDOWN MENU
-          </label>
+          <label>Restaurant: NEED A DROPDOWN MENU</label>
         </div>
         <div className="description-container">
           <label>
             Description
-            <textarea value={text} onChange={(e) => setText(e.target.value)} className="description-input" />
+            <textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className="description-input"
+            />
           </label>
         </div>
         <div className="submit-container">

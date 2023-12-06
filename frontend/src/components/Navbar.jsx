@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { LiaSearchSolid } from "react-icons/lia";
 import { AiFillHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
+import { Buffer } from "buffer";
 import axios from "axios";
 
 function debounce(func, wait) {
@@ -184,10 +185,22 @@ export default function Navbar({
           {userData && loggedIn && (
             <>
               <p>{userData.username}</p>
-              <CgProfile
-                className="profile-icon"
-                onClick={() => profileMenu()}
-              />
+              {userData.profile_picture && (
+                <img
+                  src={
+                    "data:image/png;base64," +
+                    Buffer.from(userData.profile_picture).toString("base64")
+                  }
+                  className="profile-image-icon"
+                  onClick={() => profileMenu()}
+                />
+              )}
+              {!userData.profile_picture && (
+                <CgProfile
+                  className="profile-icon"
+                  onClick={() => profileMenu()}
+                />
+              )}
             </>
           )}
           {!loggedIn && (
