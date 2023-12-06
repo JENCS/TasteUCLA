@@ -41,9 +41,8 @@ const reviewSchema = new mongoose.Schema(
             type: String,
             required: false
         },
-        image: {
-            type: Buffer,
-            required: false
+        imageUrl: {
+            type: String
         },
         comments: {
             type: [

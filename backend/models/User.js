@@ -10,9 +10,8 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   reviews: [mongoose.Types.ObjectId],
-  profile_picture: {
-    type: Buffer,
-    required: false,
+  imageUrl: {
+    type: String
   },
   bio: {
     type: String,

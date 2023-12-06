@@ -37,11 +37,13 @@ const createReview = asyncHandler(async (req, res) => {
     if (!restaurant) {
         return res.status(400).json({ message: "Restaurant not found" })
     }
+    const imageUrl = req.file ? req.file.path : null
     const newReview = {
         title: req.body.title,
         user: user._id,
         rating: req.body.rating,
-        restaurant: restaurant._id
+        restaurant: restaurant._id,
+        imageUrl: imageUrl
     }
     const review = await Review.create(newReview)
     user.reviews.push(review._id)

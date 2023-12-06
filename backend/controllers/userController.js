@@ -44,16 +44,11 @@ const updateUser = asyncHandler(async (req, res) => {
   if (!user) {
     return res.status(400).json({ message: "User not found" });
   }
-  const { profile_picture, bio } = req.body;
-  if (profile_picture) {
-    user.profile_picture = profile_picture;
-  }
-  if (!profile_picture) {
-    user.profile_picture = null;
-  }
+  const { bio } = req.body;
   if (bio) {
     user.bio = bio;
   }
+  user.imageUrl = req.file ? req.file.path : null
   const updatedUser = await user.save();
   res.json({ message: `${updatedUser.username} updated` });
 });
