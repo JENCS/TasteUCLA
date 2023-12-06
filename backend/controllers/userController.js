@@ -80,7 +80,6 @@ const getUser = asyncHandler(async (req, res) => {
 
 const getProfile = asyncHandler(async (req, res) => {
     const username = req.user
-    console.log(username)
     const foundUser = await User.findOne({ username }).select("-password").exec()
     res.status(202).json(foundUser)
 })

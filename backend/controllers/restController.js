@@ -5,7 +5,7 @@ import asyncHandler from "express-async-handler"
 // @route GET /locations
 // @access Public
 const getAllRestaurants = asyncHandler(async (req, res) => {
-    const restaurants = await Restaurant.find({})
+    const restaurants = await Restaurant.find({}).lean()
     return res.status(202).json({
         count: restaurants.length,
         data: restaurants
@@ -18,7 +18,7 @@ const getAllRestaurants = asyncHandler(async (req, res) => {
 const getRestaurant = asyncHandler(async (req, res) => {
     const { id } = req.params
     const restaurant = await Restaurant.findById(id)
-        .populate("reviews")
+        .populate("reviews").lean()
     return res.status(202).json(restaurant)
 })
 
