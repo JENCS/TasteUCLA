@@ -9,7 +9,6 @@ import { Buffer } from "buffer";
 function Restaurant() {
   const [restaurant, setRestaurant] = useState({});
   const [restaurantRating, setRestaurantRating] = useState("");
-  const [imagePath, setImagePath] = useState("");
   const [numOfReviews, setNumOfReviews] = useState(0);
 
   const [imageDisplay, setImageDisplay] = useState(null);
@@ -43,7 +42,7 @@ function Restaurant() {
     axios.get(`http://localhost:5555/locations/${id}`)
     .then((res) => {
       setRestaurant(res.data); 
-      setImagePath(res.data.location.split(" ").join(""));
+
       setReviews(res.data.reviews);
       setNumOfReviews(res.data.reviews.length)
       setReviewsLoading(false);
@@ -85,7 +84,7 @@ function Restaurant() {
               <div className={classes.description}>{restaurant.description}</div>
               </div> 
               <div className={classes.logo}>
-              <img src={"/logos/" + imagePath + "/" + restaurant._id + ".png"} height = {"500px"} width = {"500px"}alt={"Loading..."} />
+              <img src={"/logos/" + restaurant._id + ".png"} height = {"500px"} width = {"500px"}alt={"Loading..."} />
               </div>
             </div>       
             <div className={classes.reviews_header}>Reviews:</div>
