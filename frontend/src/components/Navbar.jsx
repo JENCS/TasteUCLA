@@ -62,7 +62,7 @@ export default function Navbar({ loggedIn, changeLoginState }) {
   }
   function logOut() {
     profileMenu();
-    changeLoginState();
+    changeLoginState(false);
   }
   function removeMenus() {
     setProfileDropdown(false);
