@@ -34,6 +34,9 @@ const createReview = asyncHandler(async (req, res) => {
     }
     const restaurant_name = req.body.restaurant
     const restaurant = await Restaurant.findOne({ name: restaurant_name }).exec()
+    if (!restaurant) {
+        return res.status(400).json({ message: "Restaurant not found" })
+    }
     const newReview = {
         title: req.body.title,
         user: user._id,
