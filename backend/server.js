@@ -2,6 +2,8 @@ import "dotenv/config";
 import express from "express";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -16,6 +18,8 @@ const app = express();
 
 const PORT = process.env.PORT;
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 const uploadsDir = path.join(__dirname, "uploads")
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir)
