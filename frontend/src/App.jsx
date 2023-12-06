@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import UserReviews from "./pages/UserReviews.jsx";
 import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
+import SearchResults from "./pages/SearchResults.jsx";
 import axios from "axios";
 
 const App = () => {
@@ -118,6 +119,7 @@ const App = () => {
         <Route path="/reviews/details/:id" element={<ShowReview />} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/login" element={<LoginPage loginUser={loginUser} />} />
         <Route
           path="/sign-up"
@@ -135,6 +137,7 @@ const App = () => {
         <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/locations/:id" element={<Restaurant />} />
+        <Route path="/search-results/:query" element={<SearchResults />} />
       </Routes>
     </>
   );
