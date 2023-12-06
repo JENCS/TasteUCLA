@@ -91,16 +91,21 @@ const deleteReview = asyncHandler(async (req, res) => {
 // @route POST /reviews/:id/comment
 // @access Private
 const createComment = asyncHandler(async (req, res) => {
-  if (!req.body.author || !req.body.text) {
+  const username = req.user;
+  const user = await User.findOne({ username }).select("_id").lean()
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+  if (!req.body.text) {
     return res.status(400).send({
-      message: "Send all required fields: author, text",
+      message: "Send all required fields: text",
     });
   }
   const { id } = req.params;
   try {
     const review = await Review.findById(id).select("comments");
     const comment = new Comment({
-      user: req.body.author,
+      user: user._id,
       body: req.body.text,
     });
     var newCommentCount = review.comments.push(comment);
