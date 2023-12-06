@@ -8,8 +8,9 @@ import { Buffer } from "buffer";
 
 function Restaurant() {
   const [restaurant, setRestaurant] = useState({});
-  const [restaurantRating, setRestaurantRating] = useState(0);
-  const didMount = useRef(false);
+  const [restaurantRating, setRestaurantRating] = useState("");
+  const [imagePath, setImagePath] = useState("");
+  const [numOfReviews, setNumOfReviews] = useState(0);
 
   const [imageDisplay, setImageDisplay] = useState(null);
   const [reviewsLoading, setReviewsLoading] = useState(true);
@@ -34,41 +35,57 @@ function Restaurant() {
     for (let i = 0; i < reviews.length; i++) {
       sum += reviews[i].rating
     }
-    return(sum/reviews.length)
+    setRatingsLoading(false);
+    return(Math.round((sum/reviews.length) * 100)/100)
   }
 
   useEffect(() => {
     axios.get(`http://localhost:5555/locations/${id}`)
     .then((res) => {
       setRestaurant(res.data); 
-      const mimeType = "image/png";
-      const b64 = Buffer.from(res.data.image).toString("base64");
-      setImageDisplay(`data:${mimeType};base64,${b64}`);
-
+      setImagePath(res.data.location.split(" ").join(""));
       setReviews(res.data.reviews);
+      setNumOfReviews(res.data.reviews.length)
       setReviewsLoading(false);
-      setRestaurantRating(getRestaurantRating());
+      setRestaurantRating(getRestaurantRating().toString());
+      
       getImage();
     })
     .catch((error) => {
       console.error('Error fetching restaurant:', error);
       setReviewsLoading(false);
     });
+
+    if(isNaN(restaurantRating) && numOfReviews != 0) {
+      setRestaurantRating("Loading...")
+      setRatingsLoading(false);
+    }
+
+    if(isNaN(restaurantRating) && numOfReviews == 0) {
+      setRestaurantRating("No reviews")
+      setRatingsLoading(false);
+    }
     //document.onload = setRestaurantRating(getRestaurantRating());
   }, [getRestaurantRating, getImage] );
   
   return (
       <div className={classes.root}>
-          <div className={classes.row}>
+          <div className={classes.row}>           
             <div className={classes.container}>
+                <div className={classes.back_button}>
+                  <BackButton destination='/locations'/>
+                </div> 
                 <div className={classes.restaurant_name}>{restaurant.name}</div>
-                <BackButton destination='/locations'/>
                 <div className={classes.restaurant_location}>{restaurant.location}</div>
-                <div className={classes.rating}>{"Overall Rating:  " + restaurantRating}</div>
+                {ratingLoading ? (
+                  <Spinner />
+                  ) : (
+                    <div className={classes.rating}>{"Overall Rating:  " + restaurantRating + " (" + numOfReviews + " review(s))"}</div>
+                  )}
               <div className={classes.description}>{restaurant.description}</div>
               </div> 
               <div className={classes.logo}>
-              <img src={imageDisplay} width = {"500px"}alt={"image can't load"} />
+              <img src={"/logos/" + imagePath + "/" + restaurant._id + ".png"} height = {"500px"} width = {"500px"}alt={"Loading..."} />
               </div>
             </div>       
             <div className={classes.reviews_header}>Reviews:</div>
