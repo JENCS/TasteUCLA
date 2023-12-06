@@ -1,5 +1,7 @@
 import "dotenv/config";
 import express from "express";
+import path from "path";
+import fs from "fs";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -8,16 +10,26 @@ import searchRoutes from "./routes/searchRoutes.js";
 import cors from "cors";
 import corsOptions from "./config/corsOptions.js";
 import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
 import restRoutes from "./routes/restRoutes.js";
 
 const app = express();
 
 const PORT = process.env.PORT;
 
-app.use(bodyParser.json({ limit: "10mb" }));
-app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
-
+const uploadsDir = path.join(__dirname, "uploads")
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir)
+}
+const profileImageDir = path.join(__dirname, "uploads/profile")
+if (!fs.existsSync(profileImageDir)) {
+  fs.mkdirSync(profileImageDir)
+}
+const reviewImageDir = path.join(__dirname, "uploads/review")
+if (!fs.existsSync(reviewImageDir)) {
+  fs.mkdirSync(reviewImageDir)
+}
+app.use("/uploads/profile", express.static(profileImageDir))
+app.use("/uploads/review", express.static(reviewImageDir))
 app.use(express.json());
 
 app.use(cors(corsOptions));
