@@ -37,43 +37,48 @@
 }
 
 .rests_container{
-    /* background-color: #051d3159; */
+    background-color: #051d3113;
     outline: #6776ff;
     outline-style: solid;
     outline-width: 1px;
     overflow-x: hidden;
     margin: 10px;
+    border-radius: 12px;
 }
 
 .users_container{
-    /* background-color: #0e45723f; */
+    background-color: #051d3113;
     outline: #6776ff;
     outline-style: solid;
     outline-width: 1px;
     overflow-x: hidden;
     margin: 10px;
+    border-radius: 12px;
 }
 
 .reviews_container{
-    background-color: #3851653a;
-    /* outline: #6776ff;
+    background-color: #051d3113;
+    outline: #6776ff;
     outline-style: solid;
-    outline-width: 1px; */
+    outline-width: 1px;
     overflow-x: hidden;
     margin: 10px;
+    border-radius: 12px;
 }
 
 .section_grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10px, 300px));
+    grid-template-columns: repeat(auto-fit, minmax(10px, 400px));
     margin: 10px;
 }
 
 .section_grid_item{
     display: flex;
+    flex-basis: content;
     color: #ffffff;
-    background-color: #1b5e76;
+    background-color: #051d3120;
     border: 1px solid #77cdff;
+    border-radius: 12px;
     padding: 5px;
     font-size: 14px;
     margin: 5px;
@@ -81,27 +86,29 @@
 
 .section_grid_item_col{
     display: flex;
+    text-overflow: ellipsis;
+    overflow: hidden;
     grid-template-columns: repeat(2, minmax(0px,600px));
 }
 
 .grid_item_text{
-    display: flex;
-    text-overflow: ellipsis;
+    color: #0477b9;
+    font-size: 16px;
     overflow: hidden;
     white-space: nowrap;
-    margin: 5px;
 }
 
 .grid_item_title{
     display: flex;
-    color: rgb(85, 178, 255);
+    color: #051d31;
     font-size: 20px;
-    margin: 5px;
+    margin: 10px;
 }
 
 .grid_item_img{
     display: flex;
-    width: 75px;
-    height: 75px;
+    width: 100px;
+    height: 100px;
     margin: 5px;
+    border-radius: 12px;
 }

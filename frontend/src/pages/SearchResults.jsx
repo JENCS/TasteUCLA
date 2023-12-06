@@ -89,10 +89,14 @@ function SearchResults() {
                                 <div className={classes.section_grid}>
                                     {reviews.map((review, index) => (
                                         <a key={index} className={classes.section_grid_item} href={"/reviews/details/" + review._id}>
-                                            <div className={classes.section_grid_item}>
-                                                <div className={classes.grid_item_title}>{review.title}</div>
-                                                <div className={classes.grid_item_text}>{"of " + review.restaurant}</div>
-                                                <div className={classes.grid_item_text} style={{color: "yellow"}}>{"★".repeat(review.rating)}</div>
+                                            <div className={classes.section_grid_item_col}>
+                                                <div>
+                                                </div>
+                                                <div>
+                                                    <div className={classes.grid_item_title}>{review.title}</div>
+                                                    <div className={classes.grid_item_text}>{"of " + review.restaurant}</div>
+                                                    <div className={classes.grid_item_text} style={{color: "yellow"}}>{"★".repeat(review.rating)}</div>
+                                                </div>
                                             </div>
                                         </a>
                                     ))}
