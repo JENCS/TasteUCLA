@@ -41,7 +41,7 @@ async function searchDatabase(restaurantQuery, userQuery, reviewQuery) {
     let reviewResult = [];
     
     if (restaurantQuery !== '') {
-        const rests = await Restaurant.find({}).select("-image -reviews").lean();
+        const rests = await Restaurant.find({}).select("-reviews").lean();
         const re = new RegExp(restaurantQuery, "gi");
 
         for (let i in rests) {
