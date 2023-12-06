@@ -24,7 +24,7 @@
   text-align: center;
   position: relative;
   margin-top: 40px;
-  margin-left: 20px;
+  margin-left: 50px;
   margin-right: auto;
   top: 110px;
   font-size: 50px;
@@ -40,7 +40,7 @@
   display: flex;
   text-align: center;
   position: relative;
-  margin-left: 20px;
+  margin-left: 50px;
   margin-right: auto;
   top: 80px;
   font-size: 40px;
@@ -52,7 +52,7 @@
   width: max-content;
   height: max-content;
   margin-left: auto;
-  margin-right: 50px;
+  margin-right: 150px;
   top: 120px;
 }
 
@@ -75,7 +75,7 @@
   display: flex;
   text-align: center;
   position: relative;
-  margin-left: 20px;
+  margin-left: 50px;
   margin-right: auto;
   top: 80px;
   font-size: 40px;
@@ -91,7 +91,7 @@
   text-align: left;
   position: relative;
   margin-top: 10px;
-  margin-left: 20px;
+  margin-left: 50px;
   margin-right: auto;
   top: 80px;
   font-size: 20px;
@@ -144,6 +144,7 @@
   border-radius: 50%;
   display: inline-block;
   top: 120px;
+  margin-bottom: 10px;
 }
 
 .username{
