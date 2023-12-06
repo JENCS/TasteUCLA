@@ -72,6 +72,7 @@
 }
 
 .section_grid_item{
+    color: #ffffff;
     background-color: #1b5e76;
     border: 1px solid #77cdff;
     padding: 5px;
@@ -86,6 +87,6 @@
 }
 
 .grid_item_title{
-    color: rgb(12, 3, 3);
+    color: rgb(85, 178, 255);
     font-size: 16px;
 }
