@@ -33,6 +33,7 @@ const App = () => {
 
   async function updateProfileInfo(picture, bio) {
     console.log(token);
+    console.log(picture);
     await axios.patch(
       "http://localhost:5555/users/me",
       {
@@ -60,35 +61,6 @@ const App = () => {
       });
   }
 
-  // const updateProfileInfo = (picture, bio) => {
-  //   console.log(token);
-  //   axios.patch(
-  //     "http://localhost:5555/users/me",
-  //     {
-  //       bio: bio,
-  //     },
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     }
-  //   );
-  //   console.log(userData);
-
-  //   axios
-  //     .get("http://localhost:5555/users/me", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setUserData(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching reviews:", error);
-  //     });
-  // };
-
   // search username and check password
   async function loginUser(username, password) {
     try {
@@ -105,7 +77,7 @@ const App = () => {
         console.log(response.data.accessToken);
         // changeToken(response.data.accessToken);
 
-        axios
+        await axios
           .get("http://localhost:5555/users/me", {
             headers: {
               Authorization: `Bearer ${response.data.accessToken}`,
@@ -128,9 +100,18 @@ const App = () => {
     }
   }
 
+  async function logoutUser() {
+    axios.post("http://localhost:5555/auth/logout");
+  }
+
   return (
     <>
-      <Navbar loggedIn={login} changeLoginState={changeLoginState} />
+      <Navbar
+        userData={userData}
+        loggedIn={login}
+        changeLoginState={changeLoginState}
+        logoutUser={logoutUser}
+      />
       <Routes>
         <Route path="/" element={<Home loggedIn={login} />} />
         <Route path="/reviews/create" element={<WriteReview />} />

@@ -9,12 +9,14 @@ export default function Profile({ userData, updateProfileInfo }) {
   const [bio, setBio] = useState(userData.bio);
   const [image, setImage] = useState(null);
 
-  if (userData.profile_picture) {
-    setFile(
-      "data:image/png;base64," +
-        Buffer.from(userData.profile_picture).toString("base64")
-    );
-  }
+  useEffect(() => {
+    if (userData.profile_picture) {
+      setFile(
+        "data:image/png;base64," +
+          Buffer.from(userData.profile_picture).toString("base64")
+      );
+    }
+  }, []);
 
   // "data:image/png;base64," + Buffer.from(userData.profile_picture).toString("base64")
 
@@ -39,7 +41,7 @@ export default function Profile({ userData, updateProfileInfo }) {
     if (file) {
       updateProfileInfo(image, bio);
     } else {
-      updateProfileInfo(file, bio);
+      updateProfileInfo(null, bio);
     }
   }
   function deleteAccount() {
