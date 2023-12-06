@@ -32,8 +32,31 @@ const reviewImageDir = path.join(__dirname, "uploads/review")
 if (!fs.existsSync(reviewImageDir)) {
   fs.mkdirSync(reviewImageDir)
 }
-app.use("/uploads/profile", express.static(profileImageDir))
-app.use("/uploads/review", express.static(reviewImageDir))
+const setContentType = (req, res, next) => {
+  const filePath = path.join(__dirname, req.path)
+  if (fs.existsSync(filePath)) {
+    const fileExt = path.extname(filePath).toLowerCase()
+    const contentTypeMap = {
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.png': 'image/png',
+      '.gif': 'image/gif',
+      '.bmp': 'image/bmp',
+      '.webp': 'image/webp',
+      '.tiff': 'image/tiff',
+      '.ico': 'image/x-icon',
+      '.svg': 'image/svg+xml',
+      '.svgz': 'image/svg+xml'
+    }
+    const contentType = contentTypeMap[fileExt]
+    if (contentType) {
+      res.setHeader('Content-Type', contentType)
+    }
+  }
+  next()
+}
+app.use("/uploads/profile", setContentType, express.static(profileImageDir))
+app.use("/uploads/review", setContentType, express.static(reviewImageDir))
 app.use(express.json());
 
 app.use(cors(corsOptions));
