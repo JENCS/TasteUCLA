@@ -7,51 +7,83 @@ import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 
 const WriteReview = () => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [author, setAuthor] = useState("");
+  // const [photo, setPhoto] = useState();
+  // const [description, setDescription] = useState("");
+  // const [file, setFile] = useState(null);
+  // const [image, setImage] = useState(null);
+
+  // async function uploadImage(e) {
+  //   console.log(e.target.files);
+  //   setFile(e.target.files[0]);
+  //   // setImage(file);
+  //   setPhoto(URL.createObjectURL(e.target.files[0]));
+  //   console.log("UPLOADED");
+  //   const promise = e.target.files[0].arrayBuffer();
+  //   promise.then((value) => {
+  //     console.log(value);
+  //     setImage(Buffer.from(value));
+  //     console.log(typeof image);
+  //   });
+
+  //   // imageBuffer = fs.readFileSync(file);
+  //   // fs.writeFileSync("lkawenfoawef.png", imageBuffer);
+  // }
+
+  // function removeImage(e) {
+  //   setPhoto();
+  // }
+  // const handleSubmitReview = () => {
+  //   // const reader = new FileReader();
+  //   const data = {
+  //     title,
+  //     author,
+  //     rating,
+  //     description,
+  //     image,
+  //   };
+  //   setLoading(true);
+  //   axios
+  //     .post("http://localhost:5555/reviews", data)
+  //     .then(() => {
+  //       setLoading(false);
+  //       navigate("/");
+  //     })
+  //     .catch((error) => {
+  //       setLoading(false);
+  //       alert("An error occurred. Please check the console.");
+  //       console.log(file);
+  //       console.log(error);
+  //     });
+  // };
+
+  const [title, setTitle] = useState('')
   const [rating, setRating] = useState("");
-  const [photo, setPhoto] = useState();
-  const [description, setDescription] = useState("");
+  const [text, setText] = useState('')
+  const [image, setImage] = useState(null)
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [file, setFile] = useState(null);
-  const [image, setImage] = useState(null);
 
-  async function uploadImage(e) {
-    console.log(e.target.files);
-    setFile(e.target.files[0]);
-    // setImage(file);
-    setPhoto(URL.createObjectURL(e.target.files[0]));
-    console.log("UPLOADED");
-    const promise = e.target.files[0].arrayBuffer();
-    promise.then((value) => {
-      console.log(value);
-      setImage(Buffer.from(value));
-      console.log(typeof image);
-    });
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-    // imageBuffer = fs.readFileSync(file);
-    // fs.writeFileSync("lkawenfoawef.png", imageBuffer);
-  }
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('text', text)
+    formData.append('image', image)
 
-  function removeImage(e) {
-    setPhoto();
-  }
-  const handleSubmitReview = () => {
-    // const reader = new FileReader();
-    const data = {
-      title,
-      author,
-      rating,
-      description,
-      image,
-    };
-    setLoading(true);
+    setLoading(true)
     axios
-      .post("http://localhost:5555/reviews", data)
+      .post('/api/reviews', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`,
+        },
+      })
       .then(() => {
-        setLoading(false);
-        navigate("/");
+        setLoading(false)
+        navigate('/')
       })
       .catch((error) => {
         setLoading(false);
@@ -59,15 +91,14 @@ const WriteReview = () => {
         console.log(file);
         console.log(error);
       });
-  };
+  }
 
   return (
     <div>
-      {/* <Navbar /> */}
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
-      <div>
+      {/* <div>
         <div className="title-rating">
           <div className="title-container">
             <label>Title</label>
@@ -132,7 +163,53 @@ const WriteReview = () => {
             Submit
           </button>
         </div>
-      </div>
+      </div> */}
+      <form onSubmit={handleSubmit}>
+        <div className="title-rating">
+          <div className="title-container">
+            <label>
+              Title
+              <textarea value={text} onChange={(e) => setTitle(e.target.value)} />
+            </label>
+          </div>
+          <div className="rating-container">
+            <label>Rating</label>
+            <input
+              type="number"
+              step=".1"
+              min="0"
+              max="10"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              className="rating-input"
+            />
+          </div>
+        </div>
+        <div className="photo-container">
+          <label>Photo (optional)</label>
+          <div className="photo-input">
+            <label>
+              <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>
+            Restaurant: NEED A DROPDOWN MENU
+          </label>
+        </div>
+        <div className="description-container">
+          <label>
+            Description
+            <textarea value={text} onChange={(e) => setText(e.target.value)} className="description-input" />
+          </label>
+        </div>
+        <div className="submit-container">
+          <button type="submit" className="submit-btn">
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

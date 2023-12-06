@@ -1,17 +1,20 @@
 .root {
     position: absolute;
-    top:0;
+    top:70px;
     left:0;
     right:0;
     flex-direction: column;
     outline: solid 1px #aabcd2;
     outline-offset: -1px;
-    overflow: hidden;
+    overflow-y: hidden;
     background-color: #E2F1F5;
+    height: calc(100vh-70px)!important;
   }
 
   .back_button{
     position: relative;
+    margin-left: 50px;
+    margin-top: 50px;
   }
 
 .restaurant_name{
@@ -23,11 +26,10 @@
   display: flex;
   text-align: center;
   position: relative;
-  margin-top: 40px;
   margin-left: 50px;
   margin-right: auto;
-  top: 110px;
   font-size: 50px;
+  top: 20px;
 }
 
 .restaurant_location{
@@ -42,8 +44,8 @@
   position: relative;
   margin-left: 50px;
   margin-right: auto;
-  top: 80px;
   font-size: 40px;
+  top: 5px;
 }
 
 .logo{
@@ -52,13 +54,13 @@
   width: max-content;
   height: max-content;
   margin-left: auto;
-  margin-right: 150px;
-  top: 120px;
+  margin-right: 90px;
+  margin-top: 100px;
 }
 
 .row{
   display: flex;
-  margin-bottom: 150px;
+  margin-bottom: 80px;
 }
 
 .container{
@@ -77,8 +79,7 @@
   position: relative;
   margin-left: 50px;
   margin-right: auto;
-  top: 80px;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .description{
@@ -90,10 +91,9 @@
   display: flex;
   text-align: left;
   position: relative;
-  margin-top: 10px;
   margin-left: 50px;
   margin-right: auto;
-  top: 80px;
+  top: 20px;
   font-size: 20px;
   width: 600px;
 }
@@ -112,7 +112,7 @@
   display: flex;
   text-align: center;
   position: relative;
-  margin-left: 20px;
+  margin-left: 30px;
   margin-right: auto;
   font-size: 40px;
 }
