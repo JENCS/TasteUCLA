@@ -107,6 +107,9 @@ textarea,
   max-width: 400px;
   max-height: 400px;
   padding: 0px 30px 30px 30px;
+  margin-top: 20px;
+  /* background-color: blue; */
+  padding-bottom: 0px;
   /* min-height: 30px; */
   /* margin: 30px 0px; */
 }
@@ -118,11 +121,12 @@ textarea,
   /* margin: 0px 30px 30px 30px; */
 }
 
-.uploaded-img > button {
+.photo-input > button {
   /* border: 1px solid rgb(107, 117, 255); */
-  background-color: aliceblue;
-  border: 1px solid black;
-  margin-top: 20px;
+  /* background-color: aliceblue;
+  border: 1px solid black; */
+  margin-top: 0px;
+  margin-bottom: 20px;
   padding: 3px 10px;
 }
 

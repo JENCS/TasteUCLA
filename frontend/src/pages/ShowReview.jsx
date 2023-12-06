@@ -10,6 +10,7 @@ const ShowReview = () => {
   const [review, setReview] = useState({});
   const [loading, setLoading] = useState(false);
   const [imageDisplay, setImageDisplay] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
   const { id } = useParams();
   const [comments, setComments] = useState([]);
 
@@ -28,12 +29,73 @@ const ShowReview = () => {
         setComments(res.data.comments);
         setLoading(false);
         setComments(res.data.comments);
+
+        const fullUrl = `http://localhost:5555/${res.data.imageUrl}`;
+        try {
+          const response = axios.get(fullUrl, {
+            responseType: "arraybuffer",
+          });
+
+          // Convert the array buffer to a base64-encoded string
+          const base64String = btoa(
+            new Uint8Array(response.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ""
+            )
+          );
+
+          // Construct the data URL
+          const dataUrl = `data:${response.headers["content-type"]};base64,${base64String}`;
+
+          setImageUrl(dataUrl);
+        } catch (error) {
+          console.error("Error fetching image:", error);
+        }
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
   }, []);
+
+  // const ImageComponent = (review) => {
+  //   const [imageUrl, setImageUrl] = useState("");
+
+  //   useEffect(() => {
+  //     const fetchImage = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           path.join("http://localhost:5555", review.imageUrl),
+  //           {
+  //             responseType: "arraybuffer",
+  //           }
+  //         );
+
+  //         // Convert the array buffer to a base64-encoded string
+  //         const base64String = btoa(
+  //           new Uint8Array(response.data).reduce(
+  //             (data, byte) => data + String.fromCharCode(byte),
+  //             ""
+  //           )
+  //         );
+
+  //         // Construct the data URL
+  //         const dataUrl = `data:${response.headers["content-type"]};base64,${base64String}`;
+
+  //         setImageUrl(dataUrl);
+  //       } catch (error) {
+  //         console.error("Error fetching image:", error);
+  //       }
+  //     };
+
+  //     fetchImage();
+  //   }, []); // Run once when the component mounts
+
+  //   return (
+  //     <div>{imageUrl && <img src={imageUrl} alt="cannot load image" />}</div>
+  //   );
+  // };
+
   return (
     <div className="p-4 mt-16">
       <BackButton />
