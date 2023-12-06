@@ -19,7 +19,6 @@ function SearchResults() {
                 setUserResults(res.data.users);
                 setReviewResults(res.data.reviews);
                 setLoading(false);
-                console.log(JSON.stringify(res.data.restaurants))
             })
             .catch((error) => {
                 console.error('Error fetching search results', error);
@@ -37,34 +36,58 @@ function SearchResults() {
                 <Spinner />
                 ) : (
                     <>
-                        <div className={classes.restaurants_container}>
-                            <div className={classes.searchResults_section_title}>Restaurants</div>
+                        <div className={classes.rests_container}>
+                            <div className={classes.section_title}>Restaurants</div>
                             {restaurants.length === 0 ? (
-                                <div>No restaurants matching "{query}" found</div>
+                                <div className={classes.not_found_message}>No restaurants matching "{query}" found</div>
                             ) : (
-                                <div className={classes.restaurants_grid}>
+                                <div className={classes.section_grid}>
                                     {restaurants.map((rest, index) => (
-                                        <a href={"/locations/" + rest._id}>
-                                            <div key={index} className={classes.restaurants_grid_item}>
-                                                <div className={classes.restaurant_title}>{rest.name}</div>
-                                                <div>{rest.location}</div>
+                                        <a key={index} href={"/locations/" + rest._id}>
+                                            <div className={classes.section_grid_item}>
+                                                <div className={classes.grid_item_title}>{rest.name}</div>
+                                                <div className={classes.grid_item_text}>{rest.location}</div>
                                             </div>
                                         </a>
                                     ))}
                                 </div>
                             )}
                         </div>
-                        {/* <div className={classes.reviews_grid}>
-                        {reviews.length === 0 ? (
-                            <div>No reviews matching "{query}" found</div>
+                        <div className={classes.users_container}>
+                            <div className={classes.section_title}>Users</div>
+                            {users.length === 0 ? (
+                                <div className={classes.not_found_message}>No users matching "{query}" found</div>
                             ) : (
-                            <div className={classes.reviews_grid}>
-                                {reviews.map((review, index) => (
-                                    <div key={index}>{review.title}</div>
-                                ))}
-                            </div>
+                                <div className={classes.section_grid}>
+                                    {users.map((user, index) => (
+                                        <a key={index} href={"/profile/" + user._id}>
+                                            <div className={classes.section_grid_item}>
+                                                <div className={classes.grid_item_title}>{user.username}</div>
+                                                <div className={classes.grid_item_text}>{user.bio}</div>
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
                             )}
-                        </div> */}
+                        </div>
+                        <div className={classes.reviews_container}>
+                            <div className={classes.section_title}>Reviews</div>
+                            {reviews.length === 0 ? (
+                                <div className={classes.not_found_message}>No reviews matching "{query}" found</div>
+                            ) : (
+                                <div className={classes.section_grid}>
+                                    {reviews.map((review, index) => (
+                                        <a key={index} href={"/reviews/" + review._id}>
+                                            <div className={classes.section_grid_item}>
+                                                <div className={classes.grid_item_title}>{review.title}</div>
+                                                <div className={classes.grid_item_text}>{"of " + review.restaurant}</div>
+                                                <div className={classes.grid_item_text} style={{color: "yellow"}}>{"★".repeat(review.rating)}</div>
+                                            </div>
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </>
                 )}
             </div>

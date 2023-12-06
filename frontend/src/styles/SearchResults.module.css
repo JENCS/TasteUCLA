@@ -1,63 +1,91 @@
 .root {
     position: absolute;
-    top:0;
+    top:70px;
     left:0;
     right:0;
-    margin-top: 70px;
     flex-direction: column;
     outline: solid 1px #aabcd2;
     outline-offset: -1px;
-    overflow: hidden;
+    overflow-y: scroll;
     background-color: #E2F1F5;
-    height: calc(100vh-60px);
+    height: calc(100vh - 70px);
 }
 
 .searchResults_title{
     color: #1e1e1e;
-    line-height: 150%;
-    font-weight: 500;
-    letter-spacing: -0.023em;
-    display: flex;
-    text-align: center;
-    position: relative;
-    margin-left: 20px;
-    margin-right: auto;
-    margin-bottom: 30px;
-    top: 10px;
     font-size: 30px;
+    font-weight: bolder;
+    margin: 30px;
 }
 
 .results_container{
     overflow-x: hidden;
 }
 
-.searchResults_section_title{
-    font-size: large;
+.not_found_message{
+    color: #ff0000;
+    font-weight: normal;
+    margin: 20px;
+}
+
+.section_title{
+    color: #000000;
+    font-size: 25px;
+    font-weight: bold;
     text-align: left;
+    margin: 20px;
 }
 
-.restaurants_container{
+.rests_container{
+    background-color: #051d3159;
+    /* outline: #6776ff;
+    outline-style: solid;
+    outline-width: 1px; */
     overflow-x: hidden;
+    margin: 10px;
 }
 
-.restaurants_grid{
+.users_container{
+    background-color: #0e45723f;
+    /* outline: #6776ff;
+    outline-style: solid;
+    outline-width: 1px; */
+    overflow-x: hidden;
+    margin: 10px;
+}
+
+.reviews_container{
+    background-color: #3851653a;
+    /* outline: #6776ff;
+    outline-style: solid;
+    outline-width: 1px; */
+    overflow-x: hidden;
+    margin: 10px;
+}
+
+.section_grid{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(10px, 200px));
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
+    margin: 10px;
 }
 
-.restaurants_grid_item{
-    background-color: #FFFF;
-    border: 3px solid #DED0F5;
+.section_grid_item{
+    background-color: #1b5e76;
+    border: 1px solid #77cdff;
     padding: 5px;
     font-size: 14px;
-    margin-bottom: 0px;
+    margin: 5px;
 }
 
-.restaurant_title{
-    color: #ff0000;
-    font-weight: bold;
+.grid_item_text{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.grid_item_title{
+    color: rgb(12, 3, 3);
     font-size: 16px;
 }

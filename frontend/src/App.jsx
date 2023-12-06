@@ -119,6 +119,7 @@ const App = () => {
         <Route path="/reviews/details/:id" element={<ShowReview />} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/login" element={<LoginPage loginUser={loginUser} />} />
         <Route
           path="/sign-up"
