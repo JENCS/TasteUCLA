@@ -21,7 +21,7 @@ body {
 
 .row{
   display: flex;
-  margin-bottom: 150px;
+  margin-bottom: 20px;
 }
 
 .content {
@@ -33,11 +33,26 @@ body {
   font-size: 40px;
 }
 
+.created_time{
+  color: #1e1e1e;
+  display: flex;
+  position: relative;
+  font-size: 20px;
+}
+
+.updated_time{
+  color: #1e1e1e;
+  display: flex;
+  position: relative;
+  font-size: 20px;
+}
+
 .reviews-header{
   color: #1e1e1e;
   display: flex;
   position: relative;
   font-size: 40px;
+  margin-top: 30px;
 }
 
 .comments-grid {
@@ -45,6 +60,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(800px, 1375px));
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
 } 
 
 .comment-textbox {
@@ -53,6 +69,15 @@ body {
   width: 100%;
   height: 100%;
   outline-offset: 0px;
+}
+
+
+.comments_grid_item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 3px solid #DED0F5;
+  padding: 15px;
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 
 .comments_content{
@@ -108,5 +133,19 @@ body {
   margin-bottom: 20px;
 }
 
+.created_time_comment{
+  color: #1e1e1e;
+  display: flex;
+  position: relative;
+  font-size: 15px;
+  margin-left: 180px;
+}
 
+.updated_time_comment{
+  color: #1e1e1e;
+  display: flex;
+  position: relative;
+  font-size: 15px;
+  margin-left: 180px;
+}
 
