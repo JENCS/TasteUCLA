@@ -25,9 +25,8 @@ function Restaurant() {
     const mimeType = "image/png";
     for (let i = 0; i < reviews.length; i++) {
       let b64 = Buffer.from(reviews[i].image).toString("base64");
-      a = a.concat(`data:${mimeType};base64,${b64}`);
+      setImages(images.concat(`data:${mimeType};base64,${b64}`));
     }
-    setImages(a)
   }
 
   const getRestaurantRating = () => {
@@ -89,7 +88,7 @@ function Restaurant() {
                     </div>
                     <div className={classes.rating_desc_container}>
                       <div className={classes.review_image}>
-                        <img src={images[0]} width = {"300px"}/>
+                        <img src={images[index]} width = {"300px"}/>
                       </div>
                       <div className={classes.review_rating}>{"Rating: " + review.rating}</div>
                       <div className={classes.review_title}>{review.title}</div>
