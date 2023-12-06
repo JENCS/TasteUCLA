@@ -4,7 +4,7 @@ import classes from '../styles/SignUpPage.module.css';
 import Button from '@mui/material/Button';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Popup from 'reactjs-popup';
+
 
 function SignUpPage() {
   const [username, setUsername] = useState("");
