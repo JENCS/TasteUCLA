@@ -220,7 +220,7 @@ export default function Navbar({
           <Link to="/profile">
             <p onClick={removeMenus}>Profile</p>
           </Link>
-          <Link to="/id/reviews">
+          <Link to="/reviews/me">
             <p onClick={removeMenus}>My Reviews</p>
           </Link>
           <Link to="/">
