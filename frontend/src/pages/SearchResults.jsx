@@ -3,6 +3,7 @@ import axios from "axios";
 import classes from '../styles/SearchResults.module.css';
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import { CgGlassAlt } from "react-icons/cg";
 
 function SearchResults() {
     const [restaurants, setRestResults] = useState([]);
@@ -43,10 +44,15 @@ function SearchResults() {
                             ) : (
                                 <div className={classes.section_grid}>
                                     {restaurants.map((rest, index) => (
-                                        <a key={index} href={"/locations/" + rest._id}>
-                                            <div className={classes.section_grid_item}>
-                                                <div className={classes.grid_item_title}>{rest.name}</div>
-                                                <div className={classes.grid_item_text}>{rest.location}</div>
+                                        <a key={index} className={classes.section_grid_item} href={"/locations/" + rest._id}>
+                                            <div className={classes.section_grid_item_col}>
+                                                <div>
+                                                    <img className={classes.grid_item_img} src={`/logos/${rest._id}.png`}/>
+                                                </div>
+                                                <div>
+                                                    <div className={classes.grid_item_title}>{rest.name}</div>
+                                                    <div className={classes.grid_item_text}>{rest.location}</div>
+                                                </div>
                                             </div>
                                         </a>
                                     ))}
@@ -60,10 +66,15 @@ function SearchResults() {
                             ) : (
                                 <div className={classes.section_grid}>
                                     {users.map((user, index) => (
-                                        <a key={index} href={"/profile/" + user._id}>
-                                            <div className={classes.section_grid_item}>
-                                                <div className={classes.grid_item_title}>{user.username}</div>
-                                                <div className={classes.grid_item_text}>{user.bio}</div>
+                                        <a key={index} className={classes.section_grid_item} href={"/profile/" + user._id}>
+                                            <div className={classes.section_grid_item_col}>
+                                                <div>
+                                                    <img className={classes.grid_item_img} src={user.imageUrl} alt="N/A"/>
+                                                </div>
+                                                <div>
+                                                    <div className={classes.grid_item_title}>{user.username}</div>
+                                                    <div className={classes.grid_item_text}>{user.bio}</div>
+                                                </div>
                                             </div>
                                         </a>
                                     ))}
@@ -77,7 +88,7 @@ function SearchResults() {
                             ) : (
                                 <div className={classes.section_grid}>
                                     {reviews.map((review, index) => (
-                                        <a key={index} href={"/reviews/" + review._id}>
+                                        <a key={index} className={classes.section_grid_item} href={"/reviews/details/" + review._id}>
                                             <div className={classes.section_grid_item}>
                                                 <div className={classes.grid_item_title}>{review.title}</div>
                                                 <div className={classes.grid_item_text}>{"of " + review.restaurant}</div>
