@@ -44,16 +44,11 @@ const updateUser = asyncHandler(async (req, res) => {
   if (!user) {
     return res.status(400).json({ message: "User not found" });
   }
-  const { profile_picture, bio } = req.body;
-  if (profile_picture) {
-    user.profile_picture = profile_picture;
-  }
-  if (!profile_picture) {
-    user.profile_picture = null;
-  }
+  const { bio } = req.body;
   if (bio) {
     user.bio = bio;
   }
+  user.imageUrl = req.file ? req.file.path : null
   const updatedUser = await user.save();
   res.json({ message: `${updatedUser.username} updated` });
 });
@@ -77,15 +72,16 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 const getUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).select("-password").lean();
+  const user = await User.findById(id).select("-password")
+    .populate("reviews").lean();
   res.status(202).json(user);
 });
 
 const getProfile = asyncHandler(async (req, res) => {
-  const username = req.user;
-  console.log(username);
-  const foundUser = await User.findOne({ username }).select("-password").exec();
-  res.status(202).json(foundUser);
-});
+  const username = req.user
+  const foundUser = await User.findOne({ username }).select("-password")
+    .populate("reviews").lean()
+  res.status(202).json(foundUser)
+})
 
 export { getAllUsers, createUser, updateUser, deleteUser, getUser, getProfile };

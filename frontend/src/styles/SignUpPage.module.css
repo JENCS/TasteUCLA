@@ -43,6 +43,22 @@
   transform: rotate(45deg);
 }
 
+.error_message {
+  color: #dd5656;
+  font-size: 16.9814px;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  letter-spacing: -0.023em;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  top: 33%;
+  flex-direction: column;
+}
+
 .username {
   color: #1e1e1e;
   font-size: 16.9814px;

@@ -1,6 +1,7 @@
 import express from "express"
 import * as userController from "../controllers/userController.js"
 import verifyJWT from "../middleware/verifyJWT.js"
+import { profileImageUpload } from "../middleware/imageHandler.js"
 
 const router = express.Router()
 
@@ -12,7 +13,7 @@ router.route('/')
 // @route /users/me
 router.route('/me')
     .get(verifyJWT, userController.getProfile)
-    .patch(verifyJWT, userController.updateUser)
+    .patch(verifyJWT, profileImageUpload.single('image'), userController.updateUser)
     .delete(verifyJWT, userController.deleteUser)
 
 // @route /users/:id

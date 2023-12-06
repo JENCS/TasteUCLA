@@ -1,5 +1,7 @@
 import { Review, Comment } from "../models/Review.js";
 import asyncHandler from "express-async-handler";
+import { User } from "../models/User.js";
+import { Restaurant } from "../models/Restaurant.js";
 
 // @desc Get all reviews
 // @route GET /reviews
@@ -16,18 +18,34 @@ const getAllReviews = asyncHandler(async (req, res) => {
 // @route POST /reviews
 // @access Private
 const createReview = asyncHandler(async (req, res) => {
-  if (!req.body.title || !req.body.user || !req.body.rating) {
+  const username = req.user;
+  const user = await User.findOne({ username }).exec();
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+  if (!req.body.title || !req.body.rating || !req.body.restaurant) {
     return res.status(400).send({
-      message: "Send all required fields: title, author, rating",
+      message: "Send all required fields: title, rating, restaurant",
     });
   }
+  const restaurant_name = req.body.restaurant;
+  const restaurant = await Restaurant.findOne({ name: restaurant_name }).exec();
+  if (!restaurant) {
+    return res.status(400).json({ message: "Restaurant not found" });
+  }
+  const imageUrl = req.file ? req.file.path : null;
   const newReview = {
     title: req.body.title,
-    user: req.body.user,
+    user: user._id,
     rating: req.body.rating,
-    comments: [],
+    restaurant: restaurant._id,
+    imageUrl: imageUrl,
   };
   const review = await Review.create(newReview);
+  user.reviews.push(review._id);
+  user.save();
+  restaurant.reviews.push(review._id);
+  restaurant.save();
   return res.status(201).send(review);
 });
 

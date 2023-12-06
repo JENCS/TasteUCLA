@@ -29,6 +29,7 @@ export default function Navbar({
   logoutUser,
 }) {
   const [searchInput, setSearchInput] = useState("");
+  const [placeholderText, setPlaceholderText] = useState("Search here");
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [searchDropdown, setSearchDropdown] = useState(false);
   const [reviewRedirect, setReviewRedirect] = useState("/login");
@@ -116,7 +117,7 @@ export default function Navbar({
           <div className="search-bar">
             <input
               type="text"
-              placeholder="Search here"
+              placeholder={placeholderText}
               className="input-field"
               onChange={(e) => {
                 setQuery(e.target.value);
@@ -126,8 +127,17 @@ export default function Navbar({
                 e.stopPropagation(); // Prevent the click from bubbling to document
                 searchMenu();
               }}
+              onKeyDown={event => {
+                console.log(event.key)
+                if (event.key === 'Enter') {
+                  navigation.navigate(`/search-results/${query}`);
+                }
+              }}
             />
-            <LiaSearchSolid className="search-icon" onClick={search} />
+            <LiaSearchSolid className="search-icon" onClick={() => {
+              // setPlaceholderText(query);
+              navigation.navigate(`/search-results/${query}`);
+            }}/>
             {searchDropdown && (
               <div className="search-dropdown">
                 {searchResults.restaurants.length > 0 && (

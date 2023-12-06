@@ -2,8 +2,15 @@ import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema(
     {
-        user: String,
-        body: String
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: "User"
+        },
+        body: {
+            type: String,
+            required: true
+        }
     },
     {
         timestamps: true
@@ -14,7 +21,7 @@ const reviewSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            required: false,
+            required: true,
             ref: "User"
         },
         title: {
@@ -23,25 +30,24 @@ const reviewSchema = new mongoose.Schema(
         },
         restaurant: {
             type: mongoose.Schema.Types.ObjectId,
-            required: false
+            required: true,
+            ref: "Restaurant"
         },
         rating: {
             type: Number,
-            required: true,
+            required: true
         },
         text: {
             type: String,
             required: false
         },
-        image: {
-            type: Buffer,
-            required: false
+        imageUrl: {
+            type: String
         },
         comments: {
             type: [
                 commentSchema
-            ],
-            required: true
+            ]
         }
     },
     {
