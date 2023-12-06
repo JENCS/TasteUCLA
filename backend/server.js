@@ -9,8 +9,7 @@ import cors from "cors";
 import corsOptions from "./config/corsOptions.js";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-
-//const bodyParser = require("body-parser");
+import restRoutes from "./routes/restRoutes.js";
 
 const app = express();
 
@@ -33,6 +32,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/reviews", reviewRoutes);
 app.use("/search", searchRoutes);
+app.use("/locations", restRoutes);
 
 mongoose
   .connect(process.env.DATABASE_URI)

@@ -1,10 +1,20 @@
 import mongoose from "mongoose";
 
+const commentSchema = new mongoose.Schema(
+    {
+        user: String,
+        body: String
+    },
+    {
+        timestamps: true
+    }
+)
+
 const reviewSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true,
+            required: false,
             ref: "User"
         },
         title: {
@@ -13,7 +23,7 @@ const reviewSchema = new mongoose.Schema(
         },
         restaurant: {
             type: mongoose.Schema.Types.ObjectId,
-            required: true
+            required: false
         },
         rating: {
             type: Number,
@@ -26,6 +36,12 @@ const reviewSchema = new mongoose.Schema(
         image: {
             type: Buffer,
             required: false
+        },
+        comments: {
+            type: [
+                commentSchema
+            ],
+            required: true
         }
     },
     {
@@ -34,3 +50,4 @@ const reviewSchema = new mongoose.Schema(
 )
 
 export const Review = mongoose.model('Review', reviewSchema)
+export const Comment = mongoose.model('Comment', commentSchema)

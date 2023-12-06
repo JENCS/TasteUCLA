@@ -12,4 +12,7 @@ router.route('/:id')
     .put(reviewController.editReview)
     .delete(reviewController.deleteReview)
 
+router.route('/:id/comment')
+    .post(reviewController.createComment)
+
 export default router

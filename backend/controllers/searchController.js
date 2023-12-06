@@ -10,7 +10,6 @@ const SEARCH_RESULT_CAP = 10;
 // @route GET /search
 // @access Private
 const searchGlobal = asyncHandler(async (req, res) => {
-    
     if (!isValidQuery(req)) {
         return res.status(400).send();
     }
