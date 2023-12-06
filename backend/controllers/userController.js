@@ -77,13 +77,15 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 const getUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).select("-password").lean();
+  const user = await User.findById(id).select("-password")
+    .populate("reviews").lean();
   res.status(202).json(user);
 });
 
 const getProfile = asyncHandler(async (req, res) => {
   const username = req.user
-  const foundUser = await User.findOne({ username }).select("-password").exec()
+  const foundUser = await User.findOne({ username }).select("-password")
+    .populate("reviews").lean()
   res.status(202).json(foundUser)
 })
 
