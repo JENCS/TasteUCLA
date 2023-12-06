@@ -48,6 +48,9 @@ const updateUser = asyncHandler(async (req, res) => {
   if (profile_picture) {
     user.profile_picture = profile_picture;
   }
+  if (!profile_picture) {
+    user.profile_picture = null;
+  }
   if (bio) {
     user.bio = bio;
   }

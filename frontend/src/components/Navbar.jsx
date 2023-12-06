@@ -21,14 +21,23 @@ function debounce(func, wait) {
   };
 }
 
-export default function Navbar({ loggedIn, changeLoginState }) {
+export default function Navbar({
+  userData,
+  loggedIn,
+  changeLoginState,
+  logoutUser,
+}) {
   const [searchInput, setSearchInput] = useState("");
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [searchDropdown, setSearchDropdown] = useState(false);
   const [reviewRedirect, setReviewRedirect] = useState("/login");
   const [query, setQuery] = useState("");
 
-  const [searchResults, setSearchResults] = useState({ restaurants: [], users: [], reviews: [] });
+  const [searchResults, setSearchResults] = useState({
+    restaurants: [],
+    users: [],
+    reviews: [],
+  });
   const [isDebouncing, setIsDebouncing] = useState(false);
 
   const debouncedSearch = debounce(() => {
@@ -41,12 +50,12 @@ export default function Navbar({ loggedIn, changeLoginState }) {
   };
 
   const search = () => {
-    console.log(query)
+    console.log(query);
     axios
       .get(`http://localhost:5555/search/${query}`)
       .then((res) => {
         setSearchResults(res.data);
-        console.log(res.data)
+        console.log(res.data);
       })
       .catch((error) => {
         alert("An error occurred. Please check the console.");
@@ -63,6 +72,7 @@ export default function Navbar({ loggedIn, changeLoginState }) {
   function logOut() {
     profileMenu();
     changeLoginState(false);
+    logoutUser();
   }
   function removeMenus() {
     setProfileDropdown(false);
@@ -78,7 +88,7 @@ export default function Navbar({ loggedIn, changeLoginState }) {
   });
 
   useEffect(() => {
-    if (query !== '' && isDebouncing) {
+    if (query !== "" && isDebouncing) {
       debouncedSearch();
     }
   }, [query, isDebouncing]);
@@ -88,10 +98,10 @@ export default function Navbar({ loggedIn, changeLoginState }) {
       setSearchDropdown(false);
     };
 
-    document.addEventListener('click', closeDropdown);
+    document.addEventListener("click", closeDropdown);
 
     return () => {
-      document.removeEventListener('click', closeDropdown);
+      document.removeEventListener("click", closeDropdown);
     };
   }, []);
 
@@ -139,9 +149,11 @@ export default function Navbar({ loggedIn, changeLoginState }) {
                     ))}
                   </div>
                 )}
-                {searchResults.restaurants.length === 0 && searchResults.restaurants.length === 0 && searchResults.restaurants.length === 0 && (
-                  <p>No results found</p>
-                )}
+                {searchResults.restaurants.length === 0 &&
+                  searchResults.restaurants.length === 0 &&
+                  searchResults.restaurants.length === 0 && (
+                    <p>No results found</p>
+                  )}
               </div>
             )}
           </div>
@@ -159,9 +171,9 @@ export default function Navbar({ loggedIn, changeLoginState }) {
           </Link>
         </div>
         <div className="navigation-right">
-          {loggedIn && (
+          {userData && loggedIn && (
             <>
-              <p>Username</p>
+              <p>{userData.username}</p>
               <CgProfile
                 className="profile-icon"
                 onClick={() => profileMenu()}
