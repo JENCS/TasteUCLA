@@ -6,9 +6,10 @@
 .img-container-profile {
   text-align: center;
   /* background-color: rgb(221, 235, 255); */
-  width: 300px;
+  width: 250px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
   /* padding: 30px 0px;
   border-radius: 10px; */
 }
@@ -20,7 +21,7 @@
 }
 
 .default-profile-img {
-  font-size: 220px;
+  font-size: 250px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
@@ -48,12 +49,13 @@
 } */
 
 .crop-img {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
   border: 1px solid black;
+  margin-bottom: 20px;
 }
 
 .crop-img > img {
@@ -79,12 +81,64 @@
 
 .user-info {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .user-info > h1 {
-  font-size: 32px;
+  font-size: 40px;
 }
 
-.user-info > h3 {
+.bio-container {
+  display: flex;
+  flex-direction: column;
+  /* text-align: center;
+  justify-content: center; */
+  width: 32vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bio-container > label {
+  font-size: 22px;
+  margin-right: auto;
+  margin-left: 20px;
+  margin-bottom: 4px;
+}
+
+.bio {
+  min-height: 150px;
+  padding: 10px;
+}
+
+.lower-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.lower-btns > * {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+.save-profile-btn {
+  width: 300px;
+  height: 50px;
   font-size: 24px;
+  border: 1px solid rgb(107, 117, 255);
+  margin-top: 50px;
+  padding: 5px 15px;
+}
+
+.delete-account-btn {
+  width: 200px;
+  font-size: 18px;
+  border: 1px solid rgb(255, 119, 119);
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 5px 15px;
+}
+
+.delete-account-btn:hover {
+  background-color: rgb(254, 228, 228);
 }
