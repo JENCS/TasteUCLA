@@ -1,35 +1,50 @@
 import "../styles/WriteReview.css";
-import Navbar from "../components/Navbar.jsx";
 import React, { useState } from "react";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Buffer } from "buffer";
 
 const WriteReview = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [rating, setRating] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [photo, setPhoto] = useState();
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
+  const [image, setImage] = useState(null);
 
-  function uploadImage(e) {
+  async function uploadImage(e) {
     console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    setFile(e.target.files[0]);
+    // setImage(file);
+    setPhoto(URL.createObjectURL(e.target.files[0]));
+    console.log("UPLOADED");
+    const promise = e.target.files[0].arrayBuffer();
+    promise.then((value) => {
+      console.log(value);
+      setImage(Buffer.from(value));
+      console.log(typeof image);
+    });
+
+    // imageBuffer = fs.readFileSync(file);
+    // fs.writeFileSync("lkawenfoawef.png", imageBuffer);
   }
+
   function removeImage(e) {
-    setFile();
+    setPhoto();
   }
   const handleSubmitReview = () => {
+    // const reader = new FileReader();
     const data = {
       title,
       author,
       rating,
-      photo,
       description,
+      image,
     };
     setLoading(true);
     axios
@@ -41,6 +56,7 @@ const WriteReview = () => {
       .catch((error) => {
         setLoading(false);
         alert("An error occurred. Please check the console.");
+        console.log(file);
         console.log(error);
       });
   };
@@ -79,9 +95,9 @@ const WriteReview = () => {
           <label>Photo (optional)</label>
           <div className="photo-input">
             <input type="file" onChange={uploadImage} />
-            {file && (
+            {photo && (
               <div className="uploaded-img">
-                <img src={file} />
+                <img src={photo} />
                 <button onClick={removeImage}>Delete</button>
               </div>
             )}
