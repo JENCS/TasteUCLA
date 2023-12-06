@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from "buffer";
 
-const WriteReview = () => {
+const WriteReview = ({ userData }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [rating, setRating] = useState("");
@@ -16,6 +16,7 @@ const WriteReview = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
+  const [restaurant, setResaurant] = useState("Choose restaurant to review");
 
   async function uploadImage(e) {
     console.log(e.target.files);
@@ -39,9 +40,13 @@ const WriteReview = () => {
   }
   const handleSubmitReview = () => {
     // const reader = new FileReader();
+    // console.log(user);
+    const user = userData;
+    console.log(userData);
+    console.log(user);
     const data = {
       title,
-      author,
+      user,
       rating,
       description,
       image,
@@ -68,6 +73,9 @@ const WriteReview = () => {
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
       <div>
+        <div className="choose-restaurant-container">
+          <label>{restaurant}</label>
+        </div>
         <div className="title-rating">
           <div className="title-container">
             <label>Title</label>
@@ -110,22 +118,6 @@ const WriteReview = () => {
             onChange={(e) => setDescription(e.target.value)}
             className="description-input"
           ></textarea>
-        </div>
-        <div>
-          <label>Author</label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Stars</label>
-          <input
-            type="number"
-            value={rating}
-            onChange={(e) => setRating(e.target.value)}
-          />
         </div>
         <div className="submit-container">
           <button onClick={handleSubmitReview} className="submit-btn">

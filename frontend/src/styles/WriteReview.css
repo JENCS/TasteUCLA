@@ -10,6 +10,28 @@ textarea,
   text-align: center;
 }
 
+.choose-restaurant-container {
+  background-color: rgb(229, 203, 255);
+  width: 450px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 14px;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  line-height: 190%;
+  border-radius: 50px;
+  border: 2px solid rgb(220, 184, 255);
+}
+
+.choose-restaurant-container:hover,
+.choose-restaurant-container > *:hover {
+  cursor: pointer;
+}
+
 .title-rating {
   display: flex;
   justify-content: space-around;
