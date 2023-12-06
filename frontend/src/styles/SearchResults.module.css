@@ -9,6 +9,7 @@
     outline-offset: -1px;
     overflow: hidden;
     background-color: #E2F1F5;
+    height: calc(100vh-60px);
 }
 
 .searchResults_title{
@@ -27,5 +28,36 @@
 }
 
 .results_container{
-    overflow-x: scroll;
+    overflow-x: hidden;
+}
+
+.searchResults_section_title{
+    font-size: large;
+    text-align: left;
+}
+
+.restaurants_container{
+    overflow-x: hidden;
+}
+
+.restaurants_grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10px, 200px));
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.restaurants_grid_item{
+    background-color: #FFFF;
+    border: 3px solid #DED0F5;
+    padding: 5px;
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.restaurant_title{
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 16px;
 }
