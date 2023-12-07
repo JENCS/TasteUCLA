@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div>
       <div className="home-container">
-        <img src="../public/tasteUCLA.png" className="tasteucla-logo" />
+        <img src="/tasteUCLA.png" className="tasteucla-logo" />
         {loading ? (
           <Spinner />
         ) : (
@@ -43,11 +43,9 @@ const Home = () => {
                 )}
                 {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
                 <h3>{review.title}</h3>
-                {review.rating && (
-                  <p className="review-rating">
-                    Rating by {review.username}: {review.rating}
-                  </p>
-                )}
+                <p className="review-rating">
+                  Rating by {review.user.username}: {review.rating}
+                </p>
                 <p>{review.text}</p>
               </Link>
             ))}

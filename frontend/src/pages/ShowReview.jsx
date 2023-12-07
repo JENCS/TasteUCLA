@@ -2,6 +2,7 @@ import "../styles/ShowReview.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import Popup from "reactjs-popup";
@@ -31,8 +32,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!loggedIn)
-      setOpenPopup(true);
+    if (!loggedIn) setOpenPopup(true);
     else if (response) {
       await submitComment(id, response);
       setResponse("");
@@ -49,9 +49,8 @@ const ShowReview = ({ submitComment, loggedIn }) => {
           setLoading(false);
         });
       setLoading(false);
-    } else
-      setErrorMessage("Empty comment!");
-  }
+    } else setErrorMessage("Empty comment!");
+  };
 
   const typeInComment = () => {
     if (!loggedIn) {
@@ -84,24 +83,37 @@ const ShowReview = ({ submitComment, loggedIn }) => {
         <Spinner />
       ) : (
         <div className="show-review-page">
+          <div className="restaurant-logo">
+            <img
+              src={"/logos/" + restaurant._id + ".png"}
+              alt="Restaurant image"
+            />
+          </div>
           <div className="row">
             <div className="container">
               <img src={review.imageUrl}/>
+              <div className="restaurant-name">
+                <Link to={"/locations/" + restaurant._id}>
+                  <p>{review.restaurant.name}</p>
+                </Link>
+              </div>
               <h1>{review.title}</h1>
-              <p className="text-2xl mr-4 text-black">
-                Restaurant: {review.restaurant.name}
-              </p>
-              <p className="text-xl mr-4 text-gray-500">
-                Review written by {review.user.username}
-              </p>
               <p className="content">{review.text}</p>
+              <div className="review-username">
+                <p className="text-xl mr-4 mt-2 text-gray-500">
+                  Review written by{" "}
+                  <Link to={"/profile/" + review.user._id}>
+                    <a className="underline">{review.user.username}</a>
+                  </Link>
+                </p>
+              </div>
             </div>
             <div className="created_time">
               {"Created at: " + review.createdAt}
             </div>
-            <div className="updated_time">
+            {/* <div className="updated_time">
               {"Updated at: " + review.updatedAt}
-            </div>
+            </div> */}
             <div className="reviews-header">Comments</div>
             <div className="error_message">{errorMessage}</div>
             <div className="comments-grid">
@@ -138,19 +150,21 @@ const ShowReview = ({ submitComment, loggedIn }) => {
                   <div className="text-right">
                     <button
                       type="submit"
-                      className="px-4 py-2 mt-2 text-white bg-blue-300 rounded hover:bg-blue-700"
+                      className="px-4 py-2 mt-2 text-white bg-blue-700 rounded hover:bg-blue-900"
                     >
                       Submit
                     </button>
                   </div>
                 </form>
               </div>
-              <div className="comments-grid">
+              <div className="user-comments-grid">
                 {comments.map((comment, index) => (
                   <div className="comments_grid_item" key={index}>
                     <div className="comments_content">
                       <div className="comments_user_container">
-                        <div className="comments_username">{comment.user.username}</div>
+                        <div className="comments_username">
+                          {comment.user.username}
+                        </div>
                         <span className="comments_profile_pic"></span>
                       </div>
                       <div className="comments_description">{comment.body}</div>
@@ -158,9 +172,9 @@ const ShowReview = ({ submitComment, loggedIn }) => {
                     <div className="created_time_comment">
                       {"Created at: " + comment.createdAt}
                     </div>
-                    <div className="updated_time_comment">
+                    {/* <div className="updated_time_comment">
                       {"Updated at: " + comment.updatedAt}
-                    </div>
+                    </div> */}
                   </div>
                 ))}
               </div>

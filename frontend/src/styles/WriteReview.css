@@ -10,13 +10,17 @@ textarea,
   text-align: center;
 }
 
-.choose-restaurant-container {
-  background-color: rgb(229, 203, 255);
+.restaurant-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: rgb(224, 194, 255);
   width: 450px;
   height: 50px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 14px;
+  /* padding-left: 5px; */
   font-size: 24px;
   font-weight: bold;
   display: flex;
@@ -24,13 +28,24 @@ textarea,
   justify-content: center;
   line-height: 190%;
   border-radius: 50px;
-  border: 2px solid rgb(212, 169, 255);
+  border: 2px solid rgb(201, 146, 255);
 }
 
-.choose-restaurant-container:hover,
-.choose-restaurant-container > *:hover {
-  background-color: rgb(222, 190, 253);
+.restaurant-select:hover,
+.restaurant-select > *:hover {
+  background-color: rgb(217, 180, 254);
   cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: 184px;
+  left: 60.5vw;
+  font-size: 20px;
 }
 
 .choose-restaurant-container > label {
@@ -196,3 +211,54 @@ input[type="file"]::file-selector-button {
   text-align: center;
   margin: auto;
 } */
+
+/* .restaurant-select {
+  display: block;
+  width: 30%;
+  margin: 0 auto;
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: rgb(181, 141, 233);
+  color: white;
+  font-size: 20px;
+  border: 2px solid rgb(181, 141, 233);
+  outline: none;
+  cursor: pointer;
+} */
+
+.restaurant-select:focus {
+  border-color: darkviolet;
+}
+
+.restaurant-select option {
+  background-color: white;
+  color: black;
+}
+
+.error_message {
+  color: #dd5656;
+  line-height: 150%;
+  font-weight: 500;
+  letter-spacing: -0.023em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  text-align: center;
+  top: 33%;
+  flex-direction: column;
+}
+
+.popup-content {
+  background-color: white;
+  color: black;
+  border: none !important;
+  border-radius: 10px;
+  max-width: 600px;
+  max-height: 300px;
+  text-align: center;
+}
+
+.popup-content p {
+  font-size: 20px;
+  color: black;
+}

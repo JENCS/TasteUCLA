@@ -50,7 +50,7 @@ function SignUpPage() {
     <div className={`${resets.clapyResets} ${classes.root}`}>
       {/* <div className={classes.tasteUCLA}>TasteUCLA</div>
       <div className={classes.logo}></div> */}
-      <img src="../public/tasteUCLA.png" className={classes.tasteucla_logo} />
+      <img src="/tasteUCLA.png" className={classes.tasteucla_logo} />
       <div className={classes.error_message}>{errorMessage}</div>
       <div className={classes.username}>Username</div>
       <div className={classes.username_textbox}>
