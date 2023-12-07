@@ -142,7 +142,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                     </div>
                     <div className={classes.review_title}>{review.title}</div>
                     <div className={classes.review_description}>
-                      {review.description}
+                      {review.text}
                     </div>
                   </div>
                 </div>
