@@ -92,7 +92,7 @@ const deleteReview = asyncHandler(async (req, res) => {
 // @access Private
 const createComment = asyncHandler(async (req, res) => {
   const username = req.user;
-  const user = await User.findOne({ username }).select("_id").lean()
+  const user = await User.findOne({ username }).lean()
   if (!user) {
     return res.status(400).json({ message: "User not found" });
   }
@@ -102,17 +102,15 @@ const createComment = asyncHandler(async (req, res) => {
     });
   }
   const { id } = req.params;
-  try {
-    const review = await Review.findById(id).select("comments");
-    const comment = new Comment({
-      user: user._id,
-      body: req.body.text,
-    });
-    var newCommentCount = review.comments.push(comment);
-    review.save();
-  } catch {
-    return res.status(404).send({ message: "Review does not exist" });
+  // console.log(id)
+  const review = await Review.findById(id).exec();
+  const data = {
+    user: user._id,
+    body: req.body.text,
   }
+  const comment = await Comment.create(data)
+  var newCommentCount = review.comments.push(comment);
+  review.save();
   return res
     .status(200)
     .send({ message: "Comment " + newCommentCount + " posted successfully" });
