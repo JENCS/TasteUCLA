@@ -189,6 +189,7 @@ const App = () => {
               createReview={createReview}
               restaurantToReview={restaurantToReview}
               setMyRestaurant={setMyRestaurant}
+              loggedIn={login}
             />
           }
         />

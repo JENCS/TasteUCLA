@@ -9,7 +9,11 @@ import { IoMdClose } from "react-icons/io";
 import { Buffer } from "buffer";
 import { display } from "@mui/system";
 
-const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
+import Popup from "reactjs-popup";
+import Button from "@mui/material/Button";
+import "reactjs-popup/dist/index.css";
+
+const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, loggedIn }) => {
   // const [title, setTitle] = useState("");
   // const [author, setAuthor] = useState("");
   // const [photo, setPhoto] = useState();
@@ -71,6 +75,52 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
   const [displayCloseRestaurant, setDisplayCloseRestaurant] = useState(false);
   const navigate = useNavigate();
 
+  const [restaurants, setRestaurants] = useState([]);
+  const [selectedRestaurant, setSelectedRestaurant] = useState("");
+  const [preSelected, setPreSelected] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [openPopUp, setOpenPopUp] = useState(false);
+
+  useEffect(() => {
+    if (!loggedIn){
+      setOpenPopUp(true);
+    }
+    const fetchRestaurants = async () => {
+      try {
+        const rest = await axios.get('http://localhost:5555/locations');
+        let fetchedRestaurants = rest.data.data;
+
+        setSelectedRestaurant("");
+        if (restaurantToReview) {
+          const foundRestaurant = fetchedRestaurants.find(r => r.name === restaurantToReview);
+          if (foundRestaurant) {
+            restaurantToReview = "";
+            //console.log("selected: ", selectedRestaurant, "found", foundRestaurant.name)
+            setPreSelected(true);
+            const i = getRestIndex(foundRestaurant.name, fetchedRestaurants);
+            //console.log(i)
+            //console.log(fetchedRestaurants[i])
+            setSelectedRestaurant(fetchedRestaurants[i].name);
+            //fetchedRestaurants = fetchedRestaurants.filter(r => r.name !== restaurantToReview);
+          } else {
+            setSelectedRestaurant("");
+          }
+        } else {
+          setSelectedRestaurant("");
+        }
+
+        setRestaurants(fetchedRestaurants);
+      } catch (error) {
+        console.error('Error fetching restaurants:', error);
+      }
+    };
+    fetchRestaurants();
+    //restaurantToReview = "";
+    console.log(preSelected);
+
+  }, [restaurantToReview]);
+
+  /*
   useEffect(() => {
     console.log(restaurantToReview);
     if (restaurantToReview) {
@@ -81,6 +131,12 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
       setDisplayCloseRestaurant(false);
     }
   });
+  */
+
+  function getRestIndex(name, rests) {
+    const index = rests.findIndex(restaurant => restaurant.name === name);
+    return index;
+  }
 
   function uploadImage(e) {
     setImage(e.target.files[0]);
@@ -102,12 +158,23 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("text", text);
-    formData.append("image", image);
+    formData.append("restaurant", selectedRestaurant);
     formData.append("rating", rating);
-    formData.append("restaurant", restaurant);
+    formData.append("text", text);
 
-    createReview(formData);
+    if (image) {
+      formData.append("image", image);
+    }
+    //console.log("form", formData.get("restaurant"));
+    
+    //console.log(title);
+    if (title.length == 0 || selectedRestaurant === '' || isNaN(rating) || text === '') {
+      //console.log("here!")
+      setErrorMessage("Please ensure all required fields are completed before submitting.")
+      //return;
+    } else {
+      createReview(formData);
+    }
 
     // setLoading(true);
     // axios
@@ -133,7 +200,7 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
-      {displayCloseRestaurant && (
+      {/* {displayCloseRestaurant && (
         <div className="choose-restaurant-container">
           <label>{restaurant}</label>
           <div className="remove-restaurant-btn">
@@ -147,7 +214,7 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
             <label>Choose Restaurant</label>
           </div>
         </Link>
-      )}
+      )} */}
       <div>
         {/* <div className="title-rating">
           <div className="title-container">
@@ -198,7 +265,48 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
           </button>
         </div> */}
       </div>
+      <div className="error_message">{errorMessage}</div>
+      {openPopUp && (
+                    <Popup
+                      open={openPopUp}
+                      closeOnDocumentClick={false}
+                      //onClose={() => setOpenPopUp(false)}
+                    >
+                      <div className="popup-content">
+                        <p>Please sign in to comment.</p>
+                        {
+                          <Button
+                            name="signin-button"
+                            style={{ width: "120px" }}
+                            href="/login"
+                          >
+                            Sign in
+                          </Button>
+                        }
+                      </div>
+                    </Popup>
+                    )}
+
       <form onSubmit={handleSubmit}>
+        <div className="restaurant-dropdown">
+          <select
+            value={selectedRestaurant}
+            onChange={(e) => 
+                setSelectedRestaurant(e.target.value)
+              }
+            className="restaurant-select"
+          >
+            <option value="">
+              Select a Restaurant
+            </option> 
+            {restaurants.map((restaurant, index) => (
+              //(console.log(index, "rest: ", restaurant))
+              (<option key={index} value={restaurant.name}>
+                {restaurant.name}
+              </option>)
+            ))}
+          </select>
+        </div>
         <div className="title-rating">
           <div className="title-container">
             <label>Title</label>
