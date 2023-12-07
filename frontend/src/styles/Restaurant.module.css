@@ -1,26 +1,26 @@
 .root {
-    position: absolute;
-    top:70px;
-    left:0;
-    right:0;
-    flex-direction: column;
-    outline: solid 1px #aabcd2;
-    outline-offset: -1px;
-    overflow-y: hidden;
-    background-color: #E2F1F5;
-    height: calc(100vh-70px)!important;
-  }
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  outline: solid 1px #aabcd2;
+  outline-offset: -1px;
+  overflow-y: hidden;
+  background-color: #e2f1f5;
+  height: calc(100vh-70px) !important;
+}
 
-  .back_button{
-    position: relative;
-    margin-left: 50px;
-    margin-top: 50px;
-  }
+.back_button {
+  position: relative;
+  margin-left: 50px;
+  margin-top: 50px;
+}
 
-.restaurant_name{
+.restaurant_name {
   color: #1e1e1e;
   line-height: 150%;
-  font-weight:bold;
+  font-weight: bold;
   font-family: "Gill Sans";
   letter-spacing: -0.023em;
   display: flex;
@@ -32,12 +32,12 @@
   top: 20px;
 }
 
-.restaurant_location{
+.restaurant_location {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -48,7 +48,7 @@
   top: 5px;
 }
 
-.logo{
+.logo {
   position: relative;
   outline: solid #1e1e1e;
   width: max-content;
@@ -58,21 +58,21 @@
   margin-top: 100px;
 }
 
-.row{
+.row {
   display: flex;
   margin-bottom: 80px;
 }
 
-.container{
+.container {
   position: relative;
 }
 
-.rating{
+.rating {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -82,7 +82,7 @@
   font-size: 30px;
 }
 
-.description{
+.description {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
@@ -98,16 +98,31 @@
   width: 600px;
 }
 
-.reviews_container{
+.write_review_button {
+  background-color: rgb(7 89 133);
+  color: white;
+  /* background-color: rgb(180, 207, 250); */
+  margin-left: 100px;
+  margin-top: 50px;
+  border: 1px solid black;
+  border-radius: 100px;
+  font-size: 24px;
+  width: 200px;
+  height: 40px;
+  text-align: center;
+  line-height: 150%;
+}
+
+.reviews_container {
   display: flex;
 }
 
-.reviews_header{
+.reviews_header {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -123,22 +138,22 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
-} 
+}
 
 .reviews_grid_item {
-  background-color: #FFFF;
-  border: 3px solid #DED0F5;
+  background-color: #ffff;
+  border: 3px solid #ded0f5;
   padding: 30px;
   font-size: 30px;
   margin-bottom: 50px;
 }
 
-.review_content{
+.review_content {
   display: flex;
   flex-direction: row;
 }
 
-.profile_pic{
+.profile_pic {
   height: 200px;
   width: 200px;
   border-radius: 50%;
@@ -147,12 +162,12 @@
   margin-bottom: 10px;
 }
 
-.username{
+.username {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -162,15 +177,14 @@
   width: min-content;
 }
 
-.user_container{
+.user_container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: 50px;
-
 }
 
-.review_image{
+.review_image {
   position: relative;
   outline: solid #1e1e1e;
   width: max-content;
@@ -180,12 +194,12 @@
   margin-right: auto;
 }
 
-.review_rating{
-  color: #D69C03;
+.review_rating {
+  color: #d69c03;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -194,7 +208,7 @@
   margin-bottom: 10px;
 }
 
-.review_title{
+.review_title {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: bold;
@@ -206,7 +220,7 @@
   margin-bottom: 10px;
 }
 
-.review_description{
+.review_description {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
@@ -221,12 +235,12 @@
   margin-bottom: 20px;
 }
 
-.comments_header{
+.comments_header {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -241,22 +255,22 @@
   grid-template-columns: repeat(auto-fill, minmax(800px, 1375px));
   margin-left: auto;
   margin-right: auto;
-} 
+}
 
 .comments_grid_item {
   background-color: rgba(255, 255, 255, 0.8);
-  border: 3px solid #DED0F5;
+  border: 3px solid #ded0f5;
   padding: 15px;
   font-size: 30px;
   margin-bottom: 20px;
 }
 
-.comments_content{
+.comments_content {
   display: flex;
   flex-direction: row;
 }
 
-.comments_profile_pic{
+.comments_profile_pic {
   height: 125px;
   width: 125px;
   background-color: #bbb;
@@ -265,12 +279,12 @@
   top: 70px;
 }
 
-.comments_username{
+.comments_username {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -280,14 +294,14 @@
   width: min-content;
 }
 
-.comments_user_container{
+.comments_user_container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: 50px;
 }
 
-.comments_description{
+.comments_description {
   color: #1e1e1e;
   line-height: 150%;
   font-weight: 500;

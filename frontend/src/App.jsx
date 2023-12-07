@@ -23,6 +23,7 @@ const App = () => {
   const [login, setLogin] = useState(false);
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [restaurantToReview, setRestaurantToReview] = useState("");
 
   const [user, setUser] = useState("");
 
@@ -63,6 +64,10 @@ const App = () => {
         console.error("Error fetching reviews:", error);
       });
   }
+
+  const setMyRestaurant = (restaurant) => {
+    setRestaurantToReview(restaurant);
+  };
 
   // search username and check password
   async function loginUser(username, password) {
@@ -139,7 +144,13 @@ const App = () => {
         <Route path="/" element={<Home loggedIn={login} />} />
         <Route
           path="/reviews/create"
-          element={<WriteReview createReview={createReview} />}
+          element={
+            <WriteReview
+              createReview={createReview}
+              restaurantToReview={restaurantToReview}
+              setMyRestaurant={setMyRestaurant}
+            />
+          }
         />
         <Route path="/reviews/details/:id" element={<ShowReview />} />
         <Route path="/reviews/me" element={<MyReviews />} />
@@ -161,7 +172,12 @@ const App = () => {
           }
         />
         <Route path="/locations" element={<Locations />} />
-        <Route path="/locations/:id" element={<Restaurant />} />
+        <Route
+          path="/locations/:id"
+          element={
+            <Restaurant loggedIn={login} setMyRestaurant={setMyRestaurant} />
+          }
+        />
         <Route path="/search-results/:query" element={<SearchResults />} />
       </Routes>
     </>
