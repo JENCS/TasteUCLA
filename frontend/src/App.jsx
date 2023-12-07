@@ -11,6 +11,7 @@ import WriteReview from "./pages/WriteReview";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Profile from "./pages/Profile";
+import UserProfile from "./pages/UserProfile";
 import MyReviews from "./pages/MyReviews.jsx";
 import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
@@ -67,23 +68,26 @@ const App = () => {
 
   async function submitComment(reviewID, comment) {
     if (login) {
-      await axios.post(`http://localhost:5555/reviews/${reviewID}/comment`, 
-      {
-        text: comment
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .catch((error) => {
-        console.error("Error storing comment:", error)
-      })
+      await axios
+        .post(
+          `http://localhost:5555/reviews/${reviewID}/comment`,
+          {
+            text: comment,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .catch((error) => {
+          console.error("Error storing comment:", error);
+        });
     } else {
-      console.error("Empty comment")
+      console.error("Empty comment");
     }
   }
-  
+
   const setMyRestaurant = (restaurant) => {
     setRestaurantToReview(restaurant);
   };
@@ -171,11 +175,16 @@ const App = () => {
             />
           }
         />
-        <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login}/>} />
+        <Route
+          path="/reviews/details/:id"
+          element={
+            <ShowReview submitComment={submitComment} loggedIn={login} />
+          }
+        />
         <Route path="/reviews/me" element={<MyReviews />} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
-        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/profile/:id" element={<UserProfile />} />
         <Route path="/login" element={<LoginPage loginUser={loginUser} />} />
         <Route
           path="/sign-up"
