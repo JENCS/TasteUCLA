@@ -169,11 +169,18 @@ export default function Navbar({
                 {searchResults.users.length > 0 && (
                   <div>
                     <h3>Users</h3>
-                    {searchResults.users.map((user, index) => (
-                      <Link to={`/profile/${user._id}`} key={index}>
-                        <p>{user.username}</p>
-                      </Link>
-                    ))}
+                    {searchResults.users.map((user, index) => {
+                      
+                      // Redirect to profile page if the user search him/herself
+                      return user.username === userData.username ? (
+                        <Link to={`/profile`}>
+                          <p>{user.username}</p>
+                        </Link>) : (
+                        <Link to={`/profile/${user._id}`} key={index}>
+                          <p>{user.username}</p>
+                        </Link>
+                      )
+                        })}
                   </div>
                 )}
                 {searchResults.restaurants.length === 0 &&
