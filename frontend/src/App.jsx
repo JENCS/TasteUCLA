@@ -155,6 +155,23 @@ const App = () => {
       });
   }
 
+  async function getMyReviews() {
+    let reviews = [];
+    await axios
+      .get(`http://localhost:5555/users/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        reviews = res.data.reviews;
+      })
+      .catch((error) => {
+        console.error("Error fetching reviews:", error)
+      });
+    return reviews;
+  }
+
   return (
     <>
       <Navbar
@@ -175,13 +192,8 @@ const App = () => {
             />
           }
         />
-        <Route
-          path="/reviews/details/:id"
-          element={
-            <ShowReview submitComment={submitComment} loggedIn={login} />
-          }
-        />
-        <Route path="/reviews/me" element={<MyReviews />} />
+        <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login}/>} />
+        <Route path="/reviews/me" element={<MyReviews getMyReviews={getMyReviews}/>} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route path="/profile/:id" element={<UserProfile />} />
