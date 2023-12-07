@@ -64,6 +64,27 @@ const App = () => {
       });
   }
 
+  async function submitComment(reviewID, comment) {
+    if (login) {
+      console.log(token)
+      console.log(comment)
+      axios.post(`http://localhost:5555/reviews/${reviewID}/comment`, 
+      {
+        text: comment
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((error) => {
+        console.error("Error storing comment:", error)
+      })
+    } else {
+      console.error("Empty comment")
+    }
+  }
+
   // search username and check password
   async function loginUser(username, password) {
     try {
@@ -141,7 +162,7 @@ const App = () => {
           path="/reviews/create"
           element={<WriteReview createReview={createReview} />}
         />
-        <Route path="/reviews/details/:id" element={<ShowReview />} />
+        <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login}/>} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route path="/profile/:id" element={<Profile />} />
