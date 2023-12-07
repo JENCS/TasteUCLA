@@ -74,6 +74,7 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState("");
   const [preSelected, setPreSelected] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -152,12 +153,20 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
     formData.append("restaurant", selectedRestaurant);
     formData.append("rating", rating);
     formData.append("text", text);
-    
+
     if (image) {
       formData.append("image", image);
     }
-    console.log("form", formData.get("restaurant"));
-    createReview(formData);
+    //console.log("form", formData.get("restaurant"));
+    
+    //console.log(title);
+    if (title.length == 0 || selectedRestaurant === '' || isNaN(rating) || text === '') {
+      //console.log("here!")
+      setErrorMessage("Please ensure all required fields are completed before submitting.")
+      //return;
+    } else {
+      createReview(formData);
+    }
 
     // setLoading(true);
     // axios
@@ -248,6 +257,7 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
           </button>
         </div> */}
       </div>
+      <div className="error_message">{errorMessage}</div>
       <form onSubmit={handleSubmit}>
         <div className="restaurant-dropdown">
           <select
