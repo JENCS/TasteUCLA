@@ -1,7 +1,6 @@
 import classes from "../styles/Locations.module.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar.jsx";
 
 function Locations() {
   const NorthCampusRestaurants = [

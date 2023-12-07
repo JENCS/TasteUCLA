@@ -45,7 +45,7 @@ const ShowReview = () => {
           );
 
           // Construct the data URL
-          const dataUrl = `data:${response.headers["content-type"]};base64,${base64String}`;
+          const dataUrl = `data:${response.headers["Content-Type"]};base64,${base64String}`;
 
           setImageUrl(dataUrl);
         } catch (error) {

@@ -1,13 +1,15 @@
 import "../styles/WriteReview.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { IoMdClose } from "react-icons/io";
 import { Buffer } from "buffer";
+import { display } from "@mui/system";
 
-const WriteReview = ({ createReview }) => {
+const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
   // const [title, setTitle] = useState("");
   // const [author, setAuthor] = useState("");
   // const [photo, setPhoto] = useState();
@@ -65,8 +67,20 @@ const WriteReview = ({ createReview }) => {
   const [image, setImage] = useState(null);
   const [imageDisplay, setImageDisplay] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [restaurant, setRestaurant] = useState("Bruin Buzz");
+  const [restaurant, setRestaurant] = useState(null);
+  const [displayCloseRestaurant, setDisplayCloseRestaurant] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(restaurantToReview);
+    if (restaurantToReview) {
+      setRestaurant(restaurantToReview);
+      setDisplayCloseRestaurant(true);
+    } else {
+      setRestaurant("Choose Restaurant");
+      setDisplayCloseRestaurant(false);
+    }
+  });
 
   function uploadImage(e) {
     setImage(e.target.files[0]);
@@ -76,6 +90,11 @@ const WriteReview = ({ createReview }) => {
   function removeImage(e) {
     setImage(null);
     setImageDisplay();
+  }
+
+  function removeRestaurant() {
+    console.log("removing restaurant...");
+    setMyRestaurant(null);
   }
 
   const handleSubmit = async (e) => {
@@ -114,11 +133,21 @@ const WriteReview = ({ createReview }) => {
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
-      <Link to="/locations">
+      {displayCloseRestaurant && (
         <div className="choose-restaurant-container">
-          <label>Choose Restaurant</label>
+          <label>{restaurant}</label>
+          <div className="remove-restaurant-btn">
+            <IoMdClose onClick={removeRestaurant} />
+          </div>
         </div>
-      </Link>
+      )}
+      {!displayCloseRestaurant && (
+        <Link to="/locations">
+          <div className="choose-restaurant-container">
+            <label>Choose Restaurant</label>
+          </div>
+        </Link>
+      )}
       <div>
         {/* <div className="title-rating">
           <div className="title-container">
