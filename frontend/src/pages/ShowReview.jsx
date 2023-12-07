@@ -19,11 +19,40 @@ const ShowReview = ({ submitComment, loggedIn }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!loggedIn)
+  //     setOpenPopup(true);
+  //   else if (response){
+  //     await submitComment(id, response);
+  //     setResponse("");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    submitComment(id, response);
-    console.log(response); // For now
-  };
+    if (!loggedIn)
+      setOpenPopup(true);
+    else if (response) {
+      await submitComment(id, response);
+      setResponse("");
+      setLoading(true);
+      await axios
+        .get(`http://localhost:5555/reviews/${id}`)
+        .then((res) => {
+          setComments(res.data.comments);
+          setLoading(false);
+          console.log(comments);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+      setLoading(false);
+    } else
+      setErrorMessage("Empty comment!");
+  }
+
   const typeInComment = () => {
     if (!loggedIn) {
       setOpenPopup(true);
@@ -36,7 +65,9 @@ const ShowReview = ({ submitComment, loggedIn }) => {
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
         setReview(res.data);
-        setComments(res.data.comments);
+        if (res.data.comments.length != comments.length) {
+          setComments(res.data.comments);
+        }
         setLoading(false);
         setRestaurant(res.data.restaurant);
       })
@@ -44,7 +75,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+  }, [comments]);
 
   return (
     <div className="p-4 mt-16">
