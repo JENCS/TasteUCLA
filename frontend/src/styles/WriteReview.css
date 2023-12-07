@@ -24,12 +24,25 @@ textarea,
   justify-content: center;
   line-height: 190%;
   border-radius: 50px;
-  border: 2px solid rgb(220, 184, 255);
+  border: 2px solid rgb(212, 169, 255);
 }
 
 .choose-restaurant-container:hover,
 .choose-restaurant-container > *:hover {
+  background-color: rgb(222, 190, 253);
   cursor: pointer;
+}
+
+.choose-restaurant-container > label {
+  position: absolute;
+}
+
+.remove-restaurant-btn {
+  position: relative;
+  /* margin-left: auto; */
+  margin-left: auto;
+  margin-right: 18px;
+  margin-top: 12px;
 }
 
 .title-rating {

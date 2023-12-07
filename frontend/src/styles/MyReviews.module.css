@@ -1,0 +1,12 @@
+.root {
+  position: absolute;
+  top:70px;
+  left:0;
+  right:0;
+  flex-direction: column;
+  outline: solid 1px #aabcd2;
+  outline-offset: -1px;
+  overflow-y: scroll;
+  background-color: #E2F1F5;
+  height: calc(100vh - 70px);
+}

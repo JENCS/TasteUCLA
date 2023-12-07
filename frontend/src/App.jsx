@@ -11,7 +11,7 @@ import WriteReview from "./pages/WriteReview";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Profile from "./pages/Profile";
-import UserReviews from "./pages/UserReviews.jsx";
+import MyReviews from "./pages/MyReviews.jsx";
 import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
 import SearchResults from "./pages/SearchResults.jsx";
@@ -23,6 +23,7 @@ const App = () => {
   const [login, setLogin] = useState(false);
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [restaurantToReview, setRestaurantToReview] = useState("");
 
   const [user, setUser] = useState("");
 
@@ -82,6 +83,10 @@ const App = () => {
       console.error("Empty comment")
     }
   }
+  
+  const setMyRestaurant = (restaurant) => {
+    setRestaurantToReview(restaurant);
+  };
 
   // search username and check password
   async function loginUser(username, password) {
@@ -158,9 +163,16 @@ const App = () => {
         <Route path="/" element={<Home loggedIn={login} />} />
         <Route
           path="/reviews/create"
-          element={<WriteReview createReview={createReview} />}
+          element={
+            <WriteReview
+              createReview={createReview}
+              restaurantToReview={restaurantToReview}
+              setMyRestaurant={setMyRestaurant}
+            />
+          }
         />
         <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login}/>} />
+        <Route path="/reviews/me" element={<MyReviews />} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route path="/profile/:id" element={<Profile />} />
@@ -178,9 +190,13 @@ const App = () => {
             />
           }
         />
-        <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
-        <Route path="/locations/:id" element={<Restaurant />} />
+        <Route
+          path="/locations/:id"
+          element={
+            <Restaurant loggedIn={login} setMyRestaurant={setMyRestaurant} />
+          }
+        />
         <Route path="/search-results/:query" element={<SearchResults />} />
       </Routes>
     </>
