@@ -4,7 +4,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
-import { Buffer } from "buffer";
 import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
 import "reactjs-popup/dist/index.css";
@@ -12,12 +11,9 @@ import "reactjs-popup/dist/index.css";
 const ShowReview = ({ submitComment, loggedIn }) => {
   const [review, setReview] = useState({});
   const [loading, setLoading] = useState(true);
-  const [imageDisplay, setImageDisplay] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
   const [restaurant, setRestaurant] = useState({});
   const { id } = useParams();
   const [comments, setComments] = useState([]);
-
 
   const [response, setResponse] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
@@ -34,33 +30,9 @@ const ShowReview = ({ submitComment, loggedIn }) => {
     }
   };
 
-  async function getImage() {
-    const fullUrl = `http://localhost:5555/${review.imageUrl}`;
-    try {
-      const response = axios.get(fullUrl, {
-        responseType: "arraybuffer",
-      });
-
-      // Convert the array buffer to a base64-encoded string
-      const base64String = btoa(
-        new Uint8Array(response.data).reduce(
-          (data, byte) => data + String.fromCharCode(byte),
-          ""
-        )
-      );
-
-      // Construct the data URL
-      const dataUrl = `data:${response.headers["Content-Type"]};base64,${base64String}`;
-
-      setImageUrl(dataUrl);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }
-
-  async function setReviewAndComments() {
-    console.log("i'm here");
-    await axios
+  useEffect(() => {
+    setLoading(true);
+    axios
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
         setReview(res.data);
@@ -72,52 +44,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
         console.log(error);
         setLoading(false);
       });
-    await getImage();
-  }
-
-  useEffect(() => {
-    setLoading(true);
-    console.log("1");
-    setReviewAndComments();
   }, []);
-
-  // const ImageComponent = (review) => {
-  //   const [imageUrl, setImageUrl] = useState("");
-
-  //   useEffect(() => {
-  //     const fetchImage = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           path.join("http://localhost:5555", review.imageUrl),
-  //           {
-  //             responseType: "arraybuffer",
-  //           }
-  //         );
-
-  //         // Convert the array buffer to a base64-encoded string
-  //         const base64String = btoa(
-  //           new Uint8Array(response.data).reduce(
-  //             (data, byte) => data + String.fromCharCode(byte),
-  //             ""
-  //           )
-  //         );
-
-  //         // Construct the data URL
-  //         const dataUrl = `data:${response.headers["content-type"]};base64,${base64String}`;
-
-  //         setImageUrl(dataUrl);
-  //       } catch (error) {
-  //         console.error("Error fetching image:", error);
-  //       }
-  //     };
-
-  //     fetchImage();
-  //   }, []); // Run once when the component mounts
-
-  //   return (
-  //     <div>{imageUrl && <img src={imageUrl} alt="cannot load image" />}</div>
-  //   );
-  // };
 
   return (
     <div className="p-4 mt-16">
