@@ -149,7 +149,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
                   <div className="comments_grid_item" key={index}>
                     <div className="comments_content">
                       <div className="comments_user_container">
-                        <div className="comments_username">{"user"}</div>
+                        <div className="comments_username">{comment.user.username}</div>
                         <span className="comments_profile_pic"></span>
                       </div>
                       <div className="comments_description">{comment.body}</div>

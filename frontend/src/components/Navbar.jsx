@@ -150,7 +150,7 @@ export default function Navbar({
                   <div>
                     <h3>Restaurants</h3>
                     {searchResults.restaurants.map((restaurant, index) => (
-                      <Link to={`/locations/${restaurant.id}`} key={index}>
+                      <Link to={`/locations/${restaurant._id}`} key={index}>
                         <p>{restaurant.name}</p>
                       </Link>
                     ))}
@@ -160,7 +160,7 @@ export default function Navbar({
                   <div>
                     <h3>Reviews</h3>
                     {searchResults.reviews.map((review, index) => (
-                      <Link to={`/reviews/details/${review.id}`} key={index}>
+                      <Link to={`/reviews/details/${review._id}`} key={index}>
                         <p>{review.title}</p>
                       </Link>
                     ))}
