@@ -71,6 +71,21 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
   const [displayCloseRestaurant, setDisplayCloseRestaurant] = useState(false);
   const navigate = useNavigate();
 
+  const [restaurants, setRestaurants] = useState([]);
+  const [selectedRestaurant, setSelectedRestaurant] = useState("");
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const rest = await axios.get('http://localhost:5555/locations');
+        setRestaurants(rest.data.data);
+      } catch (error) {
+        console.error('Error fetching restaurants:', error);
+      }
+    };
+    fetchRestaurants();
+  });
+
   useEffect(() => {
     console.log(restaurantToReview);
     if (restaurantToReview) {
@@ -199,6 +214,20 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
         </div> */}
       </div>
       <form onSubmit={handleSubmit}>
+        <div className="restaurant-dropdown">
+          <select
+            value={selectedRestaurant}
+            onChange={(e) => setSelectedRestaurant(e.target.value)}
+            className="restaurant-select"
+          >
+            <option value="">Select a Restaurant</option>
+            {restaurants.map((restaurant, index) => (
+              <option key={index} value={restaurant._id}>
+                {restaurant.name} {/* Assuming each restaurant has a 'name' property */}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="title-rating">
           <div className="title-container">
             <label>Title</label>
