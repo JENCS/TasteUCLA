@@ -9,7 +9,11 @@ export default function MyReviews({ getMyReviews }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setReviews(getMyReviews());
+    getMyReviews()
+      .then((res) => {
+        setReviews(res);
+        setLoading(false);
+      })
   }, []);
 
   return (
@@ -21,7 +25,7 @@ export default function MyReviews({ getMyReviews }) {
         </div>
         <div className={classes.results_container}>
           {loading ? (
-          <Spinner />
+            <Spinner />
           ) : (
             <>
               <div className={classes.reviews_container}>

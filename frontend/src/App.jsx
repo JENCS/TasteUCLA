@@ -156,19 +156,20 @@ const App = () => {
   }
 
   async function getMyReviews() {
-    axios
+    let reviews = [];
+    await axios
       .get(`http://localhost:5555/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        return res.reviews;
+        reviews = res.data.reviews;
       })
       .catch((error) => {
         console.error("Error fetching reviews:", error)
-        return [];
       });
+    return reviews;
   }
 
   return (
