@@ -66,9 +66,7 @@ const App = () => {
 
   async function submitComment(reviewID, comment) {
     if (login) {
-      console.log(token)
-      console.log(comment)
-      axios.post(`http://localhost:5555/reviews/${reviewID}/comment`, 
+      await axios.post(`http://localhost:5555/reviews/${reviewID}/comment`, 
       {
         text: comment
       },
