@@ -86,6 +86,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
         <div className="show-review-page">
           <div className="row">
             <div className="container">
+              <img src={review.imageUrl}/>
               <h1>{review.title}</h1>
               <p className="text-2xl mr-4 text-black">
                 Restaurant: {review.restaurant.name}
