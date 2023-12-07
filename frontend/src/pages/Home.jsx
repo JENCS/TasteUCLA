@@ -46,11 +46,9 @@ const Home = () => {
                 )} */}
                 {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
                 <h3>{review.title}</h3>
-                {review.rating && (
-                  <p className="review-rating">
-                    Rating by {review.username}: {review.rating}
-                  </p>
-                )}
+                <p className="review-rating">
+                  Rating by {review.user.username}: {review.rating}
+                </p>
                 <p>{review.text}</p>
               </Link>
             ))}
