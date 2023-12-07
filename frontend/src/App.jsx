@@ -11,7 +11,7 @@ import WriteReview from "./pages/WriteReview";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Profile from "./pages/Profile";
-import UserReviews from "./pages/UserReviews.jsx";
+import MyReviews from "./pages/MyReviews.jsx";
 import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
 import SearchResults from "./pages/SearchResults.jsx";
@@ -153,6 +153,7 @@ const App = () => {
           }
         />
         <Route path="/reviews/details/:id" element={<ShowReview />} />
+        <Route path="/reviews/me" element={<MyReviews />} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route path="/profile/:id" element={<Profile />} />
@@ -170,7 +171,6 @@ const App = () => {
             />
           }
         />
-        <Route path="/id/reviews" element={<UserReviews />} />
         <Route path="/locations" element={<Locations />} />
         <Route
           path="/locations/:id"

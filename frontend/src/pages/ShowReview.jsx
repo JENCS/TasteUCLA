@@ -5,8 +5,11 @@ import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import { Buffer } from "buffer";
+import Popup from 'reactjs-popup';
+import Button from "@mui/material/Button";
+import 'reactjs-popup/dist/index.css';
 
-const ShowReview = () => {
+const ShowReview = ( {submitComment, loggedIn} ) => {
   const [review, setReview] = useState({});
   const [loading, setLoading] = useState(false);
   const [imageDisplay, setImageDisplay] = useState(null);
@@ -14,11 +17,18 @@ const ShowReview = () => {
   const { id } = useParams();
   const [comments, setComments] = useState([]);
 
-  const [response, setResponse] = useState("");
+  const [response, setResponse] = useState('');
+  const [openPopup, setOpenPopup] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(response); // For now, just log the response.
-  };
+    submitComment(id, response);
+    console.log(response); // For now
+  }
+  const typeInComment = () => {
+    if (!loggedIn) {
+      setOpenPopup(true);}
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -122,15 +132,24 @@ const ShowReview = () => {
             </div>
             <div className="reviews-header">Comments</div>
             <div className="comments-grid">
-              <div className="comment-textbox">
-                <form onSubmit={handleSubmit}>
-                  <textarea
-                    className="w-full p-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline"
-                    rows="4"
-                    placeholder="Write your comment..."
-                    value={response}
-                    onChange={(e) => setResponse(e.target.value)}
-                  />
+            <div className="comment-textbox">
+                    <form onSubmit={handleSubmit}>
+                        <textarea
+                            className="w-full p-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline"
+                            rows="4"
+                            placeholder="Write your comment..."
+                            value={response}
+                            onClick={typeInComment}
+                            onChange={(e) => setResponse(e.target.value)}
+                        />
+                        {openPopup && <Popup open={openPopup} closeOnDocumentClick onClose={() => setOpenPopup(false)}>
+                          <div className="popup-content">
+                              <p>Please sign in to comment.</p>
+                              {<Button name="signin-button" style={{ width: "120px" }} href="/login">
+                                Sign in
+                              </Button>}
+                          </div>
+                        </Popup>}
                   <div className="text-right">
                     <button
                       type="submit"
