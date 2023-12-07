@@ -37,6 +37,7 @@ const createReview = asyncHandler(async (req, res) => {
   const newReview = {
     title: req.body.title,
     user: user._id,
+    text: req.body.text,
     rating: req.body.rating,
     restaurant: restaurant._id,
     imageUrl: imageUrl,
