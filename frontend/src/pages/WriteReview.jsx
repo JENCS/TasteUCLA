@@ -9,7 +9,11 @@ import { IoMdClose } from "react-icons/io";
 import { Buffer } from "buffer";
 import { display } from "@mui/system";
 
-const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
+import Popup from "reactjs-popup";
+import Button from "@mui/material/Button";
+import "reactjs-popup/dist/index.css";
+
+const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, loggedIn }) => {
   // const [title, setTitle] = useState("");
   // const [author, setAuthor] = useState("");
   // const [photo, setPhoto] = useState();
@@ -75,8 +79,12 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
   const [selectedRestaurant, setSelectedRestaurant] = useState("");
   const [preSelected, setPreSelected] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [openPopUp, setOpenPopUp] = useState(false);
 
   useEffect(() => {
+    if (!loggedIn){
+      setOpenPopUp(true);
+    }
     const fetchRestaurants = async () => {
       try {
         const rest = await axios.get('http://localhost:5555/locations');
@@ -258,6 +266,27 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
         </div> */}
       </div>
       <div className="error_message">{errorMessage}</div>
+      {openPopUp && (
+                    <Popup
+                      open={openPopUp}
+                      closeOnDocumentClick={false}
+                      //onClose={() => setOpenPopUp(false)}
+                    >
+                      <div className="popup-content">
+                        <p>Please sign in to comment.</p>
+                        {
+                          <Button
+                            name="signin-button"
+                            style={{ width: "120px" }}
+                            href="/login"
+                          >
+                            Sign in
+                          </Button>
+                        }
+                      </div>
+                    </Popup>
+                    )}
+
       <form onSubmit={handleSubmit}>
         <div className="restaurant-dropdown">
           <select

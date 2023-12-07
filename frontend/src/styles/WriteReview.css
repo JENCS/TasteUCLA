@@ -232,3 +232,18 @@ input[type="file"]::file-selector-button {
   top: 33%;
   flex-direction: column;
 }
+
+.popup-content {
+  background-color: white; 
+  color: black;   
+  border: none !important;       
+  border-radius: 10px;   
+  max-width: 600px;
+  max-height: 300px;
+  text-align: center;   
+}
+
+.popup-content p {
+  font-size: 20px;       
+  color: black;
+}
