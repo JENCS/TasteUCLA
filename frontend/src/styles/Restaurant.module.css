@@ -316,3 +316,19 @@
   margin-bottom: 20px;
   top: 20px;
 }
+
+.created_time_comment{
+  color: #1e1e1e;
+  display: flex;
+  position: relative;
+  font-size: 15px;
+  margin-left: 180px;
+}
+
+.updated_time_comment{
+  color: #1e1e1e;
+  display: flex;
+  position: relative;
+  font-size: 15px;
+  margin-left: 180px;
+}

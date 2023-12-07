@@ -7,7 +7,7 @@ import { Restaurant } from "../models/Restaurant.js";
 // @route GET /reviews
 // @access Public
 const getAllReviews = asyncHandler(async (req, res) => {
-  const reviews = await Review.find({});
+  const reviews = await Review.find({})
   return res.status(202).json({
     count: reviews.length,
     data: reviews,
@@ -37,6 +37,7 @@ const createReview = asyncHandler(async (req, res) => {
   const newReview = {
     title: req.body.title,
     user: user._id,
+    text: req.body.text,
     rating: req.body.rating,
     restaurant: restaurant._id,
     imageUrl: imageUrl,
@@ -54,7 +55,10 @@ const createReview = asyncHandler(async (req, res) => {
 // @access Public
 const getReview = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const review = await Review.findById(id);
+  const review = await Review.findById(id)
+    .populate("restaurant").lean()
+    .populate("user").lean()
+    .populate("comments.user").lean()
   return res.status(202).json(review);
 });
 

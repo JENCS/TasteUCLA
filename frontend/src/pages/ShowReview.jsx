@@ -4,7 +4,6 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
-import { Buffer } from "buffer";
 import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
 import "reactjs-popup/dist/index.css";
@@ -12,8 +11,7 @@ import "reactjs-popup/dist/index.css";
 const ShowReview = ({ submitComment, loggedIn }) => {
   const [review, setReview] = useState({});
   const [loading, setLoading] = useState(true);
-  const [imageDisplay, setImageDisplay] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
+  const [restaurant, setRestaurant] = useState({});
   const { id } = useParams();
   const [comments, setComments] = useState([]);
 
@@ -21,101 +19,63 @@ const ShowReview = ({ submitComment, loggedIn }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!loggedIn)
+  //     setOpenPopup(true);
+  //   else if (response){
+  //     await submitComment(id, response);
+  //     setResponse("");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    submitComment(id, response);
-    console.log(response); // For now
-  };
+    if (!loggedIn)
+      setOpenPopup(true);
+    else if (response) {
+      await submitComment(id, response);
+      setResponse("");
+      setLoading(true);
+      await axios
+        .get(`http://localhost:5555/reviews/${id}`)
+        .then((res) => {
+          setComments(res.data.comments);
+          setLoading(false);
+          console.log(comments);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+      setLoading(false);
+    } else
+      setErrorMessage("Empty comment!");
+  }
+
   const typeInComment = () => {
     if (!loggedIn) {
       setOpenPopup(true);
     }
   };
 
-  async function getImage() {
-    const fullUrl = `http://localhost:5555/${review.imageUrl}`;
-    try {
-      const response = axios.get(fullUrl, {
-        responseType: "arraybuffer",
-      });
-
-      // Convert the array buffer to a base64-encoded string
-      const base64String = btoa(
-        new Uint8Array(response.data).reduce(
-          (data, byte) => data + String.fromCharCode(byte),
-          ""
-        )
-      );
-
-      // Construct the data URL
-      const dataUrl = `data:${response.headers["Content-Type"]};base64,${base64String}`;
-
-      setImageUrl(dataUrl);
-    } catch (error) {
-      console.error("Error fetching image:", error);
-    }
-  }
-
-  async function setReviewAndComments() {
-    console.log("i'm here");
-    await axios
+  useEffect(() => {
+    setLoading(true);
+    axios
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
         setReview(res.data);
-        setComments(res.data.comments);
+        if (res.data.comments.length != comments.length) {
+          setComments(res.data.comments);
+        }
         setLoading(false);
-        setComments(res.data.comments);
+        setRestaurant(res.data.restaurant);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-    await getImage();
-  }
-
-  useEffect(() => {
-    setLoading(true);
-    console.log("1");
-    setReviewAndComments();
-  }, []);
-
-  // const ImageComponent = (review) => {
-  //   const [imageUrl, setImageUrl] = useState("");
-
-  //   useEffect(() => {
-  //     const fetchImage = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           path.join("http://localhost:5555", review.imageUrl),
-  //           {
-  //             responseType: "arraybuffer",
-  //           }
-  //         );
-
-  //         // Convert the array buffer to a base64-encoded string
-  //         const base64String = btoa(
-  //           new Uint8Array(response.data).reduce(
-  //             (data, byte) => data + String.fromCharCode(byte),
-  //             ""
-  //           )
-  //         );
-
-  //         // Construct the data URL
-  //         const dataUrl = `data:${response.headers["content-type"]};base64,${base64String}`;
-
-  //         setImageUrl(dataUrl);
-  //       } catch (error) {
-  //         console.error("Error fetching image:", error);
-  //       }
-  //     };
-
-  //     fetchImage();
-  //   }, []); // Run once when the component mounts
-
-  //   return (
-  //     <div>{imageUrl && <img src={imageUrl} alt="cannot load image" />}</div>
-  //   );
-  // };
+  }, [comments]);
 
   return (
     <div className="p-4 mt-16">
@@ -128,12 +88,12 @@ const ShowReview = ({ submitComment, loggedIn }) => {
             <div className="container">
               <h1>{review.title}</h1>
               <p className="text-2xl mr-4 text-black">
-                Location: {review.location}
+                Restaurant: {review.restaurant.name}
               </p>
               <p className="text-xl mr-4 text-gray-500">
-                Review written by {review.author}author
+                Review written by {review.user.username}
               </p>
-              <p className="content">{review.description}</p>
+              <p className="content">{review.text}</p>
             </div>
             <div className="created_time">
               {"Created at: " + review.createdAt}
@@ -189,7 +149,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
                   <div className="comments_grid_item" key={index}>
                     <div className="comments_content">
                       <div className="comments_user_container">
-                        <div className="comments_username">{"user"}</div>
+                        <div className="comments_username">{comment.user.username}</div>
                         <span className="comments_profile_pic"></span>
                       </div>
                       <div className="comments_description">{comment.body}</div>

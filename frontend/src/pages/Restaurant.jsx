@@ -25,15 +25,6 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
     setMyRestaurant(restaurant.name);
   }
 
-  const getImage = () => {
-    let a = [];
-    const mimeType = "image/png";
-    for (let i = 0; i < reviews.length; i++) {
-      let b64 = Buffer.from(reviews[i].image).toString("base64");
-      setImages(images.concat(`data:${mimeType};base64,${b64}`));
-    }
-  };
-
   const getRestaurantRating = () => {
     let sum = 0;
     for (let i = 0; i < reviews.length; i++) {
@@ -48,13 +39,10 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
       .get(`http://localhost:5555/locations/${id}`)
       .then((res) => {
         setRestaurant(res.data);
-
         setReviews(res.data.reviews);
         setNumOfReviews(res.data.reviews.length);
         setReviewsLoading(false);
         setRestaurantRating(getRestaurantRating().toString());
-
-        getImage();
       })
       .catch((error) => {
         console.error("Error fetching restaurant:", error);
@@ -70,8 +58,8 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
       setRestaurantRating("No reviews");
       setRatingsLoading(false);
     }
-    //document.onload = setRestaurantRating(getRestaurantRating());
-  }, [getRestaurantRating, getImage]);
+
+  }, [getRestaurantRating]);
 
   return (
     <div className={classes.root}>
@@ -136,10 +124,10 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
               <div className={classes.reviews_grid_item} key={index}>
                 <div className={classes.review_content}>
                   <div className={classes.user_container}>
-                    <div className={classes.username}>{"user"}</div>
+                    <div className={classes.username}>{review.user.username}</div>
                     <div className={classes.profile_pic}>
                       <img
-                        src={"/logos/CentralCampus/lollicup.png"}
+                        src={""}
                         border-radius={"50%"}
                         alt={"image can't load"}
                       />
@@ -147,14 +135,14 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                   </div>
                   <div className={classes.rating_desc_container}>
                     <div className={classes.review_image}>
-                      <img src={images[index]} width={"300px"} />
+                      <img src={""} width={"300px"} />
                     </div>
                     <div className={classes.review_rating}>
                       {"Rating: " + review.rating}
                     </div>
                     <div className={classes.review_title}>{review.title}</div>
                     <div className={classes.review_description}>
-                      {review.description}
+                      {review.text}
                     </div>
                   </div>
                 </div>
@@ -163,6 +151,41 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                   Others have commented on your review...{" "}
                 </div>
                 <div className={classes.comments_grid}>
+                {review.comments.map((comment, index) => (
+                  <div className={classes.comments_grid_item} key = {index}>
+                    <div className={classes.comments_content}>
+                      <div className={classes.comments_user_container}>
+                        <div className={classes.comments_username}>
+                          {comment.user.username}
+                        </div>
+                        <div className={classes.comments_profile_pic}>
+                          <img
+                            src={""}
+                            border-radius={"50%"}
+                            alt={"image can't load"}
+                          />
+                        </div>
+                      </div>
+                      <div className={classes.comments_description}>
+                        {comment.body}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Restaurant;
+
+/*
+{review.comments.map((comment, index) => (
                   <div className={classes.comments_grid_item}>
                     <div className={classes.comments_content}>
                       <div className={classes.comments_user_container}>
@@ -182,16 +205,5 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                       </div>
                     </div>
                   </div>
-                  <div className={classes.comments_grid_item}>2</div>
-                  <div className={classes.comments_grid_item}>3</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-export default Restaurant;
+                ))}
+*/
