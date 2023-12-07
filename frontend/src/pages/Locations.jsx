@@ -36,8 +36,8 @@ function Locations() {
     },
     {
       name: "Jimmy's",
-      img: "/logos/656e8b776c581d194c6d6c0b.png",
-      id: "656e8b776c581d194c6d6c0b",
+      img: "/logos/657145cab6a35d3fc51c4429.png",
+      id: "657145cab6a35d3fc51c4429",
     },
     {
       name: "Northern Lights Café",
@@ -117,38 +117,38 @@ function Locations() {
   const SouthCampusRestaurants = [
     {
       name: "Blaze Pizza",
-      img: "/logos/656e8d3df40395536ccb0935.png",
-      id: "656e8d3df40395536ccb0935",
+      img: "/logos/6571449c0859299910c3e0b6.png",
+      id: "6571449c0859299910c3e0b6",
     },
     {
       name: "Fusion",
-      img: "/logos/656e8d3df40395536ccb0936.png",
-      id: "656e8d3df40395536ccb0936",
+      img: "/logos/6571449c0859299910c3e0b7.png",
+      id: "6571449c0859299910c3e0b7",
     },
     {
       name: "ScrubJay Café",
-      img: "/logos/656e8d3df40395536ccb0937.png",
-      id: "656e8d3df40395536ccb0937",
+      img: "/logos/6571449c0859299910c3e0b8.png",
+      id: "6571449c0859299910c3e0b8",
     },
     {
       name: "Southern Lights Café",
-      img: "/logos/656e8d3df40395536ccb0938.png",
-      id: "656e8d3df40395536ccb0938",
+      img: "/logos/6571449c0859299910c3e0b9.png",
+      id: "6571449c0859299910c3e0b9",
     },
     {
       name: "Subway",
-      img: "/logos/656e8d3df40395536ccb0939.png",
-      id: "656e8d3df40395536ccb0939",
+      img: "/logos/6571449c0859299910c3e0ba.png",
+      id: "6571449c0859299910c3e0ba",
     },
     {
       name: "Café Synapse",
-      img: "/logos/656e8d3df40395536ccb093a.png",
-      id: "656e8d3df40395536ccb093a",
+      img: "/logos/6571449c0859299910c3e0bb.png",
+      id: "6571449c0859299910c3e0bb",
     },
     {
       name: "Yoshinoya",
-      img: "/logos/656e8d3df40395536ccb093b.png",
-      id: "656e8d3df40395536ccb093b",
+      img: "/logos/6571449c0859299910c3e0bc.png",
+      id: "6571449c0859299910c3e0bc",
     },
   ];
 
