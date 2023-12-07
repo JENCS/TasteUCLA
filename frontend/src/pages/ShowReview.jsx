@@ -11,7 +11,7 @@ import 'reactjs-popup/dist/index.css';
 
 const ShowReview = ( {submitComment, loggedIn} ) => {
   const [review, setReview] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [imageDisplay, setImageDisplay] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { id } = useParams();
@@ -19,27 +19,23 @@ const ShowReview = ( {submitComment, loggedIn} ) => {
 
   const [response, setResponse] = useState('');
   const [openPopup, setOpenPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    submitComment(id, response);
-    console.log(response); // For now
-  }
-  const typeInComment = () => {
-    if (!loggedIn) {
-      setOpenPopup(true);}
-  }
-
-  useEffect(() => {
+    if (!loggedIn)
+      setOpenPopup(true);
+    else if (response){
+    await submitComment(id, response);
+    setResponse("");
     setLoading(true);
-    axios
+    await axios
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
-        setReview(res.data);
         setComments(res.data.comments);
+        
         setLoading(false);
-        setComments(res.data.comments);
-
+        console.log(comments);
         const fullUrl = `http://localhost:5555/${res.data.imageUrl}`;
         try {
           const response = axios.get(fullUrl, {
@@ -66,7 +62,57 @@ const ShowReview = ( {submitComment, loggedIn} ) => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+    setLoading(false);
+    } else
+      setErrorMessage("Empty comment!");
+  }
+
+  const typeInComment = () => {
+    if (!loggedIn) {
+      setOpenPopup(true);}
+  }
+
+  useEffect(() => {
+    console.log(loading);
+    
+    axios
+      .get(`http://localhost:5555/reviews/${id}`)
+      .then((res) => {
+        setReview(res.data);
+        //setComments(res.data.comments);
+        if (res.data.comments.length != comments.length) {
+          setComments(res.data.comments);
+        }
+        
+        setLoading(false);
+        console.log(comments);
+        // const fullUrl = `http://localhost:5555/${res.data.imageUrl}`;
+        // try {
+        //   const response = axios.get(fullUrl, {
+        //     responseType: "arraybuffer",
+        //   });
+
+        //   // Convert the array buffer to a base64-encoded string
+        //   const base64String = btoa(
+        //     new Uint8Array(response.data).reduce(
+        //       (data, byte) => data + String.fromCharCode(byte),
+        //       ""
+        //     )
+        //   );
+
+        //   // Construct the data URL
+        //   const dataUrl = `data:${response.headers["content-type"]};base64,${base64String}`;
+
+        //   setImageUrl(dataUrl);
+        // } catch (error) {
+        //   console.error("Error fetching image:", error);
+        // }
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, [comments]);
 
   // const ImageComponent = (review) => {
   //   const [imageUrl, setImageUrl] = useState("");
@@ -131,6 +177,7 @@ const ShowReview = ( {submitComment, loggedIn} ) => {
               {"Updated at: " + review.updatedAt}
             </div>
             <div className="reviews-header">Comments</div>
+            <div className="error_message">{errorMessage}</div>
             <div className="comments-grid">
             <div className="comment-textbox">
                     <form onSubmit={handleSubmit}>
