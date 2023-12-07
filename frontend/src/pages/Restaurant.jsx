@@ -96,24 +96,26 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
             </div>
           )}
           <div className={classes.description}>{restaurant.description}</div>
-          <div className={classes.write_review_button}>
-            {loggedIn && (
-              <Link to="/reviews/create">
-                <button onClick={sendRestaurant}>Write a Review</button>
-              </Link>
-            )}
-            {!loggedIn && (
-              <Link to="/login">
-                <button
-                  onClick={() => {
-                    setMyRestaurant(restaurant.name);
-                  }}
-                >
-                  Write a Review
-                </button>
-              </Link>
-            )}
-          </div>
+          {!reviewsLoading && !ratingLoading && (
+            <div className={classes.write_review_button}>
+              {loggedIn && (
+                <Link to="/reviews/create">
+                  <button onClick={sendRestaurant}>Write a Review</button>
+                </Link>
+              )}
+              {!loggedIn && (
+                <Link to="/login">
+                  <button
+                    onClick={() => {
+                      setMyRestaurant(restaurant.name);
+                    }}
+                  >
+                    Write a Review
+                  </button>
+                </Link>
+              )}
+            </div>
+          )}
         </div>
         <div className={classes.logo}>
           <img
