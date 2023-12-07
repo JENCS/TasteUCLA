@@ -14,8 +14,10 @@ const ShowReview = ({ submitComment, loggedIn }) => {
   const [loading, setLoading] = useState(true);
   const [imageDisplay, setImageDisplay] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [restaurant, setRestaurant] = useState({});
   const { id } = useParams();
   const [comments, setComments] = useState([]);
+
 
   const [response, setResponse] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
@@ -64,7 +66,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
         setReview(res.data);
         setComments(res.data.comments);
         setLoading(false);
-        setComments(res.data.comments);
+        setRestaurant(res.data.restaurant);
       })
       .catch((error) => {
         console.log(error);
@@ -128,12 +130,12 @@ const ShowReview = ({ submitComment, loggedIn }) => {
             <div className="container">
               <h1>{review.title}</h1>
               <p className="text-2xl mr-4 text-black">
-                Location: {review.location}
+                Restaurant: {review.restaurant.name}
               </p>
               <p className="text-xl mr-4 text-gray-500">
-                Review written by {review.author}author
+                Review written by {review.user.username}
               </p>
-              <p className="content">{review.description}</p>
+              <p className="content">{review.text}</p>
             </div>
             <div className="created_time">
               {"Created at: " + review.createdAt}

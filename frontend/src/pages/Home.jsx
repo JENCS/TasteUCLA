@@ -52,7 +52,7 @@ const Home = () => {
                     Rating by {review.username}: {review.rating}
                   </p>
                 )}
-                <p>{review.text}description here!!!</p>
+                <p>{review.text}</p>
               </Link>
             ))}
           </div>
