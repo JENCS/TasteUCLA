@@ -58,6 +58,7 @@ const getReview = asyncHandler(async (req, res) => {
   const review = await Review.findById(id)
     .populate("restaurant").lean()
     .populate("user").lean()
+    .populate("comments.user").lean()
   return res.status(202).json(review);
 });
 
