@@ -160,9 +160,19 @@ export default function Navbar({
                     ))}
                   </div>
                 )}
+                {searchResults.users.length > 0 && (
+                  <div>
+                    <h3>Users</h3>
+                    {searchResults.users.map((user, index) => (
+                      <Link to={`/users/${user._id}`} key={index}>
+                        <p>{user.username}</p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
                 {searchResults.restaurants.length === 0 &&
-                  searchResults.restaurants.length === 0 &&
-                  searchResults.restaurants.length === 0 && (
+                  searchResults.reviews.length === 0 &&
+                  searchResults.users.length === 0 && (
                     <p>No results found</p>
                   )}
               </div>
