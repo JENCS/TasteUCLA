@@ -10,38 +10,15 @@ function LoginPage({ loginUser }) {
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
 
-  // // search username and check password
-  // async function login(username, password) {
-  //   try {
-  //     const response = await axios.post("http://localhost:5555/auth", {
-  //       username,
-  //       password,
-  //     });
-
-  //     if (response.data.accessToken) {
-  //       // window.location.href = "/";
-  //       navigate("/");
-  //       changeLoginState(true);
-  //       // changeToken(response.data.accessToken);
-  //     }
-  //   } catch (error) {
-  //     if (error.response) {
-  //       console.error("Login error:", error.response.data);
-  //       alert(error.response.data.message);
-  //     } else {
-  //       console.error("Network error:", error.message);
-  //     }
-  //   }
-  // }
-
   function callLoginFunction(user, pass) {
     loginUser(user, pass);
   }
 
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
-      <div className={classes.tasteUCLA}>TasteUCLA</div>
-      <div className={classes.logo}></div>
+      {/* <div className={classes.tasteUCLA}>TasteUCLA</div>
+      <div className={classes.logo}></div> */}
+      <img src="../public/tasteUCLA.png" className={classes.tasteucla_logo} />
       <div className={classes.username}>Username</div>
       <div className={classes.username_textbox}>
         <input

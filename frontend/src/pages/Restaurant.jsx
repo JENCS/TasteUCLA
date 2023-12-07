@@ -124,10 +124,10 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
               <div className={classes.reviews_grid_item} key={index}>
                 <div className={classes.review_content}>
                   <div className={classes.user_container}>
-                    <div className={classes.username}>{"user"}</div>
+                    <div className={classes.username}>{review.user.username}</div>
                     <div className={classes.profile_pic}>
                       <img
-                        src={"/logos/CentralCampus/lollicup.png"}
+                        src={""}
                         border-radius={"50%"}
                         alt={"image can't load"}
                       />
@@ -135,7 +135,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                   </div>
                   <div className={classes.rating_desc_container}>
                     <div className={classes.review_image}>
-                      <img src={images[index]} width={"300px"} />
+                      <img src={""} width={"300px"} />
                     </div>
                     <div className={classes.review_rating}>
                       {"Rating: " + review.rating}
@@ -151,8 +151,27 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                   Others have commented on your review...{" "}
                 </div>
                 <div className={classes.comments_grid}>
-                  <div className={classes.comments_grid_item}>2</div>
-                  <div className={classes.comments_grid_item}>3</div>
+                {review.comments.map((comment, index) => (
+                  <div className={classes.comments_grid_item} key = {index}>
+                    <div className={classes.comments_content}>
+                      <div className={classes.comments_user_container}>
+                        <div className={classes.comments_username}>
+                          {comment.user.username}
+                        </div>
+                        <div className={classes.comments_profile_pic}>
+                          <img
+                            src={""}
+                            border-radius={"50%"}
+                            alt={"image can't load"}
+                          />
+                        </div>
+                      </div>
+                      <div className={classes.comments_description}>
+                        {comment.body}
+                      </div>
+                    </div>
+                  </div>
+                ))}
                 </div>
               </div>
             ))}

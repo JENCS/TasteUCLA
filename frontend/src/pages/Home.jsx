@@ -24,8 +24,7 @@ const Home = () => {
   return (
     <div>
       <div className="home-container">
-        <h1 className="home-title">TasteUCLA</h1>
-        <div className="home-logo"></div>
+        <img src="../public/tasteUCLA.png" className="tasteucla-logo" />
         {loading ? (
           <Spinner />
         ) : (
