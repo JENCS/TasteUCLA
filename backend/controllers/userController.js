@@ -79,8 +79,12 @@ const getUser = asyncHandler(async (req, res) => {
 
 const getProfile = asyncHandler(async (req, res) => {
   const username = req.user
-  const foundUser = await User.findOne({ username }).select("-password")
-    .populate("reviews").lean()
+  const foundUser = await User.findOne({ username })
+    .select("-password")
+    .populate({
+      path: 'reviews',
+      model: 'Review'
+    }).lean()
   res.status(202).json(foundUser)
 })
 
