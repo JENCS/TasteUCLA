@@ -18,7 +18,12 @@ const getAllRestaurants = asyncHandler(async (req, res) => {
 const getRestaurant = asyncHandler(async (req, res) => {
     const { id } = req.params
     const restaurant = await Restaurant.findById(id)
-        .populate("reviews").lean()
+        .populate({
+            path: "reviews",
+            populate: {path: "user"},
+            populate: {path: "comments.user"}
+        })
+
     return res.status(202).json(restaurant)
 })
 
