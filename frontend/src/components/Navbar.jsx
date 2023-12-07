@@ -170,7 +170,7 @@ export default function Navbar({
                   <div>
                     <h3>Users</h3>
                     {searchResults.users.map((user, index) => (
-                      <Link to={`/users/${user._id}`} key={index}>
+                      <Link to={`/profile/${user._id}`} key={index}>
                         <p>{user.username}</p>
                       </Link>
                     ))}
