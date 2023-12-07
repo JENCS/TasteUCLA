@@ -45,7 +45,7 @@ const Home = () => {
                     alt={"image can't load"}
                   />
                 )} */}
-                {review.imageUrl && <img src={review.imageUrl} alt="Review" />}
+                {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
                 <h3>{review.title}</h3>
                 {review.rating && (
                   <p className="review-rating">
