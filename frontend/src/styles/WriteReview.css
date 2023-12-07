@@ -196,3 +196,26 @@ input[type="file"]::file-selector-button {
   text-align: center;
   margin: auto;
 } */
+
+.restaurant-select {
+  display: block; 
+  width: 30%; 
+  margin: 0 auto; 
+  padding: 10px 15px; 
+  border-radius: 15px;
+  background-color: rgb(181, 141, 233); 
+  color: white; 
+  font-size: 20px; 
+  border: 2px solid rgb(181, 141, 233);
+  outline: none; 
+  cursor: pointer; 
+}
+
+.restaurant-select:focus {
+  border-color: darkviolet; 
+}
+
+.restaurant-select option {
+  background-color: white; 
+  color: black; 
+}

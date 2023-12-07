@@ -73,19 +73,45 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
 
   const [restaurants, setRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState("");
+  const [preSelected, setPreSelected] = useState("");
 
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
         const rest = await axios.get('http://localhost:5555/locations');
-        setRestaurants(rest.data.data);
+        let fetchedRestaurants = rest.data.data;
+
+        setSelectedRestaurant("");
+        if (restaurantToReview) {
+          const foundRestaurant = fetchedRestaurants.find(r => r.name === restaurantToReview);
+          if (foundRestaurant) {
+            restaurantToReview = "";
+            //console.log("selected: ", selectedRestaurant, "found", foundRestaurant.name)
+            setPreSelected(true);
+            const i = getRestIndex(foundRestaurant.name, fetchedRestaurants);
+            //console.log(i)
+            //console.log(fetchedRestaurants[i])
+            setSelectedRestaurant(fetchedRestaurants[i].name);
+            //fetchedRestaurants = fetchedRestaurants.filter(r => r.name !== restaurantToReview);
+          } else {
+            setSelectedRestaurant("");
+          }
+        } else {
+          setSelectedRestaurant("");
+        }
+
+        setRestaurants(fetchedRestaurants);
       } catch (error) {
         console.error('Error fetching restaurants:', error);
       }
     };
     fetchRestaurants();
-  });
+    //restaurantToReview = "";
+    console.log(preSelected);
 
+  }, [restaurantToReview]);
+
+  /*
   useEffect(() => {
     console.log(restaurantToReview);
     if (restaurantToReview) {
@@ -96,6 +122,12 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
       setDisplayCloseRestaurant(false);
     }
   });
+  */
+
+  function getRestIndex(name, rests) {
+    const index = rests.findIndex(restaurant => restaurant.name === name);
+    return index;
+  }
 
   function uploadImage(e) {
     setImage(e.target.files[0]);
@@ -117,11 +149,14 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("text", text);
-    formData.append("image", image);
+    formData.append("restaurant", selectedRestaurant);
     formData.append("rating", rating);
-    formData.append("restaurant", restaurant);
-
+    formData.append("text", text);
+    
+    if (image) {
+      formData.append("image", image);
+    }
+    console.log("form", formData.get("restaurant"));
     createReview(formData);
 
     // setLoading(true);
@@ -148,7 +183,7 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
-      {displayCloseRestaurant && (
+      {/* {displayCloseRestaurant && (
         <div className="choose-restaurant-container">
           <label>{restaurant}</label>
           <div className="remove-restaurant-btn">
@@ -162,7 +197,7 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
             <label>Choose Restaurant</label>
           </div>
         </Link>
-      )}
+      )} */}
       <div>
         {/* <div className="title-rating">
           <div className="title-container">
@@ -217,14 +252,19 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant }) => {
         <div className="restaurant-dropdown">
           <select
             value={selectedRestaurant}
-            onChange={(e) => setSelectedRestaurant(e.target.value)}
+            onChange={(e) => 
+                setSelectedRestaurant(e.target.value)
+              }
             className="restaurant-select"
           >
-            <option value="">Select a Restaurant</option>
+            <option value="">
+              Select a Restaurant
+            </option> 
             {restaurants.map((restaurant, index) => (
-              <option key={index} value={restaurant._id}>
-                {restaurant.name} {/* Assuming each restaurant has a 'name' property */}
-              </option>
+              //(console.log(index, "rest: ", restaurant))
+              (<option key={index} value={restaurant.name}>
+                {restaurant.name}
+              </option>)
             ))}
           </select>
         </div>
