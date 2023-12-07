@@ -81,11 +81,7 @@ export default function UserProfile() {
       </div>
       <div className="bio-container">
         <label>Bio</label>
-        <textarea
-          className="bio"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-        ></textarea>
+        <p className="bio">{bio}</p>
       </div>
     </div>
   );
