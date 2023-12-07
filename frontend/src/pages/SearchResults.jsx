@@ -26,7 +26,7 @@ function SearchResults() {
         console.error("Error fetching search results", error);
         setLoading(false);
       });
-  }, []);
+  }, [query]);
 
   return (
     <div className={classes.root}>
@@ -55,7 +55,7 @@ function SearchResults() {
                         <div>
                           <img
                             className={classes.grid_item_img}
-                            src={`/logos/${rest._id}.png`}
+                            src={`/logos/${rest._id}.png`} alt={"Image failed"}
                           />
                         </div>
                         <div>
@@ -87,11 +87,21 @@ function SearchResults() {
                     >
                       <div className={classes.section_grid_item_col}>
                         <div>
-                          <img
-                            className={classes.grid_item_img}
-                            src={user.imageUrl}
-                            alt="N/A"
-                          />
+                            {user.imageUrl !== null ? (
+                                <img
+                                className={classes.grid_item_img}
+                                src={user.imageUrl}
+                                alt="N/A"
+                                />
+                            ) : (
+                              <div style={{
+                                margin: "10px",
+                                offset: "10px",
+                                width: "20px",
+                                height: "20px",
+                                backgroundColor: "rgb(" + ((Math.random() * 100) + 155) + "," + ((Math.random() * 100) + 155) + "," + ((Math.random() * 100) + 155) + ")"
+                              }} className="home-logo"></div>
+                            )}
                         </div>
                         <div>
                           <div className={classes.grid_item_title}>
@@ -121,13 +131,35 @@ function SearchResults() {
                       className={classes.section_grid_item}
                     >
                       <div className={classes.section_grid_item_col}>
-                        <div></div>
+                        <div>
+                            {review.imageUrl !== null ? (
+                              <img
+                              className={classes.grid_item_img}
+                              src={review.imageUrl}
+                              alt="N/A"
+                              />
+                            ) : (
+                              <div className="home-logo" style={{
+                                top: "25px",
+                                margin: "10px",
+                                offset: "0px",
+                                width: "50px",
+                                height: "50px",
+                                backgroundColor: "rgb(" + ((Math.random() * 100) + 155) + ","
+                                  + ((Math.random() * 100) + 155) + ","
+                                  + ((Math.random() * 100) + 155) + ")"
+                              }} ></div>
+                            )}
+                        </div>
                         <div>
                           <div className={classes.grid_item_title}>
                             {review.title}
                           </div>
                           <div className={classes.grid_item_text}>
-                            {"of " + review.restaurant}
+                            {"of " + review.restaurant.name}
+                          </div>
+                          <div className={classes.grid_item_text} style={{ color: "black" }}>
+                            {"by " + review.user.username}
                           </div>
                           <div
                             className={classes.grid_item_text}
