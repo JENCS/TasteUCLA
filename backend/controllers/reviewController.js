@@ -110,7 +110,7 @@ const createComment = asyncHandler(async (req, res) => {
   }
   const comment = await Comment.create(data)
   var newCommentCount = review.comments.push(comment);
-  review.save();
+  await review.save();
   return res
     .status(200)
     .send({ message: "Comment " + newCommentCount + " posted successfully" });

@@ -5,67 +5,78 @@ import { useParams } from "react-router-dom";
 import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import { Buffer } from "buffer";
-import Popup from 'reactjs-popup';
+import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
-import 'reactjs-popup/dist/index.css';
+import "reactjs-popup/dist/index.css";
 
-const ShowReview = ( {submitComment, loggedIn} ) => {
+const ShowReview = ({ submitComment, loggedIn }) => {
   const [review, setReview] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [imageDisplay, setImageDisplay] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { id } = useParams();
   const [comments, setComments] = useState([]);
 
-  const [response, setResponse] = useState('');
+  const [response, setResponse] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     submitComment(id, response);
     console.log(response); // For now
-  }
+  };
   const typeInComment = () => {
     if (!loggedIn) {
-      setOpenPopup(true);}
+      setOpenPopup(true);
+    }
+  };
+
+  async function getImage() {
+    const fullUrl = `http://localhost:5555/${review.imageUrl}`;
+    try {
+      const response = axios.get(fullUrl, {
+        responseType: "arraybuffer",
+      });
+
+      // Convert the array buffer to a base64-encoded string
+      const base64String = btoa(
+        new Uint8Array(response.data).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+
+      // Construct the data URL
+      const dataUrl = `data:${response.headers["Content-Type"]};base64,${base64String}`;
+
+      setImageUrl(dataUrl);
+    } catch (error) {
+      console.error("Error fetching image:", error);
+    }
   }
 
-  useEffect(() => {
-    setLoading(true);
-    axios
+  async function setReviewAndComments() {
+    console.log("i'm here");
+    await axios
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
         setReview(res.data);
         setComments(res.data.comments);
         setLoading(false);
         setComments(res.data.comments);
-
-        const fullUrl = `http://localhost:5555/${res.data.imageUrl}`;
-        try {
-          const response = axios.get(fullUrl, {
-            responseType: "arraybuffer",
-          });
-
-          // Convert the array buffer to a base64-encoded string
-          const base64String = btoa(
-            new Uint8Array(response.data).reduce(
-              (data, byte) => data + String.fromCharCode(byte),
-              ""
-            )
-          );
-
-          // Construct the data URL
-          const dataUrl = `data:${response.headers["Content-Type"]};base64,${base64String}`;
-
-          setImageUrl(dataUrl);
-        } catch (error) {
-          console.error("Error fetching image:", error);
-        }
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
+    await getImage();
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    console.log("1");
+    setReviewAndComments();
   }, []);
 
   // const ImageComponent = (review) => {
@@ -131,25 +142,38 @@ const ShowReview = ( {submitComment, loggedIn} ) => {
               {"Updated at: " + review.updatedAt}
             </div>
             <div className="reviews-header">Comments</div>
+            <div className="error_message">{errorMessage}</div>
             <div className="comments-grid">
-            <div className="comment-textbox">
-                    <form onSubmit={handleSubmit}>
-                        <textarea
-                            className="w-full p-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline"
-                            rows="4"
-                            placeholder="Write your comment..."
-                            value={response}
-                            onClick={typeInComment}
-                            onChange={(e) => setResponse(e.target.value)}
-                        />
-                        {openPopup && <Popup open={openPopup} closeOnDocumentClick onClose={() => setOpenPopup(false)}>
-                          <div className="popup-content">
-                              <p>Please sign in to comment.</p>
-                              {<Button name="signin-button" style={{ width: "120px" }} href="/login">
-                                Sign in
-                              </Button>}
-                          </div>
-                        </Popup>}
+              <div className="comment-textbox">
+                <form onSubmit={handleSubmit}>
+                  <textarea
+                    className="w-full p-2 text-gray-700 border rounded-lg focus:outline-none focus:shadow-outline"
+                    rows="4"
+                    placeholder="Write your comment..."
+                    value={response}
+                    onClick={typeInComment}
+                    onChange={(e) => setResponse(e.target.value)}
+                  />
+                  {openPopup && (
+                    <Popup
+                      open={openPopup}
+                      closeOnDocumentClick
+                      onClose={() => setOpenPopup(false)}
+                    >
+                      <div className="popup-content">
+                        <p>Please sign in to comment.</p>
+                        {
+                          <Button
+                            name="signin-button"
+                            style={{ width: "120px" }}
+                            href="/login"
+                          >
+                            Sign in
+                          </Button>
+                        }
+                      </div>
+                    </Popup>
+                  )}
                   <div className="text-right">
                     <button
                       type="submit"

@@ -65,6 +65,25 @@ const App = () => {
       });
   }
 
+  async function submitComment(reviewID, comment) {
+    if (login) {
+      await axios.post(`http://localhost:5555/reviews/${reviewID}/comment`, 
+      {
+        text: comment
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((error) => {
+        console.error("Error storing comment:", error)
+      })
+    } else {
+      console.error("Empty comment")
+    }
+  }
+  
   const setMyRestaurant = (restaurant) => {
     setRestaurantToReview(restaurant);
   };
@@ -168,7 +187,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/reviews/details/:id" element={<ShowReview />} />
+        <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login}/>} />
         <Route path="/reviews/me" element={<MyReviews getMyReviews={getMyReviews}/>} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />

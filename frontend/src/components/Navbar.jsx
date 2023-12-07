@@ -6,6 +6,7 @@ import { LiaSearchSolid } from "react-icons/lia";
 import { AiFillHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { Buffer } from "buffer";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function debounce(func, wait) {
@@ -34,6 +35,8 @@ export default function Navbar({
   const [searchDropdown, setSearchDropdown] = useState(false);
   const [reviewRedirect, setReviewRedirect] = useState("/login");
   const [query, setQuery] = useState("");
+
+  const navigate = useNavigate();
 
   const [searchResults, setSearchResults] = useState({
     restaurants: [],
@@ -127,17 +130,20 @@ export default function Navbar({
                 e.stopPropagation(); // Prevent the click from bubbling to document
                 searchMenu();
               }}
-              onKeyDown={event => {
-                console.log(event.key)
-                if (event.key === 'Enter') {
-                  navigation.navigate(`/search-results/${query}`);
+              onKeyDown={(event) => {
+                console.log(event.key);
+                if (event.key === "Enter") {
+                  navigate(`/search-results/${query}`);
                 }
               }}
             />
-            <LiaSearchSolid className="search-icon" onClick={() => {
-              // setPlaceholderText(query);
-              navigation.navigate(`/search-results/${query}`);
-            }}/>
+            <LiaSearchSolid
+              className="search-icon"
+              onClick={() => {
+                // setPlaceholderText(query);
+                navigate(`/search-results/${query}`);
+              }}
+            />
             {searchDropdown && (
               <div className="search-dropdown">
                 {searchResults.restaurants.length > 0 && (
@@ -160,9 +166,19 @@ export default function Navbar({
                     ))}
                   </div>
                 )}
+                {searchResults.users.length > 0 && (
+                  <div>
+                    <h3>Users</h3>
+                    {searchResults.users.map((user, index) => (
+                      <Link to={`/users/${user._id}`} key={index}>
+                        <p>{user.username}</p>
+                      </Link>
+                    ))}
+                  </div>
+                )}
                 {searchResults.restaurants.length === 0 &&
-                  searchResults.restaurants.length === 0 &&
-                  searchResults.restaurants.length === 0 && (
+                  searchResults.reviews.length === 0 &&
+                  searchResults.users.length === 0 && (
                     <p>No results found</p>
                   )}
               </div>
