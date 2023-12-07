@@ -8,6 +8,8 @@ import { Restaurant } from "../models/Restaurant.js";
 // @access Public
 const getAllReviews = asyncHandler(async (req, res) => {
   const reviews = await Review.find({})
+    .populate("user").lean()
+    .populate("comments").lean()
   return res.status(202).json({
     count: reviews.length,
     data: reviews,
