@@ -11,7 +11,7 @@ import "reactjs-popup/dist/index.css";
 
 const ShowReview = ({ submitComment, loggedIn }) => {
   const [review, setReview] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [imageDisplay, setImageDisplay] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { id } = useParams();
@@ -19,8 +19,9 @@ const ShowReview = ({ submitComment, loggedIn }) => {
 
   const [response, setResponse] = useState("");
   const [openPopup, setOpenPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     submitComment(id, response);
     console.log(response); // For now
@@ -141,6 +142,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
               {"Updated at: " + review.updatedAt}
             </div>
             <div className="reviews-header">Comments</div>
+            <div className="error_message">{errorMessage}</div>
             <div className="comments-grid">
               <div className="comment-textbox">
                 <form onSubmit={handleSubmit}>

@@ -163,4 +163,16 @@ body {
   color: black;
 }
 
+.error_message {
+  color: #dd5656;
+  line-height: 150%;
+  font-weight: 500;
+  letter-spacing: -0.023em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  top: 33%;
+  flex-direction: column;
+}
+
 
