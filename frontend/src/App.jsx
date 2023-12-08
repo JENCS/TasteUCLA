@@ -36,35 +36,33 @@ const App = () => {
     console.log(login);
   };
 
-  async function updateProfileInfo(picture, bio) {
-    console.log(token);
-    console.log(picture);
-    await axios.patch(
-      "http://localhost:5555/users/me",
-      {
-        imageUrl: picture,
-        bio: bio,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
+  async function updateProfileInfo(formData) {
+    console.log("I AM AT UPDATE PROFILE");
+    console.log(formData);
     await axios
-      .get("http://localhost:5555/users/me", {
+      .post("http://localhost:5555/users/me", formData, {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => {
-        setUserData(res.data);
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error);
+      .then(() => {
+        axios
+          .get("http://localhost:5555/users/me", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setUserData(res.data);
+            navigate("/");
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching reviews:", error);
+          });
       });
+    console.log("I HAVE PATCHED MYSELF");
   }
 
   async function submitComment(reviewID, comment) {

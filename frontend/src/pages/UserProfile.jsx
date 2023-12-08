@@ -6,7 +6,6 @@ import { Buffer } from "buffer";
 import axios from "axios";
 
 export default function UserProfile() {
-  const [file, setFile] = useState(null);
   const [username, setUsername] = useState("");
   const [bio, setBio] = useState();
   const [image, setImage] = useState(null);
@@ -28,6 +27,7 @@ export default function UserProfile() {
       .then((res) => {
         setUsername(res.data.username);
         setBio(res.data.bio);
+        setImage(res.data.imageUrl);
         //setLoading(false);
       })
       .catch((error) => {
@@ -42,40 +42,16 @@ export default function UserProfile() {
   // const b64 = Buffer.from(userData.profile_picture).toString("base64");
   // setImageDisplay(`data:${mimeType};base64,${b64}`);
 
-  function uploadImage(e) {
-    console.log(e.target.files);
-    setFile(URL.createObjectURL(e.target.files[0]));
-    const promise = e.target.files[0].arrayBuffer();
-    promise.then((value) => {
-      console.log(value);
-      setImage(Buffer.from(value));
-      console.log(typeof image);
-    });
-  }
-  function removeImage(e) {
-    setFile(null);
-  }
-  function saveProfile() {
-    if (file) {
-      updateProfileInfo(image, bio);
-    } else {
-      updateProfileInfo(null, bio);
-    }
-  }
-  function deleteAccount() {
-    console.log("deleting user...");
-  }
-
   return (
     <div className="profile-page">
       <div className="user-info">
         <h1>{username}</h1>
       </div>
       <div className="img-container-profile">
-        {!file && <CgProfile className="default-profile-img" />}
-        {file && (
+        {!image && <CgProfile className="default-profile-img" />}
+        {image && (
           <div className="crop-img">
-            <img src={file} className="jiwejfijwe" />
+            <img src={image} className="jiwejfijwe" />
           </div>
         )}
       </div>

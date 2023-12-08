@@ -1,23 +1,28 @@
-import express from "express"
-import * as userController from "../controllers/userController.js"
-import verifyJWT from "../middleware/verifyJWT.js"
-import { profileImageUpload } from "../middleware/imageHandler.js"
+import express from "express";
+import * as userController from "../controllers/userController.js";
+import verifyJWT from "../middleware/verifyJWT.js";
+import { profileImageUpload } from "../middleware/imageHandler.js";
 
-const router = express.Router()
+const router = express.Router();
 
 // @route /users
-router.route('/')
-    .get(userController.getAllUsers)
-    .post(userController.createUser)
+router
+  .route("/")
+  .get(userController.getAllUsers)
+  .post(userController.createUser);
 
 // @route /users/me
-router.route('/me')
-    .get(verifyJWT, userController.getProfile)
-    .patch(verifyJWT, profileImageUpload.single('image'), userController.updateUser)
-    .delete(verifyJWT, userController.deleteUser)
+router
+  .route("/me")
+  .get(verifyJWT, userController.getProfile)
+  .post(
+    verifyJWT,
+    profileImageUpload.single("imageUrl"),
+    userController.updateUser
+  )
+  .delete(verifyJWT, userController.deleteUser);
 
 // @route /users/:id
-router.route('/:id')
-    .get(userController.getUser)
+router.route("/:id").get(userController.getUser);
 
-export default router
+export default router;
