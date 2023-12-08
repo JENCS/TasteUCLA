@@ -48,7 +48,7 @@ const updateUser = asyncHandler(async (req, res) => {
   if (bio) {
     user.bio = bio;
   }
-  user.imageUrl = req.file ? req.file.path : null
+  user.imageUrl = req.file ? "http://localhost:5555/" + req.file.path : null
   const updatedUser = await user.save();
   res.json({ message: `${updatedUser.username} updated` });
 });
