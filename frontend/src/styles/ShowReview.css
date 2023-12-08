@@ -26,10 +26,13 @@ body {
 }
 
 .review-image {
-  max-width: 500px;
-  max-height: 500px;
+
   margin-right: 60px;
   margin-top: 30px;
+  width: 10%;
+  height: 10%;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .row {
@@ -68,15 +71,27 @@ body {
 
 .restaurant-logo {
   position: absolute;
-  margin-left: 75vw;
+  margin-left: 50vw;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding-right: 150px;
 }
 
 .restaurant-logo > img {
-  width: 250px;
+  max-width: 800px;
 }
+
+/* .restaurant-logo {
+  position: absolute;
+  margin-left: 50vw;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 150px;
+}
+
+.restaurant-logo > img {
+  max-width: 800px;
+} */
 
 .comments-grid,
 .user-comments-grid {
@@ -175,7 +190,7 @@ body {
   display: flex;
   position: relative;
   font-size: 15px;
-  justify-content: end;
+  justify-content: flex-end;
   padding-right: 8px;
 }
 

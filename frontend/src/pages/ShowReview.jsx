@@ -85,13 +85,19 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
         <div className="show-review-page">
           <div className="restaurant-logo">
             <img
-              src={"/logos/" + restaurant._id + ".png"}
-              alt="Restaurant image"
+              src={review.imageUrl}
+              alt="Review image"
+              style={{ width: '500px', height: '500px', objectFit: 'cover', borderRadius: '8px' }}
             />
           </div>
+          <img 
+                src={"/logos/" + restaurant._id + ".png"}
+                style={{ width: '200px', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
+              />
           <div className="row">
             <div className="container">
-              <img src={review.imageUrl}/>
+              
+
               <div className="restaurant-name">
                 <Link to={"/locations/" + restaurant._id}>
                   <p>{review.restaurant.name}</p>
