@@ -11,7 +11,15 @@ export default function MyReviews({ getMyReviews }) {
   useEffect(() => {
     getMyReviews()
       .then((res) => {
-        setReviews(res);
+        let reviews = res;
+        reviews.map((review, index) => {
+          console.log(review.createdAt)
+          let creationTime = new Date(review.createdAt);
+          let updateTime = new Date(review.updatedAt);
+          review.createdAt = creationTime.toString();
+          review.updatedAt = updateTime.toString();
+        })
+        setReviews(reviews);
         setLoading(false);
       })
   }, []);
@@ -20,8 +28,8 @@ export default function MyReviews({ getMyReviews }) {
     <div className={classes.root}>
       <div className="my-reviews-container">
         <div className="my-reviews-header">
-          <h1 className={classes.myreviews_title}>My Reviews</h1>
-          <div className="home-logo"></div>
+          <div className={classes.myreviews_title}>My Reviews</div>
+          <div className={classes.home_logo}></div>
         </div>
         <div className={classes.results_container}>
           {loading ? (
@@ -38,19 +46,21 @@ export default function MyReviews({ getMyReviews }) {
                         <div className={classes.section_grid_item_col}>
                           <div>
                             {review.imageUrl !== null ? (
-                              <img className={classes.grid_item_img} src={"/tasteUCLA.png"/*review.imageUrl*/} alt={"Image failed"}/>
+                              <img className={classes.grid_item_img} src={review.imageUrl} alt={"Image failed"}/>
                             ) : (
                               <div style={{
-                                margin: "10px",
-                                offset: "10px",
-                                width: "20px",
-                                height: "20px",
+                                margin: "30px",
+                                width: "75px",
+                                height: "75px",
+                                border: "solid 2px #000000",
                                 backgroundColor: "rgb(" + ((Math.random() * 100) + 155) + "," + ((Math.random() * 100) + 155) + "," + ((Math.random() * 100) + 155) + ")"
                               }} className="home-logo"></div>
                             )}
                           </div>
                           <div>
                             <div className={classes.grid_item_title}>{review.title}</div>
+                            <div className={classes.grid_item_timestamp}>{"Created: " + review.createdAt}</div>
+                            <div className={classes.grid_item_timestamp}>{"Updated: " + review.createdAt}</div>
                             <div className={classes.grid_item_text}>{review.text}</div>
                           </div>
                         </div>
