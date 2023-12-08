@@ -45,6 +45,9 @@ const Home = () => {
                 <h3>{review.title}</h3>
                 <p className="review-rating">
                   Rating by {review.user.username}: {review.rating}
+                  <text style={{ color: "gold" }}>
+                  {"★ "}
+                  </text>
                 </p>
                 <p>{review.text}</p>
               </Link>
