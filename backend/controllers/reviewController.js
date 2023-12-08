@@ -8,8 +8,12 @@ import { Restaurant } from "../models/Restaurant.js";
 // @access Public
 const getAllReviews = asyncHandler(async (req, res) => {
   const reviews = await Review.find({})
-    .populate("user").lean()
-    .populate("comments").lean()
+    .populate("restaurant")
+    .lean()
+    .populate("user")
+    .lean()
+    .populate("comments")
+    .lean();
   return res.status(202).json({
     count: reviews.length,
     data: reviews,
@@ -58,9 +62,12 @@ const createReview = asyncHandler(async (req, res) => {
 const getReview = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const review = await Review.findById(id)
-    .populate("restaurant").lean()
-    .populate("user").lean()
-    .populate("comments.user").lean()
+    .populate("restaurant")
+    .lean()
+    .populate("user")
+    .lean()
+    .populate("comments.user")
+    .lean();
   return res.status(202).json(review);
 });
 
@@ -98,7 +105,7 @@ const deleteReview = asyncHandler(async (req, res) => {
 // @access Private
 const createComment = asyncHandler(async (req, res) => {
   const username = req.user;
-  const user = await User.findOne({ username }).lean()
+  const user = await User.findOne({ username }).lean();
   if (!user) {
     return res.status(400).json({ message: "User not found" });
   }
@@ -113,8 +120,8 @@ const createComment = asyncHandler(async (req, res) => {
   const data = {
     user: user._id,
     body: req.body.text,
-  }
-  const comment = await Comment.create(data)
+  };
+  const comment = await Comment.create(data);
   var newCommentCount = review.comments.push(comment);
   await review.save();
   return res

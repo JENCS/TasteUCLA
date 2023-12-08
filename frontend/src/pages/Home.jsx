@@ -7,7 +7,7 @@ import "../styles/Home.css";
 const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [restaurants, setRestaurants] = useState([]);
+  // const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
     axios
@@ -21,16 +21,16 @@ const Home = () => {
         setLoading(false);
       });
 
-    axios
-      .get("http://localhost:5555/locations")
-      .then((res) => {
-        console.log(res.data.data);
-        setRestaurants(res.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching restaurants:", error);
-        setLoading(false);
-      });
+    // axios
+    //   .get("http://localhost:5555/locations")
+    //   .then((res) => {
+    //     console.log(res.data.data);
+    //     setRestaurants(res.data.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching restaurants:", error);
+    //     setLoading(false);
+    //   });
   }, []);
 
   return (
@@ -47,19 +47,21 @@ const Home = () => {
                 key={review._id}
                 className="review-card"
               >
-                {review.imageUrl && (
-                  <img
-                    src={"http://localhost:5555/" + review.imageUrl}
-                    alt={"image can't load"}
-                  />
-                )}
                 {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
-                <h1>{review.restaurant}</h1>
+                <h1 className="restaurant-name">{review.restaurant.name}</h1>
                 <h3>{review.title}</h3>
                 <div className="review-rating">
                   <p>{review.user.username}</p>
                   <p>Rating: {review.rating} </p>
                 </div>
+                {review.imageUrl && (
+                  <img
+                    src={"http://localhost:5555/" + review.imageUrl}
+                    alt={"image can't load"}
+                    className="review-image"
+                  />
+                )}
+
                 <p className="review-description">{review.text}</p>
               </Link>
             ))}

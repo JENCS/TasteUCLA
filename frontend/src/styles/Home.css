@@ -34,12 +34,16 @@
 }
 
 .review-card {
-  background-color: #aee7ff;
+  background-color: #e2f6ff;
   border: 6px solid #142954;
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
   min-height: 300px;
+}
+
+.review-card:hover {
+  background-color: #c7edff;
 }
 
 .review-card h3 {
@@ -67,6 +71,15 @@
 .review-description {
   text-align: left;
   margin-top: 30px;
+}
+
+.restaurant-name {
+  text-align: left;
+  font-size: 20px;
+}
+
+.review-image {
+  text-align: center;
 }
 
 /* .review-button {
