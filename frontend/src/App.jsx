@@ -17,6 +17,7 @@ import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
 import SearchResults from "./pages/SearchResults.jsx";
 import axios from "axios";
+import BackButton from "./components/BackButton.jsx";
 
 // get(path.join("http://localhost:5555", imageUrl))
 
@@ -42,7 +43,7 @@ const App = () => {
     await axios.patch(
       "http://localhost:5555/users/me",
       {
-        imageUrl: picture,
+        profile_picture: picture,
         bio: bio,
       },
       {
@@ -60,7 +61,6 @@ const App = () => {
       })
       .then((res) => {
         setUserData(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.error("Error fetching reviews:", error);
@@ -168,7 +168,7 @@ const App = () => {
         reviews = res.data.reviews;
       })
       .catch((error) => {
-        console.error("Error fetching reviews:", error);
+        console.error("Error fetching reviews:", error)
       });
     return reviews;
   }
@@ -181,6 +181,7 @@ const App = () => {
         changeLoginState={changeLoginState}
         logoutUser={logoutUser}
       />
+      <BackButton/>
       <Routes>
         <Route path="/" element={<Home loggedIn={login} />} />
         <Route
@@ -194,16 +195,8 @@ const App = () => {
             />
           }
         />
-        <Route
-          path="/reviews/details/:id"
-          element={
-            <ShowReview submitComment={submitComment} loggedIn={login} />
-          }
-        />
-        <Route
-          path="/reviews/me"
-          element={<MyReviews getMyReviews={getMyReviews} />}
-        />
+        <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login} userData={userData}/>} />
+        <Route path="/reviews/me" element={<MyReviews getMyReviews={getMyReviews}/>} />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route path="/profile/:id" element={<UserProfile />} />
