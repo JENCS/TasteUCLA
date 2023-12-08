@@ -133,12 +133,19 @@ body {
 }
 
 .comments_profile_pic {
-  height: 125px;
-  width: 125px;
-  background-color: #bbb;
+  height: auto;
+  width: 120px;
   border-radius: 50%;
   display: inline-block;
-  top: 120px;
+  top: 70px;
+  clip-path: circle();
+}
+
+.comments_default_profile_pic {
+  font-size: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
 }
 
 .comments_username {
