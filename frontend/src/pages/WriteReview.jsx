@@ -210,7 +210,7 @@ const WriteReview = ({
   };
 
   return (
-    <div>
+    <div className="p-4 mt-16">
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
