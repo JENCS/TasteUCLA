@@ -5,6 +5,7 @@ import Spinner from "../components/Spinner";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowDown } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { Buffer } from "buffer";
 import { display } from "@mui/system";
@@ -13,7 +14,12 @@ import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
 import "reactjs-popup/dist/index.css";
 
-const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, loggedIn }) => {
+const WriteReview = ({
+  createReview,
+  restaurantToReview,
+  setMyRestaurant,
+  loggedIn,
+}) => {
   // const [title, setTitle] = useState("");
   // const [author, setAuthor] = useState("");
   // const [photo, setPhoto] = useState();
@@ -82,17 +88,19 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, logged
   const [openPopUp, setOpenPopUp] = useState(false);
 
   useEffect(() => {
-    if (!loggedIn){
+    if (!loggedIn) {
       setOpenPopUp(true);
     }
     const fetchRestaurants = async () => {
       try {
-        const rest = await axios.get('http://localhost:5555/locations');
+        const rest = await axios.get("http://localhost:5555/locations");
         let fetchedRestaurants = rest.data.data;
 
         setSelectedRestaurant("");
         if (restaurantToReview) {
-          const foundRestaurant = fetchedRestaurants.find(r => r.name === restaurantToReview);
+          const foundRestaurant = fetchedRestaurants.find(
+            (r) => r.name === restaurantToReview
+          );
           if (foundRestaurant) {
             restaurantToReview = "";
             //console.log("selected: ", selectedRestaurant, "found", foundRestaurant.name)
@@ -111,13 +119,12 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, logged
 
         setRestaurants(fetchedRestaurants);
       } catch (error) {
-        console.error('Error fetching restaurants:', error);
+        console.error("Error fetching restaurants:", error);
       }
     };
     fetchRestaurants();
     //restaurantToReview = "";
     console.log(preSelected);
-
   }, [restaurantToReview]);
 
   /*
@@ -134,7 +141,7 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, logged
   */
 
   function getRestIndex(name, rests) {
-    const index = rests.findIndex(restaurant => restaurant.name === name);
+    const index = rests.findIndex((restaurant) => restaurant.name === name);
     return index;
   }
 
@@ -166,11 +173,18 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, logged
       formData.append("image", image);
     }
     //console.log("form", formData.get("restaurant"));
-    
+
     //console.log(title);
-    if (title.length == 0 || selectedRestaurant === '' || isNaN(rating) || text === '') {
+    if (
+      title.length == 0 ||
+      selectedRestaurant === "" ||
+      isNaN(rating) ||
+      text === ""
+    ) {
       //console.log("here!")
-      setErrorMessage("Please ensure all required fields are completed before submitting.")
+      setErrorMessage(
+        "Please ensure all required fields are completed before submitting."
+      );
       //return;
     } else {
       createReview(formData);
@@ -267,45 +281,42 @@ const WriteReview = ({ createReview, restaurantToReview, setMyRestaurant, logged
       </div>
       <div className="error_message">{errorMessage}</div>
       {openPopUp && (
-                    <Popup
-                      open={openPopUp}
-                      closeOnDocumentClick={false}
-                      //onClose={() => setOpenPopUp(false)}
-                    >
-                      <div className="popup-content">
-                        <p>Please sign in to comment.</p>
-                        {
-                          <Button
-                            name="signin-button"
-                            style={{ width: "120px" }}
-                            href="/login"
-                          >
-                            Sign in
-                          </Button>
-                        }
-                      </div>
-                    </Popup>
-                    )}
+        <Popup
+          open={openPopUp}
+          closeOnDocumentClick={false}
+          //onClose={() => setOpenPopUp(false)}
+        >
+          <div className="popup-content">
+            <p>Please sign in to comment.</p>
+            {
+              <Button
+                name="signin-button"
+                style={{ width: "120px" }}
+                href="/login"
+              >
+                Sign in
+              </Button>
+            }
+          </div>
+        </Popup>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="restaurant-dropdown">
           <select
             value={selectedRestaurant}
-            onChange={(e) => 
-                setSelectedRestaurant(e.target.value)
-              }
+            onChange={(e) => setSelectedRestaurant(e.target.value)}
             className="restaurant-select"
           >
-            <option value="">
-              Select a Restaurant
-            </option> 
+            <option value="">Select a Restaurant</option>
             {restaurants.map((restaurant, index) => (
               //(console.log(index, "rest: ", restaurant))
-              (<option key={index} value={restaurant.name}>
+              <option key={index} value={restaurant.name}>
                 {restaurant.name}
-              </option>)
+              </option>
             ))}
           </select>
+          {/* <IoIosArrowDown className="dropdown-arrow" /> */}
         </div>
         <div className="title-rating">
           <div className="title-container">
