@@ -7,6 +7,7 @@ import "../styles/Home.css";
 const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
     axios
@@ -17,6 +18,17 @@ const Home = () => {
       })
       .catch((error) => {
         console.error("Error fetching reviews:", error);
+        setLoading(false);
+      });
+
+    axios
+      .get("http://localhost:5555/locations")
+      .then((res) => {
+        console.log(res.data.data);
+        setRestaurants(res.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching restaurants:", error);
         setLoading(false);
       });
   }, []);
@@ -45,11 +57,13 @@ const Home = () => {
                   />
                 )} */}
                 {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
+                <h1>{review.restaurant}</h1>
                 <h3>{review.title}</h3>
-                <p className="review-rating">
-                  Rating by {review.user.username}: {review.rating}
-                </p>
-                <p>{review.text}</p>
+                <div className="review-rating">
+                  <p>{review.user.username}</p>
+                  <p>Rating: {review.rating} </p>
+                </div>
+                <p className="review-description">{review.text}</p>
               </Link>
             ))}
           </div>

@@ -29,30 +29,28 @@
 .reviews-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(180px, 1fr));
-  gap: 1rem;
-  padding: 30px 50px;
+  gap: 6rem;
+  padding: 30px 100px;
 }
 
 .review-card {
-  border: 1px solid #ccc;
+  background-color: #aee7ff;
+  border: 6px solid #142954;
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
+  min-height: 300px;
 }
 
 .review-card h3 {
   margin: 0.5rem 0;
-  font-size: 1.2rem;
+  font-size: 28px;
   text-align: left;
 }
 
 .review-card p {
   font-size: 1rem;
-  color: #666;
-}
-
-.review-card .review-rating {
-  text-align: right;
+  color: rgb(0, 0, 0);
 }
 
 .review-card img {
@@ -61,7 +59,17 @@
   border-radius: 8px;
 }
 
-.review-button {
+.review-rating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-description {
+  text-align: left;
+  margin-top: 30px;
+}
+
+/* .review-button {
   background-color: #0044cc;
   color: #5988e7;
   border: none;
@@ -69,4 +77,4 @@
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   cursor: pointer;
-}
+} */
