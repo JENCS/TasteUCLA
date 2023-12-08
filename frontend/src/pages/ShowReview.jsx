@@ -9,7 +9,7 @@ import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
 import "reactjs-popup/dist/index.css";
 
-const ShowReview = ({ submitComment, loggedIn }) => {
+const ShowReview = ({ submitComment, loggedIn, userData }) => {
   const [review, setReview] = useState({});
   const [loading, setLoading] = useState(true);
   const [restaurant, setRestaurant] = useState({});
@@ -85,13 +85,19 @@ const ShowReview = ({ submitComment, loggedIn }) => {
         <div className="show-review-page">
           <div className="restaurant-logo">
             <img
-              src={"/logos/" + restaurant._id + ".png"}
-              alt="Restaurant image"
+              src={review.imageUrl}
+              alt="Review image"
+              style={{ width: '500px', height: '500px', objectFit: 'cover', borderRadius: '8px' }}
             />
           </div>
+          <img 
+                src={"/logos/" + restaurant._id + ".png"}
+                style={{ width: '200px', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
+              />
           <div className="row">
             <div className="container">
-              <img src={review.imageUrl}/>
+              
+
               <div className="restaurant-name">
                 <Link to={"/locations/" + restaurant._id}>
                   <p>{review.restaurant.name}</p>
@@ -102,9 +108,38 @@ const ShowReview = ({ submitComment, loggedIn }) => {
               <div className="review-username">
                 <p className="text-xl mr-4 mt-2 text-gray-500">
                   Review written by{" "}
-                  <Link to={"/profile/" + review.user._id}>
+                  {/* <Link to={"/profile/" + review.user._id}>
                     <a className="underline">{review.user.username}</a>
-                  </Link>
+                  </Link> */}
+                  {/* Redirect to profile page if the user search him/herself */}
+                      {loggedIn ? (
+                        review.user._id === userData._id ? (
+                          <Link to={`/profile`}
+                                style={{ textDecoration: 'underline', color: 'grey' }}
+                                onMouseEnter={e => (e.target.style.textDecoration = 'underline', e.target.style.color = 'blue')}
+                                onMouseLeave={e => (e.target.style.textDecoration = 'none', e.target.style.color = 'initial')}
+                                >
+                            {review.user.username}
+                          </Link>
+                        ) : (
+                          <Link to={`/profile/${review.user._id}`} 
+                                style={{ textDecoration: 'underline', color: 'grey' }}
+                                onMouseEnter={e => (e.target.style.textDecoration = 'underline', e.target.style.color = 'blue')}
+                                onMouseLeave={e => (e.target.style.textDecoration = 'none', e.target.style.color = 'initial')}
+                          >
+                            {review.user.username}
+                          </Link>
+                        )
+                      ) : (
+                        <Link to={`/profile/${review.user._id}`}
+                        style={{ textDecoration: 'underline', color: 'grey' }}
+                        onMouseEnter={e => (e.target.style.textDecoration = 'underline', e.target.style.color = 'blue')}
+                        onMouseLeave={e => (e.target.style.textDecoration = 'none', e.target.style.color = 'initial')}
+                        >
+                          {review.user.username}
+                        </Link>
+                      )}
+                  
                 </p>
               </div>
             </div>

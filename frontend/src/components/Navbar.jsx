@@ -8,6 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { Buffer } from "buffer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useRef } from 'react';
 
 function debounce(func, wait) {
   let timeout;
@@ -35,6 +36,9 @@ export default function Navbar({
   const [searchDropdown, setSearchDropdown] = useState(false);
   const [reviewRedirect, setReviewRedirect] = useState("/login");
   const [query, setQuery] = useState("");
+  
+  //for profile
+  const menuRef = useRef();
 
   const navigate = useNavigate();
 
@@ -53,6 +57,12 @@ export default function Navbar({
   const handleSearchInput = (event) => {
     setSearchInput(event.target.value);
   };
+
+  const handleClickOutsideProfile = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setProfileDropdown(false);
+    }
+  }
 
   const search = () => {
     console.log(query);
@@ -107,6 +117,20 @@ export default function Navbar({
 
     return () => {
       document.removeEventListener("click", closeDropdown);
+    };
+  }, []);
+
+
+  //event listener for profile menu
+  useEffect(() => {
+    // const closeProfile = () => {
+    //   setProfileDropdown(false);
+    // };
+
+    document.addEventListener("mousedown", handleClickOutsideProfile);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideProfile);
     };
   }, []);
 
@@ -216,14 +240,18 @@ export default function Navbar({
                   }
                   className="profile-image-icon"
                   onClick={() => profileMenu()}
+                  ref={menuRef}
                 />
               )}
-              {!userData.profile_picture && (
+              {
+              !userData.profile_picture && (
                 <CgProfile
                   className="profile-icon"
                   onClick={() => profileMenu()}
+                  ref={menuRef}
                 />
               )}
+              
             </>
           )}
           {!loggedIn && (
@@ -239,7 +267,7 @@ export default function Navbar({
         </div>
       </div>
       {profileDropdown && (
-        <div className="profile-dropdown">
+        <div className="profile-dropdown" ref={menuRef}>
           <Link to="/profile">
             <p onClick={removeMenus}>Profile</p>
           </Link>

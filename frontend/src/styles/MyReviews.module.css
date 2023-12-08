@@ -11,10 +11,10 @@
   height: calc(100vh - 70px);
 }
 
-.home-logo{
+.home_logo{
   margin-left: 150px;
-  width: 40.5584px;
-  height: 39.6734px;
+  width: 40px;
+  height: 40px;
   background-color: #9747ff;
   transform: rotate(45deg);
 }
@@ -22,24 +22,19 @@
 .myreviews_title{
   margin-top: 100px;
   margin-left: 50px;
-  font-size: 50px;
+  font-size: 60px;
+  font-weight: 500;
   text-align: left;
 }
 
 .reviews_container{
-  background-color: #051d3113;
-  outline: #6776ff;
-  outline-style: solid;
-  outline-width: 1px;
-  overflow-x: hidden;
-  margin: 10px;
   margin-top: 100px;
   border-radius: 12px;
 }
 
 .section_grid{
   display: grid;
-  grid-template-columns: repeat(1, minmax(10px, 100000px));
+  grid-template-columns: repeat(2, minmax(10px, 2000px));
   margin: 10px;
 }
 
@@ -47,38 +42,59 @@
   display: flex;
   flex-basis: content;
   color: #ffffff;
-  background-color: #051d3120;
-  border: 1px solid #77cdff;
+  background-color: #e2f6ff;
+  border: 6px solid #142954;
   border-radius: 12px;
   padding: 5px;
   font-size: 14px;
-  margin: 5px;
+  margin: 25px;
+}
+
+.section_grid_item:hover{
+  background-color: #c7edff;
 }
 
 .section_grid_item_col{
   display: flex;
   text-overflow: ellipsis;
   overflow: hidden;
-  grid-template-columns: repeat(2, minmax(100px,600px));
+  grid-template-columns: repeat(2, minmax(100px,1000px));
 }
 
 .grid_item_text{
   color: #0477b9;
   font-size: 16px;
   overflow: hidden;
+  white-space: nowrap;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 .grid_item_title{
+  font-weight: 500;
   display: flex;
   color: #051d31;
-  font-size: 20px;
+  font-size: 30px;
   margin: 10px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.grid_item_timestamp{
+  display: flex;
+  color: #609ccc;
+  font-size: 12px;
+  font-style: italic;
+  margin: 5px;
+  margin-left: 10px;
 }
 
 .grid_item_img{
-  display: flex;
-  width: 200px;
-  height: 200px;
+  min-width: 100px;
+  max-width: 200px;
+  height: auto;
   margin: 5px;
   border-radius: 12px;
+  border: solid 2px #000000;
 }

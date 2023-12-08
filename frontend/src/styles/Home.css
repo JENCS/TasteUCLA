@@ -39,7 +39,11 @@
   border-radius: 12px;
   padding: 1rem;
   text-align: center;
-  min-height: 300px;
+  height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .review-card:hover {
@@ -58,9 +62,10 @@
 }
 
 .review-card img {
-  max-width: 100%;
-  height: auto;
+  width: 100%;
+  height: 50%;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .review-rating {
@@ -70,7 +75,10 @@
 
 .review-description {
   text-align: left;
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  flex-grow: 1;
+  overflow-y: scroll;
 }
 
 .restaurant-name {

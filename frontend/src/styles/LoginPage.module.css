@@ -43,7 +43,7 @@
 }
 
 .tasteucla_logo {
-  width: 270px;
+  width: 175px;
   margin-top: 70px;
 }
 
@@ -105,6 +105,22 @@ width: 89.5384px;
   width: 255.4289px;
   height: 7.5%;
   outline: solid 1px #9747ff;
+  outline-offset: 0px;
+}
+
+.hide_password_header {
+  position: absolute;
+  margin-left: auto;
+  margin-right: 20px;
+  top: 65%;
+  outline-offset: 0px;
+}
+
+.hide_password {
+  position: absolute;
+  margin-left: 120px;
+  margin-right: auto;
+  top: 66%;
   outline-offset: 0px;
 }
 

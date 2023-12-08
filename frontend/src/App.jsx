@@ -17,6 +17,7 @@ import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
 import SearchResults from "./pages/SearchResults.jsx";
 import axios from "axios";
+import BackButton from "./components/BackButton.jsx";
 
 // get(path.join("http://localhost:5555", imageUrl))
 
@@ -179,6 +180,7 @@ const App = () => {
         changeLoginState={changeLoginState}
         logoutUser={logoutUser}
       />
+      <BackButton />
       <Routes>
         <Route path="/" element={<Home loggedIn={login} />} />
         <Route
@@ -195,7 +197,11 @@ const App = () => {
         <Route
           path="/reviews/details/:id"
           element={
-            <ShowReview submitComment={submitComment} loggedIn={login} />
+            <ShowReview
+              submitComment={submitComment}
+              loggedIn={login}
+              userData={userData}
+            />
           }
         />
         <Route
