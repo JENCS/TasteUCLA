@@ -10,6 +10,7 @@ function SignUpPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [hide, setHide] = useState(true);
   const navigate = useNavigate();
 
   const createAccount = () => {
@@ -72,6 +73,9 @@ function SignUpPage() {
         <input
           name="password_input"
           value={password}
+          type={
+            hide ? "password" : "text"
+          }
           onChange={(input) => setPassword(input.target.value)}
           style={{
             width: "255.4289px",
@@ -87,6 +91,9 @@ function SignUpPage() {
         <input
           name="confirm_password_input"
           value={confirmPassword}
+          type={
+            hide ? "password" : "text"
+          }
           onChange={(input) => setConfirmPassword(input.target.value)}
           style={{
             width: "255.4289px",
@@ -95,6 +102,17 @@ function SignUpPage() {
             marginRight: "10px",
           }}
           maxLength="20"
+        />
+      </div>
+      <div className={classes.hide_password_header}>{"Show Password "}</div>
+      <div className={classes.hide_password}>
+        <input
+            id="check"
+            type="checkbox"
+            value={hide}
+            onChange={() =>
+                setHide((prev) => !prev)
+            }
         />
       </div>
       <div className={classes.createAccount}>Create Account</div>
