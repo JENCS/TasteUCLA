@@ -107,8 +107,8 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
                   </Link> */}
                   {/* Redirect to profile page if the user search him/herself */}
                       {loggedIn ? (
-                        review.user._id === userData.id ? (
-                          <Link to={`/profile/`}
+                        review.user._id === userData._id ? (
+                          <Link to={`/profile`}
                                 style={{ textDecoration: 'underline', color: 'grey' }}
                                 onMouseEnter={e => (e.target.style.textDecoration = 'underline', e.target.style.color = 'blue')}
                                 onMouseLeave={e => (e.target.style.textDecoration = 'none', e.target.style.color = 'initial')}
