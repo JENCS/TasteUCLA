@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import resets from "../styles/_resets.module.css";
 import classes from "../styles/LoginPage.module.css";
@@ -8,17 +8,39 @@ import axios from "axios";
 function LoginPage({ loginUser }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [hidden, setHidden] = useState("");
+  const [hide, setHide] = useState(true);
   const navigate = useNavigate();
 
   function callLoginFunction(user, pass) {
     loginUser(user, pass);
   }
 
+  function handleChange(input) {
+    setPass(input);
+
+    if (hide)
+      setHidden("•".repeat(pass.length));
+    console.log(pass)
+  }
+
+  useEffect(() => {
+    function handleChange(input) {
+      setPass(input);
+  
+      if (hide)
+        setHidden("•".repeat(pass.length));
+      console.log(pass)
+    }
+  }, [])
+
+
   return (
     <div className={`${resets.clapyResets} ${classes.root}`}>
       <img src="/tasteUCLA.png" className={classes.tasteucla_logo} />
       <div className={classes.username}>Username</div>
       <div className={classes.username_textbox}>
+      <div>
         <input
           name="username_input"
           value={user}
@@ -32,19 +54,34 @@ function LoginPage({ loginUser }) {
           maxLength="20"
         />
       </div>
+      </div>
       <div className={classes.password}>Password</div>
       <div className={classes.password_textbox}>
         <input
-          name="password_input"
-          value={pass}
-          onChange={(input) => setPass(input.target.value)}
-          style={{
-            width: "255.4289px",
-            outline: "none",
-            marginLeft: "10px",
-            marginRight: "10px",
-          }}
-          maxLength="20"
+            name="password_input"
+            value={pass}
+            type={
+              hide ? "password" : "text"
+            }
+            onChange={(input) => setPass(input.target.value)}
+            style={{
+              width: "255.4289px",
+              outline: "none",
+              marginLeft: "10px",
+              marginRight: "10px",
+            }}
+            maxLength="20"
+          />
+      </div>
+      <div className={classes.hide_password_header}>{"Show Password "}</div>
+      <div className={classes.hide_password}>
+        <input
+            id="check"
+            type="checkbox"
+            value={hide}
+            onChange={() =>
+                setHide((prev) => !prev)
+            }
         />
       </div>
       <div className={classes.donTHaveAnAccount}>Don’t have an account?</div>
