@@ -66,7 +66,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
       <div className={classes.row}>
         <div className={classes.container}>
           <div className={classes.back_button}>
-            <BackButton destination="/locations" />
+            <BackButton />
           </div>
           <div className={classes.restaurant_name}>{restaurant.name}</div>
           <div className={classes.restaurant_location}>
