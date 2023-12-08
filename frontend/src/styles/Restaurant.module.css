@@ -130,6 +130,7 @@
   margin-left: 30px;
   margin-right: auto;
   font-size: 40px;
+  border: 0ch;
 }
 
 .reviews_grid {
@@ -138,6 +139,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 50px;
+  border: 0ch;
 }
 
 .reviews_grid_item {
@@ -146,6 +148,7 @@
   padding: 30px;
   font-size: 30px;
   margin-bottom: 50px;
+  border: 0ch;
 }
 
 .review_content {

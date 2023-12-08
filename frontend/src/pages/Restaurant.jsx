@@ -6,6 +6,7 @@ import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Buffer } from "buffer";
+import Button from "@mui/material/Button";
 
 function Restaurant({ loggedIn, setMyRestaurant }) {
   const [restaurant, setRestaurant] = useState({});
@@ -161,6 +162,16 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                     <div className={classes.created_time}>
                       {"Created at: " + review.createdAt}
                     </div>
+                    
+                    <Button
+                            name="review-button"
+                            style={{ width: "120px", 
+                                     paddingTop: "5px"
+                                    }}
+                            href={`/reviews/details/${review._id}`}
+                          >
+                            View Details
+                    </Button>
                   </div>
                 </div>
                   <div>
