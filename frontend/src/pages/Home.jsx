@@ -37,7 +37,7 @@ const Home = () => {
               >
                 {review.imageUrl && (
                   <img
-                    src={"http://localhost:5555/" + review.imageUrl}
+                    src={review.imageUrl}
                     alt={"image can't load"}
                   />
                 )}
