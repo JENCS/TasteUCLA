@@ -4,19 +4,19 @@ import { CgProfile } from "react-icons/cg";
 import { Buffer } from "buffer";
 
 export default function Profile({ userData, updateProfileInfo }) {
-  const [file, setFile] = useState(userData.profile_picture);
+  const [file, setFile] = useState(userData.imageUrl);
   const [username, setUsername] = useState(userData.username);
   const [bio, setBio] = useState(userData.bio);
   const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    if (userData.profile_picture) {
-      setFile(
-        "data:image/png;base64," +
-          Buffer.from(userData.profile_picture).toString("base64")
-      );
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (userData.imageUrl) {
+  //     setFile(
+  //       "data:image/png;base64," +
+  //         Buffer.from(userData.imageUrl).toString("base64")
+  //     );
+  //   }
+  // }, []);
 
   // "data:image/png;base64," + Buffer.from(userData.profile_picture).toString("base64")
 
@@ -25,14 +25,12 @@ export default function Profile({ userData, updateProfileInfo }) {
   // setImageDisplay(`data:${mimeType};base64,${b64}`);
 
   function uploadImage(e) {
-    console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
-    const promise = e.target.files[0].arrayBuffer();
-    promise.then((value) => {
-      console.log(value);
-      setImage(Buffer.from(value));
-      console.log(typeof image);
-    });
+    setImage(e.target.files[0]);
+    // const promise = e.target.files[0].arrayBuffer();
+    // promise.then((value) => {
+    //   setImage(Buffer.from(value));
+    // });
   }
   function removeImage(e) {
     setFile(null);

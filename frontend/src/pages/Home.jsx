@@ -7,6 +7,7 @@ import "../styles/Home.css";
 const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
     axios
@@ -19,6 +20,17 @@ const Home = () => {
         console.error("Error fetching reviews:", error);
         setLoading(false);
       });
+
+    // axios
+    //   .get("http://localhost:5555/locations")
+    //   .then((res) => {
+    //     console.log(res.data.data);
+    //     setRestaurants(res.data.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching restaurants:", error);
+    //     setLoading(false);
+    //   });
   }, []);
 
   return (
@@ -35,21 +47,24 @@ const Home = () => {
                 key={review._id}
                 className="review-card"
               >
+                {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
+                <h1 className="restaurant-name">{review.restaurant.name}</h1>
+                <h3>{review.title}</h3>
+                <div className="review-rating">
+                  <p>{review.user.username}</p>
+                  <p>
+                    Rating: {review.rating}{" "}
+                    <text style={{ color: "gold" }}>{"★ "}</text>
+                  </p>
+                </div>
                 {review.imageUrl && (
                   <img
                     src={review.imageUrl}
                     alt={"image can't load"}
+                    className="review-image"
                   />
                 )}
-                {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
-                <h3>{review.title}</h3>
-                <p className="review-rating">
-                  Rating by {review.user.username}: {review.rating}
-                  <text style={{ color: "gold" }}>
-                  {"★ "}
-                  </text>
-                </p>
-                <p>{review.text}</p>
+                <p className="review-description">{review.text}</p>
               </Link>
             ))}
           </div>
