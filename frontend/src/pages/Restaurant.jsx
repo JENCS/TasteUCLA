@@ -147,7 +147,13 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                   </div>
                   <div className={classes.rating_desc_container}>
                     <div className={classes.review_image}>
-                      <img src={""} width={"300px"} />
+                      {review.imageUrl && (
+                        <img
+                          src={review.imageUrl}
+                          alt={"image can't load"}
+                          className="review-image"
+                        />
+                      )}
                     </div>
                     <div className={classes.review_rating}>
                       {"Rating: " + review.rating}
