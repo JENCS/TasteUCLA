@@ -38,6 +38,7 @@ REFRESH_TOKEN_SECRET=<TOKEN 2 HERE>
 ```bash
 $ cd TasteUCLA/frontend
 $ npm install
+$ npm run build
 $ npm run preview
 ```
 
