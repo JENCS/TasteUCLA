@@ -47,15 +47,12 @@ const Home = () => {
                 key={review._id}
                 className="review-card"
               >
-                {/* {review.image && (
+                {review.imageUrl && (
                   <img
-                    src={
-                      "data:image/png;base64," +
-                      Buffer.from(review.image).toString("base64")
-                    }
+                    src={"http://localhost:5555/" + review.imageUrl}
                     alt={"image can't load"}
                   />
-                )} */}
+                )}
                 {/* {review.imageUrl && <img src={review.imageUrl} alt="Review" />} */}
                 <h1>{review.restaurant}</h1>
                 <h3>{review.title}</h3>

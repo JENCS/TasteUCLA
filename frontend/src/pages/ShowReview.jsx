@@ -91,6 +91,7 @@ const ShowReview = ({ submitComment, loggedIn }) => {
           </div>
           <div className="row">
             <div className="container">
+              <img src={review.imageUrl}/>
               <div className="restaurant-name">
                 <Link to={"/locations/" + restaurant._id}>
                   <p>{review.restaurant.name}</p>
