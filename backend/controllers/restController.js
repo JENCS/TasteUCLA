@@ -20,8 +20,11 @@ const getRestaurant = asyncHandler(async (req, res) => {
     const restaurant = await Restaurant.findById(id)
         .populate({
             path: "reviews",
+            populate: {path: "comments.user"},
+        })
+        .populate({
+            path: "reviews",
             populate: {path: "user"},
-            populate: {path: "comments.user"}
         })
 
     return res.status(202).json(restaurant)

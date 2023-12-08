@@ -151,6 +151,7 @@
 .review_content {
   display: flex;
   flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .profile_pic {
@@ -165,9 +166,7 @@
 .username {
   color: #1e1e1e;
   line-height: 150%;
-  font-weight: 500;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  font-weight: bold;
   letter-spacing: -0.023em;
   display: flex;
   text-align: center;
@@ -195,7 +194,7 @@
 }
 
 .review_rating {
-  color: #d69c03;
+  color: "black";
   line-height: 150%;
   font-weight: 500;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
@@ -226,13 +225,34 @@
   font-weight: 500;
   font-family: "Georgia";
   letter-spacing: -0.023em;
-  display: flex;
   text-align: left;
   position: relative;
   font-size: 20px;
   inline-size: 1050px;
   overflow-wrap: break-word;
   margin-bottom: 20px;
+  width: 1050px;
+}
+
+
+.created_time, .updated_time{
+  color: rgb(172, 172, 172);
+  display: flex;
+  position: relative;
+  font-size: 15px;
+  justify-content: right;
+}
+
+.reviews-header{
+  color: #1e1e1e;
+  display: flex;
+  position: relative;
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+.comments{
+  position: relative;
 }
 
 .comments_header {
@@ -273,7 +293,6 @@
 .comments_profile_pic {
   height: 125px;
   width: 125px;
-  background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
   top: 70px;
@@ -282,7 +301,7 @@
 .comments_username {
   color: #1e1e1e;
   line-height: 150%;
-  font-weight: 500;
+  font-weight: bold;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   letter-spacing: -0.023em;
@@ -307,28 +326,21 @@
   font-weight: 500;
   font-family: "Georgia";
   letter-spacing: -0.023em;
-  display: flex;
   text-align: left;
   position: relative;
   font-size: 20px;
   inline-size: 1050px;
   overflow-wrap: break-word;
+  width: 1075px;
   margin-bottom: 20px;
   top: 20px;
 }
 
-.created_time_comment{
-  color: #1e1e1e;
+.created_time_comment, .updated_time_comment{
+  color: rgb(172, 172, 172);
   display: flex;
   position: relative;
   font-size: 15px;
-  margin-left: 180px;
-}
-
-.updated_time_comment{
-  color: #1e1e1e;
-  display: flex;
-  position: relative;
-  font-size: 15px;
-  margin-left: 180px;
+  justify-content: right;
+  margin-top: 10px;
 }
