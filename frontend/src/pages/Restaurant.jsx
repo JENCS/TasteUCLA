@@ -15,6 +15,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
   const [imageDisplay, setImageDisplay] = useState(null);
   const [reviewsLoading, setReviewsLoading] = useState(true);
   const [ratingLoading, setRatingsLoading] = useState(true);
+  const [commentsExist, setCommentsExist] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [images, setImages] = useState([]);
   const [I, setI] = useState(null);
@@ -24,6 +25,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
   function sendRestaurant() {
     setMyRestaurant(restaurant.name);
   }
+
 
   const getRestaurantRating = () => {
     let sum = 0;
@@ -77,10 +79,14 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
           ) : (
             <div className={classes.rating}>
               {"Overall Rating:  " +
-                restaurantRating +
-                " (" +
-                numOfReviews +
+                restaurantRating}
+                <div  style={{ color: "gold" }}>
+                {"★ "}
+                </div>
+                <div font-size = {"10px"} style={{ color: "gray" }}>
+                {"    ("+ numOfReviews +
                 " review(s))"}
+                </div>
             </div>
           )}
           <div className={classes.description}>{restaurant.description}</div>
@@ -114,7 +120,12 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
           />
         </div>
       </div>
-      <div className={classes.reviews_header}>Reviews:</div>
+      <div>
+        {reviews.length 
+          ? <div className={classes.reviews_header}>Reviews:</div>
+          : <div></div>
+        }
+      </div>
       <div className={classes.reviews_container}>
         {reviewsLoading ? (
           <Spinner />
@@ -127,7 +138,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                     <div className={classes.username}>{review.user.username}</div>
                     <div className={classes.profile_pic}>
                       <img
-                        src={""}
+                        src={"/tasteUCLA.png"}
                         border-radius={"50%"}
                         alt={"image can't load"}
                       />
@@ -139,40 +150,53 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                     </div>
                     <div className={classes.review_rating}>
                       {"Rating: " + review.rating}
+                      <div  style={{ color: "gold" }}>
+                        {"★ "}
+                      </div>
                     </div>
                     <div className={classes.review_title}>{review.title}</div>
                     <div className={classes.review_description}>
-                      {review.text}
+                      {""}
+                    </div>
+                    <div className={classes.created_time}>
+                      {"Created at: " + review.createdAt}
                     </div>
                   </div>
                 </div>
-                <div className={classes.comments_header}>
-                  {" "}
-                  Others have commented on your review...{" "}
-                </div>
-                <div className={classes.comments_grid}>
-                {review.comments.map((comment, index) => (
-                  <div className={classes.comments_grid_item} key = {index}>
-                    <div className={classes.comments_content}>
-                      <div className={classes.comments_user_container}>
-                        <div className={classes.comments_username}>
-                          {comment.user.username}
+                  <div>
+                    {review.comments.length 
+                      ? <div className={classes.comments_header}>Others have commented on your review...</div>
+                      : <div></div>
+                    }
+                  </div>
+                  <div className={classes.comments_grid}>
+                  {review.comments.map((comment, index) => (
+                    <div className={classes.comments_grid_item} key = {index}>
+                      <div className={classes.comments_content}>
+                        <div className={classes.comments_user_container}>
+                          <div className={classes.comments_username}>
+                            {comment.user.username}
+                          </div>
+                          <div className={classes.comments_profile_pic}>
+                            <img
+                              src={"/tasteUCLA.png"}
+                              border-radius={"50%"}
+                              alt={"image can't load"}
+                            />
+                          </div>
                         </div>
-                        <div className={classes.comments_profile_pic}>
-                          <img
-                            src={""}
-                            border-radius={"50%"}
-                            alt={"image can't load"}
-                          />
+                        <div className={classes.comments}>
+                          <div className={classes.comments_description}>
+                            {comment.body}
+                          </div>
+                          <div className={classes.created_time_comment}>
+                          {"Created at: " + comment.createdAt}
+                          </div>
                         </div>
-                      </div>
-                      <div className={classes.comments_description}>
-                        {comment.body}
                       </div>
                     </div>
+                  ))}
                   </div>
-                ))}
-                </div>
               </div>
             ))}
           </div>

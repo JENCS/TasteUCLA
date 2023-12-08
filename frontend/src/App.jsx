@@ -42,7 +42,7 @@ const App = () => {
     await axios.patch(
       "http://localhost:5555/users/me",
       {
-        profile_picture: picture,
+        imageUrl: picture,
         bio: bio,
       },
       {
@@ -60,6 +60,7 @@ const App = () => {
       })
       .then((res) => {
         setUserData(res.data);
+        console.log(res.data);
       })
       .catch((error) => {
         console.error("Error fetching reviews:", error);
@@ -167,7 +168,7 @@ const App = () => {
         reviews = res.data.reviews;
       })
       .catch((error) => {
-        console.error("Error fetching reviews:", error)
+        console.error("Error fetching reviews:", error);
       });
     return reviews;
   }
@@ -193,8 +194,16 @@ const App = () => {
             />
           }
         />
-        <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login}/>} />
-        <Route path="/reviews/me" element={<MyReviews getMyReviews={getMyReviews}/>} />
+        <Route
+          path="/reviews/details/:id"
+          element={
+            <ShowReview submitComment={submitComment} loggedIn={login} />
+          }
+        />
+        <Route
+          path="/reviews/me"
+          element={<MyReviews getMyReviews={getMyReviews} />}
+        />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route path="/profile/:id" element={<UserProfile />} />

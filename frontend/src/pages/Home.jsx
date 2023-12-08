@@ -52,16 +52,18 @@ const Home = () => {
                 <h3>{review.title}</h3>
                 <div className="review-rating">
                   <p>{review.user.username}</p>
-                  <p>Rating: {review.rating} </p>
+                  <p>
+                    Rating: {review.rating}{" "}
+                    <text style={{ color: "gold" }}>{"★ "}</text>
+                  </p>
                 </div>
                 {review.imageUrl && (
                   <img
-                    src={"http://localhost:5555/" + review.imageUrl}
+                    src={review.imageUrl}
                     alt={"image can't load"}
                     className="review-image"
                   />
                 )}
-
                 <p className="review-description">{review.text}</p>
               </Link>
             ))}

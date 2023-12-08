@@ -39,7 +39,7 @@ const createReview = asyncHandler(async (req, res) => {
   if (!restaurant) {
     return res.status(400).json({ message: "Restaurant not found" });
   }
-  const imageUrl = req.file ? req.file.path : null;
+  const imageUrl = req.file ? "http://localhost:5555/" + req.file.path : null;
   const newReview = {
     title: req.body.title,
     user: user._id,
