@@ -10,7 +10,7 @@ Team JENCS
   - Omomo, Cain
   - Houston, Jarod
 
-TasteUCLA uses a MERN stack, using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com/), [React.js](https://react.dev/), and [Node.js](https://nodejs.org/). We also use [Vite](https://vitejs.dev) and [TailwindCSS](https://tailwindcss.com).
+TasteUCLA uses a MERN stack, using [MongoDB](https://www.mongodb.com/), [Express](https://expressjs.com/), [React.js](https://react.dev/), and [Node.js](https://nodejs.org/). We also use [MongooseJS](https://mongoosejs.com/), [Vite](https://vitejs.dev), and [TailwindCSS](https://tailwindcss.com).
 
 # Setup
 
