@@ -13,57 +13,6 @@ const WriteReview = ({
   setMyRestaurant,
   loggedIn,
 }) => {
-  // const [title, setTitle] = useState("");
-  // const [author, setAuthor] = useState("");
-  // const [photo, setPhoto] = useState();
-  // const [description, setDescription] = useState("");
-  // const [file, setFile] = useState(null);
-  // const [image, setImage] = useState(null);
-
-  // async function uploadImage(e) {
-  //   console.log(e.target.files);
-  //   setFile(e.target.files[0]);
-  //   // setImage(file);
-  //   setPhoto(URL.createObjectURL(e.target.files[0]));
-  //   console.log("UPLOADED");
-  //   const promise = e.target.files[0].arrayBuffer();
-  //   promise.then((value) => {
-  //     console.log(value);
-  //     setImage(Buffer.from(value));
-  //     console.log(typeof image);
-  //   });
-
-  //   // imageBuffer = fs.readFileSync(file);
-  //   // fs.writeFileSync("lkawenfoawef.png", imageBuffer);
-  // }
-
-  // function removeImage(e) {
-  //   setPhoto();
-  // }
-  // const handleSubmitReview = () => {
-  //   // const reader = new FileReader();
-  //   const data = {
-  //     title,
-  //     author,
-  //     rating,
-  //     description,
-  //     image,
-  //   };
-  //   setLoading(true);
-  //   axios
-  //     .post("http://localhost:5555/reviews", data)
-  //     .then(() => {
-  //       setLoading(false);
-  //       navigate("/");
-  //     })
-  //     .catch((error) => {
-  //       setLoading(false);
-  //       alert("An error occurred. Please check the console.");
-  //       console.log(file);
-  //       console.log(error);
-  //     });
-  // };
-
   const [title, setTitle] = useState("");
   const [rating, setRating] = useState("");
   const [text, setText] = useState("");
@@ -96,13 +45,9 @@ const WriteReview = ({
           );
           if (foundRestaurant) {
             restaurantToReview = "";
-            //console.log("selected: ", selectedRestaurant, "found", foundRestaurant.name)
             setPreSelected(true);
             const i = getRestIndex(foundRestaurant.name, fetchedRestaurants);
-            //console.log(i)
-            //console.log(fetchedRestaurants[i])
             setSelectedRestaurant(fetchedRestaurants[i].name);
-            //fetchedRestaurants = fetchedRestaurants.filter(r => r.name !== restaurantToReview);
           } else {
             setSelectedRestaurant("");
           }
@@ -116,22 +61,7 @@ const WriteReview = ({
       }
     };
     fetchRestaurants();
-    //restaurantToReview = "";
-    console.log(preSelected);
   }, [restaurantToReview]);
-
-  /*
-  useEffect(() => {
-    console.log(restaurantToReview);
-    if (restaurantToReview) {
-      setRestaurant(restaurantToReview);
-      setDisplayCloseRestaurant(true);
-    } else {
-      setRestaurant("Choose Restaurant");
-      setDisplayCloseRestaurant(false);
-    }
-  });
-  */
 
   function getRestIndex(name, rests) {
     const index = rests.findIndex((restaurant) => restaurant.name === name);
@@ -149,7 +79,6 @@ const WriteReview = ({
   }
 
   function removeRestaurant() {
-    console.log("removing restaurant...");
     setMyRestaurant(null);
   }
 
@@ -165,20 +94,16 @@ const WriteReview = ({
     if (image) {
       formData.append("image", image);
     }
-    //console.log("form", formData.get("restaurant"));
 
-    //console.log(title);
     if (
       title.length == 0 ||
       selectedRestaurant === "" ||
       isNaN(rating) ||
       text === ""
     ) {
-      //console.log("here!")
       setErrorMessage(
         "Please ensure all required fields are completed before submitting."
       );
-      //return;
     } else {
       createReview(formData);
     }
@@ -193,7 +118,6 @@ const WriteReview = ({
         <Popup
           open={openPopUp}
           closeOnDocumentClick={false}
-          //onClose={() => setOpenPopUp(false)}
         >
           <div className="popup-content">
             <p>Please sign in to comment.</p>
@@ -219,13 +143,11 @@ const WriteReview = ({
           >
             <option value="">Select a Restaurant</option>
             {restaurants.map((restaurant, index) => (
-              //(console.log(index, "rest: ", restaurant))
               <option key={index} value={restaurant.name}>
                 {restaurant.name}
               </option>
             ))}
           </select>
-          {/* <IoIosArrowDown className="dropdown-arrow" /> */}
         </div>
         <div className="title-rating">
           <div className="title-container">

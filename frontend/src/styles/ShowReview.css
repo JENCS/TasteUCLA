@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #f1f7fd; /* This will set the background color for the entire page */
+  background-color: #f1f7fd;
+  /* This will set the background color for the entire page */
 }
 
 .show-review-page {
@@ -16,7 +17,7 @@ body {
   width: fit-content;
 }
 
-.restaurant-name > * > p {
+.restaurant-name>*>p {
   color: black;
   text-decoration: underline;
 }
@@ -34,6 +35,13 @@ body {
   object-fit: cover;
 }
 
+.review-title {
+  color: #060606;
+  margin-right: 30px;
+  overflow-wrap: break-word;
+  width: 650px;
+}
+
 .row {
   display: block;
   margin-bottom: 20px;
@@ -42,6 +50,8 @@ body {
 .content {
   color: #060606;
   margin-right: 30px;
+  overflow-wrap: break-word;
+  width: 650px;
 }
 
 .container h1 {
@@ -102,7 +112,7 @@ body {
   outline-offset: 0px;
 }
 
-.comment-textbox > form > textarea {
+.comment-textbox>form>textarea {
   min-height: 150px;
 }
 
@@ -200,7 +210,8 @@ body {
 }
 
 .popup-content p {
-  font-size: 20px; /* Font size for paragraphs */
+  font-size: 20px;
+  /* Font size for paragraphs */
   color: black;
 }
 
