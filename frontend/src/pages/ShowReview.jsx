@@ -107,7 +107,7 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
                   <p>{review.restaurant.name}</p>
                 </Link>
               </div>
-              <h1>{review.title}</h1>
+              <h1 className="review-title">{review.title}</h1>
               <h2>{"Rating: " + review.rating + "★"}</h2>
               <p className="content">{review.text}</p>
               <div className="review-username">
