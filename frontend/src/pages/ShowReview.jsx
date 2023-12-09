@@ -20,16 +20,6 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (!loggedIn)
-  //     setOpenPopup(true);
-  //   else if (response){
-  //     await submitComment(id, response);
-  //     setResponse("");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!loggedIn) setOpenPopup(true);

@@ -173,14 +173,7 @@
   margin-right: auto;
   margin-bottom: 30px;
 }
-/*
-.default-profile-img {
-  font-size: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-}
-*/
+
 .username {
   color: #1e1e1e;
   line-height: 150%;
@@ -251,8 +244,8 @@
   width: 1050px;
 }
 
-
-.created_time, .updated_time{
+.created_time,
+.updated_time {
   color: rgb(172, 172, 172);
   display: flex;
   position: relative;
@@ -260,7 +253,7 @@
   justify-content: right;
 }
 
-.reviews-header{
+.reviews-header {
   color: #1e1e1e;
   display: flex;
   position: relative;
@@ -268,7 +261,7 @@
   margin-top: 30px;
 }
 
-.comments{
+.comments {
   position: relative;
 }
 
@@ -361,7 +354,8 @@
   top: 20px;
 }
 
-.created_time_comment, .updated_time_comment{
+.created_time_comment,
+.updated_time_comment {
   color: rgb(172, 172, 172);
   display: flex;
   position: relative;

@@ -233,27 +233,3 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
 }
 
 export default Restaurant;
-
-/*
-{review.comments.map((comment, index) => (
-                  <div className={classes.comments_grid_item}>
-                    <div className={classes.comments_content}>
-                      <div className={classes.comments_user_container}>
-                        <div className={classes.comments_username}>
-                          {"user"}
-                        </div>
-                        <div className={classes.comments_profile_pic}>
-                          <img
-                            src={""}
-                            border-radius={"50%"}
-                            alt={"image can't load"}
-                          />
-                        </div>
-                      </div>
-                      <div className={classes.comments_description}>
-                        {"Cool review"}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-*/

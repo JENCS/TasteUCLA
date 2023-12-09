@@ -9,21 +9,6 @@ export default function Profile({ userData, updateProfileInfo }) {
   const [bio, setBio] = useState(userData.bio);
   const [image, setImage] = useState(null);
 
-  // useEffect(() => {
-  //   if (userData.imageUrl) {
-  //     setFile(
-  //       "data:image/png;base64," +
-  //         Buffer.from(userData.imageUrl).toString("base64")
-  //     );
-  //   }
-  // }, []);
-
-  // "data:image/png;base64," + Buffer.from(userData.profile_picture).toString("base64")
-
-  // const mimeType = "image/png";
-  // const b64 = Buffer.from(userData.profile_picture).toString("base64");
-  // setImageDisplay(`data:${mimeType};base64,${b64}`);
-
   function uploadImage(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
@@ -53,12 +38,6 @@ export default function Profile({ userData, updateProfileInfo }) {
     console.log("I AM UPDATING PROFILE");
     console.log(...formData);
     await updateProfileInfo(formData);
-
-    // if (file) {
-    //   updateProfileInfo(image, bio);
-    // } else {
-    //   updateProfileInfo(null, bio);
-    // }
   }
   function deleteAccount() {
     console.log("deleting user...");
@@ -100,9 +79,6 @@ export default function Profile({ userData, updateProfileInfo }) {
           <button type="submit" className="save-profile-btn">
             Save Profile
           </button>
-          {/* <button className="delete-account-btn" onClick={deleteAccount}>
-            Delete Account
-          </button> */}
         </div>
       </form>
     </div>
