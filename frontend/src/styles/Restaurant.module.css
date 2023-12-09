@@ -158,14 +158,29 @@
 }
 
 .profile_pic {
-  height: 200px;
+  height: auto;
   width: 200px;
   border-radius: 50%;
   display: inline-block;
   top: 120px;
   margin-bottom: 10px;
+  clip-path: circle();
 }
 
+.default_profile_pic {
+  font-size: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+/*
+.default-profile-img {
+  font-size: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+*/
 .username {
   color: #1e1e1e;
   line-height: 150%;
@@ -188,8 +203,8 @@
 
 .review_image {
   position: relative;
-  width: max-content;
-  height: max-content;
+  width: 300px;
+  height: auto;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -293,11 +308,19 @@
 }
 
 .comments_profile_pic {
-  height: 125px;
-  width: 125px;
+  height: auto;
+  width: 120px;
   border-radius: 50%;
   display: inline-block;
   top: 70px;
+  clip-path: circle();
+}
+
+.comments_default_profile_pic {
+  font-size: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
 }
 
 .comments_username {

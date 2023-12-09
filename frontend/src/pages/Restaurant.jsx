@@ -5,7 +5,7 @@ import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Buffer } from "buffer";
+import { CgProfile } from "react-icons/cg";
 import Button from "@mui/material/Button";
 
 function Restaurant({ loggedIn, setMyRestaurant }) {
@@ -84,7 +84,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                 <div  style={{ color: "gold" }}>
                 {"★ "}
                 </div>
-                <div font-size = {"10px"} style={{ color: "gray" }}>
+                <div fontSize = {"10px"} style={{ color: "gray" }}>
                 {"    ("+ numOfReviews +
                 " review(s))"}
                 </div>
@@ -137,13 +137,18 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                 <div className={classes.review_content}>
                   <div className={classes.user_container}>
                     <div className={classes.username}>{review.user.username}</div>
-                    <div className={classes.profile_pic}>
-                      <img
-                        src={"/tasteUCLA.png"}
-                        border-radius={"50%"}
-                        alt={"image can't load"}
-                      />
-                    </div>
+                      {review.user.imageUrl
+                        ?  <div className={classes.profile_pic}>
+                            <img
+                            src={review.user.imageUrl}
+                            border-radius={"50%"}
+                            alt={"image can't load"}
+                            />
+                            </div>
+                        :  <div className={classes.default_profile_pic}>
+                            <CgProfile/>
+                          </div>
+                      }
                   </div>
                   <div className={classes.rating_desc_container}>
                     <div className={classes.review_image}>
@@ -151,7 +156,7 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                         <img
                           src={review.imageUrl}
                           alt={"image can't load"}
-                          className="review-image"
+                          className="review_image"
                         />
                       )}
                     </div>
@@ -194,13 +199,18 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                           <div className={classes.comments_username}>
                             {comment.user.username}
                           </div>
-                          <div className={classes.comments_profile_pic}>
-                            <img
-                              src={"/tasteUCLA.png"}
-                              border-radius={"50%"}
-                              alt={"image can't load"}
-                            />
-                          </div>
+                          {comment.user.imageUrl
+                            ?  <div className={classes.comments_profile_pic}>
+                                <img
+                                src={comment.user.imageUrl}
+                                border-radius={"50%"}
+                                alt={"image can't load"}
+                                />
+                                </div>
+                            :  <div className={classes.comments_default_profile_pic}>
+                                <CgProfile/>
+                              </div>
+                        }
                         </div>
                         <div className={classes.comments}>
                           <div className={classes.comments_description}>

@@ -54,7 +54,7 @@ const Home = () => {
                   <p>{review.user.username}</p>
                   <p>
                     Rating: {review.rating}{" "}
-                    <text style={{ color: "gold" }}>{"★ "}</text>
+                    ★
                   </p>
                 </div>
                 {review.imageUrl && (
