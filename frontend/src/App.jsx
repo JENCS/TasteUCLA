@@ -194,7 +194,7 @@ const App = () => {
         />
         <Route
           path="/reviews/me"
-          element={<MyReviews getMyReviews={getMyReviews} />}
+          element={<MyReviews getMyReviews={getMyReviews} loggedIn={login} />}
         />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
