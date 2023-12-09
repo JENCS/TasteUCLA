@@ -40,7 +40,20 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
       .get(`http://localhost:5555/locations/${id}`)
       .then((res) => {
         setRestaurant(res.data);
-        setReviews(res.data.reviews);
+        let reviews = res.data.reviews;
+        reviews.map((review) => {
+          let creationTime = new Date(review.createdAt);
+          let updateTime = new Date(review.updatedAt);
+          review.createdAt = creationTime.toString();
+          review.updatedAt = updateTime.toString();
+
+          let comments = review.comments;
+          comments.map((comment) => {
+            let creationTime = new Date(comment.createdAt);
+            comment.createdAt = creationTime.toString();
+        })
+        })
+        setReviews(reviews);
         setNumOfReviews(res.data.reviews.length);
         setReviewsLoading(false);
         setRestaurantRating(getRestaurantRating().toString());
@@ -167,6 +180,9 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                     <div className={classes.review_description}>{""}</div>
                     <div className={classes.created_time}>
                       {"Created at: " + review.createdAt}
+                    </div>
+                    <div className={classes.updated_time}>
+                      {"Updated at: " + review.updatedAt}
                     </div>
 
                     <Link

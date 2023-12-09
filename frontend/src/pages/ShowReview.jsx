@@ -52,12 +52,26 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
     axios
       .get(`http://localhost:5555/reviews/${id}`)
       .then((res) => {
-        setReview(res.data);
-        if (res.data.comments.length != comments.length) {
-          setComments(res.data.comments);
-        }
+        
         setLoading(false);
         setRestaurant(res.data.restaurant);
+        let review = res.data;
+        let creationTime = new Date(review.createdAt);
+        let updateTime = new Date(review.updatedAt);
+        review.createdAt = creationTime.toString();
+        review.updatedAt = updateTime.toString();
+        const a = res.data.comments.length
+        setReview(review);
+        
+        let comments = review.comments;
+        comments.map((comment) => {
+          let creationTime = new Date(comment.createdAt);
+          comment.createdAt = creationTime.toString();
+        })
+        
+        if (review.comments.length != comments.length) {
+          setComments(comments);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -171,9 +185,9 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
             <div className="created_time">
               {"Created at: " + review.createdAt}
             </div>
-            {/* <div className="updated_time">
+            <div className="updated_time">
               {"Updated at: " + review.updatedAt}
-            </div> */}
+            </div> 
             <div className="reviews-header">Comments</div>
             <div className="error_message">{errorMessage}</div>
             <div className="comments-grid">
