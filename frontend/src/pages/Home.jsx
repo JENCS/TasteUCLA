@@ -41,7 +41,7 @@ const Home = () => {
           <Spinner />
         ) : (
           <div className="reviews-grid">
-            {reviews.map((review) => (
+            {reviews.toReversed().map((review) => (
               <Link
                 to={`/reviews/details/${review._id}`}
                 key={review._id}

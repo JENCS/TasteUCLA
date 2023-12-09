@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import { Buffer } from "buffer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useRef } from 'react';
+import { useRef } from "react";
 
 function debounce(func, wait) {
   let timeout;
@@ -36,7 +36,7 @@ export default function Navbar({
   const [searchDropdown, setSearchDropdown] = useState(false);
   const [reviewRedirect, setReviewRedirect] = useState("/login");
   const [query, setQuery] = useState("");
-  
+
   //for profile
   const menuRef = useRef();
 
@@ -62,7 +62,7 @@ export default function Navbar({
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setProfileDropdown(false);
     }
-  }
+  };
 
   const search = () => {
     console.log(query);
@@ -119,7 +119,6 @@ export default function Navbar({
       document.removeEventListener("click", closeDropdown);
     };
   }, []);
-
 
   //event listener for profile menu
   useEffect(() => {
@@ -194,24 +193,22 @@ export default function Navbar({
                   <div>
                     <h3>Users</h3>
                     {searchResults.users.map((user, index) => {
-                      
                       // Redirect to profile page if the user search him/herself
                       return user.username === userData.username ? (
                         <Link to={`/profile`}>
                           <p>{user.username}</p>
-                        </Link>) : (
+                        </Link>
+                      ) : (
                         <Link to={`/profile/${user._id}`} key={index}>
                           <p>{user.username}</p>
                         </Link>
-                      )
-                        })}
+                      );
+                    })}
                   </div>
                 )}
                 {searchResults.restaurants.length === 0 &&
                   searchResults.reviews.length === 0 &&
-                  searchResults.users.length === 0 && (
-                    <p>No results found</p>
-                  )}
+                  searchResults.users.length === 0 && <p>No results found</p>}
               </div>
             )}
           </div>
@@ -232,26 +229,21 @@ export default function Navbar({
           {userData && loggedIn && (
             <>
               <p>{userData.username}</p>
-              {userData.profile_picture && (
+              {userData.imageUrl && (
                 <img
-                  src={
-                    "data:image/png;base64," +
-                    Buffer.from(userData.profile_picture).toString("base64")
-                  }
+                  src={userData.imageUrl}
                   className="profile-image-icon"
                   onClick={() => profileMenu()}
                   ref={menuRef}
                 />
               )}
-              {
-              !userData.profile_picture && (
+              {!userData.imageUrl && (
                 <CgProfile
                   className="profile-icon"
                   onClick={() => profileMenu()}
                   ref={menuRef}
                 />
               )}
-              
             </>
           )}
           {!loggedIn && (

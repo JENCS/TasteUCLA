@@ -1,15 +1,8 @@
 import "../styles/WriteReview.css";
 import React, { useEffect, useState } from "react";
-import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoMdClose } from "react-icons/io";
-import { Buffer } from "buffer";
-import { display } from "@mui/system";
-
 import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
 import "reactjs-popup/dist/index.css";
@@ -193,7 +186,6 @@ const WriteReview = ({
 
   return (
     <div className="p-4 mt-16">
-      <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
       <div className="error_message">{errorMessage}</div>

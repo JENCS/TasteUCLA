@@ -26,7 +26,6 @@ body {
 }
 
 .review-image {
-
   margin-right: 60px;
   margin-top: 30px;
   width: 10%;
@@ -69,28 +68,17 @@ body {
   margin-top: 30px;
 }
 
-.restaurant-logo {
-  position: absolute;
-  margin-left: 50vw;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 150px;
-}
-
-.restaurant-logo > img {
-  max-width: 800px;
-}
-
 /* .restaurant-logo {
   position: absolute;
   margin-left: 50vw;
   display: flex;
   justify-content: flex-end;
   padding-right: 150px;
-}
+  background-color: blue;
+} */
 
-.restaurant-logo > img {
-  max-width: 800px;
+/* .restaurant-logo > img {
+  max-width: 100px;
 } */
 
 .comments-grid,
