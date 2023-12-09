@@ -55,23 +55,24 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
         
         setLoading(false);
         setRestaurant(res.data.restaurant);
-        let review = res.data;
-        let creationTime = new Date(review.createdAt);
-        let updateTime = new Date(review.updatedAt);
-        review.createdAt = creationTime.toString();
-        review.updatedAt = updateTime.toString();
-        const a = res.data.comments.length
-        setReview(review);
+        let rev= res.data;
+        let creationTime = new Date(rev.createdAt);
+        let updateTime = new Date(rev.updatedAt);
+        rev.createdAt = creationTime.toString();
+        rev.updatedAt = updateTime.toString();
         
-        let comments = review.comments;
-        comments.map((comment) => {
-          let creationTime = new Date(comment.createdAt);
-          comment.createdAt = creationTime.toString();
+        
+        let com = rev.comments;
+        com.map((c) => {
+          let creationTime = new Date(c.createdAt);
+          c.createdAt = creationTime.toString();
         })
         
-        if (review.comments.length != comments.length) {
-          setComments(comments);
+
+        if (com.length != comments.length) {
+          setComments(com);
         }
+        setReview(rev);
       })
       .catch((error) => {
         console.log(error);
