@@ -9,28 +9,9 @@ export default function Profile({ userData, updateProfileInfo }) {
   const [bio, setBio] = useState(userData.bio);
   const [image, setImage] = useState(null);
 
-  // useEffect(() => {
-  //   if (userData.imageUrl) {
-  //     setFile(
-  //       "data:image/png;base64," +
-  //         Buffer.from(userData.imageUrl).toString("base64")
-  //     );
-  //   }
-  // }, []);
-
-  // "data:image/png;base64," + Buffer.from(userData.profile_picture).toString("base64")
-
-  // const mimeType = "image/png";
-  // const b64 = Buffer.from(userData.profile_picture).toString("base64");
-  // setImageDisplay(`data:${mimeType};base64,${b64}`);
-
   function uploadImage(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
-    // const promise = e.target.files[0].arrayBuffer();
-    // promise.then((value) => {
-    //   setImage(Buffer.from(value));
-    // });
   }
   function removeImage(e) {
     setFile(null);
@@ -38,30 +19,14 @@ export default function Profile({ userData, updateProfileInfo }) {
   async function saveProfile(event) {
     event.preventDefault();
 
-    console.log("I AM SAVING PROFILE");
     const formData = new FormData();
     formData.append("bio", bio);
 
-    console.log(bio);
-    console.log(image);
-
     if (image) {
-      console.log("I AM APPENDING IMAGE");
       formData.append("imageUrl", image);
     }
 
-    console.log("I AM UPDATING PROFILE");
-    console.log(...formData);
     await updateProfileInfo(formData);
-
-    // if (file) {
-    //   updateProfileInfo(image, bio);
-    // } else {
-    //   updateProfileInfo(null, bio);
-    // }
-  }
-  function deleteAccount() {
-    console.log("deleting user...");
   }
 
   return (

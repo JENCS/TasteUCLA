@@ -115,7 +115,6 @@ const createComment = asyncHandler(async (req, res) => {
     });
   }
   const { id } = req.params;
-  // console.log(id)
   const review = await Review.findById(id).exec();
   const data = {
     user: user._id,

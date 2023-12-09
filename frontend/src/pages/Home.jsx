@@ -20,17 +20,6 @@ const Home = () => {
         console.error("Error fetching reviews:", error);
         setLoading(false);
       });
-
-    // axios
-    //   .get("http://localhost:5555/locations")
-    //   .then((res) => {
-    //     console.log(res.data.data);
-    //     setRestaurants(res.data.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching restaurants:", error);
-    //     setLoading(false);
-    //   });
   }, []);
 
   return (

@@ -65,12 +65,10 @@ export default function Navbar({
   };
 
   const search = () => {
-    console.log(query);
     axios
       .get(`http://localhost:5555/search/${query}`)
       .then((res) => {
         setSearchResults(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         alert("An error occurred. Please check the console.");
@@ -154,7 +152,6 @@ export default function Navbar({
                 searchMenu();
               }}
               onKeyDown={(event) => {
-                console.log(event.key);
                 if (event.key === "Enter") {
                   navigate(`/search-results/${query}`);
                 }

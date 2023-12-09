@@ -13,7 +13,6 @@ export default function MyReviews({ getMyReviews }) {
       .then((res) => {
         let reviews = res;
         reviews.map((review, index) => {
-          console.log(review.createdAt)
           let creationTime = new Date(review.createdAt);
           let updateTime = new Date(review.updatedAt);
           review.createdAt = creationTime.toString();
@@ -46,7 +45,7 @@ export default function MyReviews({ getMyReviews }) {
                         <div className={classes.section_grid_item_col}>
                           <div>
                             {review.imageUrl !== null ? (
-                              <img className={classes.grid_item_img} src={review.imageUrl} alt={"Image failed"}/>
+                              <img className={classes.grid_item_img} src={review.imageUrl} alt={"Image failed"} />
                             ) : (
                               <div style={{
                                 margin: "30px",
