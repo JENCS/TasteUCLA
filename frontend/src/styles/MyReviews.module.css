@@ -11,20 +11,36 @@
   height: calc(100vh - 70px);
 }
 
+.title_row{
+  display: flex;
+  justify-content: space-between;
+}
+
 .home_logo{
-  margin-left: 150px;
   width: 40px;
   height: 40px;
   background-color: #9747ff;
   transform: rotate(45deg);
+  margin: auto;
 }
 
 .myreviews_title{
   margin-top: 100px;
   margin-left: 50px;
+  margin-right: 50px;
   font-size: 60px;
   font-weight: 500;
   text-align: left;
+}
+
+.myreviews_count{
+  color: #0477b9;
+  margin-top: 150px;
+  font-style: italic;
+  font-size: 40px;
+  font-weight: 500;
+  justify-content: flex-end;
+  margin-right: 100px;
 }
 
 .reviews_container{
@@ -97,4 +113,13 @@
   margin: 5px;
   border-radius: 12px;
   border: solid 2px #000000;
+}
+
+.not_found_message{
+  display: flex;
+  color: #ff0000;
+  font-size: 40px;
+  margin: 10px;
+  margin-bottom: 5px;
+  margin-left: 50px;
 }
