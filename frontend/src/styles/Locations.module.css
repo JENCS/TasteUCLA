@@ -1,128 +1,126 @@
 .root {
-    position: absolute;
-    top:70px;
-    left:0;
-    right:0;
-    flex-direction: column;
-    outline: solid 1px #aabcd2;
-    outline-offset: -1px;
-    overflow: hidden;
-    background-color: #E2F1F5;
-  }
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  outline: solid 1px #aabcd2;
+  outline-offset: -1px;
+  overflow: hidden;
+  background-color: #e2f1f5;
+}
 
-  .Locations_title{
-    color: #1e1e1e;
-    line-height: 150%;
-    font-family: 'Trebuchet MS';
-    font-weight: bold;
-    letter-spacing: -0.023em;
-    display: flex;
-    text-align: center;
-    position: relative;
-    margin-left: 20px;
-    margin-right: auto;
-    top: 10px;
-    font-size: 40px;
-  }
+.Locations_title {
+  color: #1e1e1e;
+  line-height: 150%;
+  font-family: "Trebuchet MS";
+  font-weight: bold;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 20px;
+  margin-right: auto;
+  top: 10px;
+  font-size: 40px;
+}
 
-  .NorthCampus_title{
-    color: #4E8FA0;
-    line-height: 150%;
-    font-weight: 500;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-    letter-spacing: -0.023em;
-    display: flex;
-    text-align: center;
-    position: relative;
-    margin-left: 40px;
-    margin-right: auto;
-    margin-bottom: 5px;
-    top: 10px;
-    font-size: 30px;
-  }
+.NorthCampus_title {
+  color: #4e8fa0;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-left: 40px;
+  margin-right: auto;
+  margin-bottom: 5px;
+  top: 10px;
+  font-size: 30px;
+}
 
-  .NorthCampus_reviews_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    margin-top: 15px;
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 50px;
-  } 
+.NorthCampus_reviews_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  margin-top: 15px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 50px;
+}
 
-  .grid_item {
-    background-color: #FFFF;
-    border: 0.5px solid black;
-    padding: 5px;
-    font-size: 30px;
-    display: flex;
-    align-items: center;
-    flex-direction: column-reverse;
-   
-  }
+.grid_item {
+  background-color: #ffff;
+  border: 0.5px solid black;
+  padding: 5px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  height: 100%;
+}
 
-  .grid_item_restaurant_name {
-    color: #1975b5;
-    line-height: 150%;
-    font-weight: bold;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-    letter-spacing: -0.023em;
-    display: flex;
-    text-align: center;
-    position: relative;
-    font-size: 15px;
-    margin-top: 10px;
-    margin-bottom: auto;
-  }
+.grid_item_restaurant_name {
+  color: #1975b5;
+  line-height: 150%;
+  font-weight: bold;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  font-size: 15px;
+  margin-top: 10px;
+  margin-bottom: auto;
+}
 
-  .CentralCampus_title{
-    color: #4E8FA0;
-    line-height: 150%;
-    font-weight: 500;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-    letter-spacing: -0.023em;
-    display: flex;
-    text-align: center;
-    position: relative;
-    margin-bottom: 5px;
-    margin-left: 40px;
-    margin-right: auto;
-    font-size: 30px;
-  }
+.CentralCampus_title {
+  color: #4e8fa0;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-bottom: 5px;
+  margin-left: 40px;
+  margin-right: auto;
+  font-size: 30px;
+}
 
-  .CentralCampus_reviews_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 50px;
-  } 
+.CentralCampus_reviews_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 50px;
+}
 
+.SouthCampus_title {
+  color: #4e8fa0;
+  line-height: 150%;
+  font-weight: 500;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: -0.023em;
+  display: flex;
+  text-align: center;
+  position: relative;
+  margin-bottom: 5px;
+  margin-left: 40px;
+  margin-right: auto;
+  font-size: 30px;
+}
 
-
-  .SouthCampus_title{
-    color: #4E8FA0;
-    line-height: 150%;
-    font-weight: 500;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-    letter-spacing: -0.023em;
-    display: flex;
-    text-align: center;
-    position: relative;
-    margin-bottom: 5px;
-    margin-left: 40px;
-    margin-right: auto;
-    font-size: 30px;
-  }
-
-  .SouthCampus_reviews_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 50px;
-  } 
+.SouthCampus_reviews_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 50px;
+}

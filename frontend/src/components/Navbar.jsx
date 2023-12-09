@@ -65,12 +65,10 @@ export default function Navbar({
   };
 
   const search = () => {
-    console.log(query);
     axios
       .get(`http://localhost:5555/search/${query}`)
       .then((res) => {
         setSearchResults(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         alert("An error occurred. Please check the console.");
@@ -154,7 +152,6 @@ export default function Navbar({
                 searchMenu();
               }}
               onKeyDown={(event) => {
-                console.log(event.key);
                 if (event.key === "Enter") {
                   navigate(`/search-results/${query}`);
                 }
@@ -194,7 +191,7 @@ export default function Navbar({
                     <h3>Users</h3>
                     {searchResults.users.map((user, index) => {
                       // Redirect to profile page if the user search him/herself
-                      return user.username === userData.username ? (
+                      return userData && user.username === userData.username ? (
                         <Link to={`/profile`}>
                           <p>{user.username}</p>
                         </Link>

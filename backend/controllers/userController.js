@@ -39,7 +39,6 @@ const createUser = asyncHandler(async (req, res) => {
 // @route POST /users
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
-  console.log("I AM AT UPDATE USER");
   const username = req.user;
   const user = await User.findOne({ username }).exec();
   if (!user) {
@@ -49,8 +48,6 @@ const updateUser = asyncHandler(async (req, res) => {
   if (bio) {
     user.bio = bio;
   }
-  console.log("PRINTING REQ FILE");
-  console.log(req.file);
   user.imageUrl = req.file ? "http://localhost:5555/" + req.file.path : null;
   const updatedUser = await user.save();
   res.json({ message: `${updatedUser.username} updated` });

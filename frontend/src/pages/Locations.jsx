@@ -158,40 +158,40 @@ function Locations() {
       <div className={classes.NorthCampus_title}>North Campus</div>
       <div className={classes.NorthCampus_reviews_grid}>
         {NorthCampusRestaurants.map((restaurant, index) => (
-          <div className={classes.grid_item} key={index}>
-            <Link to={"/locations/" + restaurant.id}>
+          <Link to={"/locations/" + restaurant.id}>
+            <div className={classes.grid_item} key={index}>
               <img src={restaurant.img} alt="N/A" />
-            </Link>
-            <div className={classes.grid_item_restaurant_name}>
-              {restaurant.name}
+              <div className={classes.grid_item_restaurant_name}>
+                {restaurant.name}
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className={classes.CentralCampus_title}>Central Campus</div>
       <div className={classes.CentralCampus_reviews_grid}>
         {CentralCampusRestaurants.map((restaurant, index) => (
-          <div className={classes.grid_item} key={index}>
-            <Link to={"/locations/" + restaurant.id}>
+          <Link to={"/locations/" + restaurant.id}>
+            <div className={classes.grid_item} key={index}>
               <img src={restaurant.img} alt="N/A" />
-            </Link>
-            <div className={classes.grid_item_restaurant_name}>
-              {restaurant.name}
+              <div className={classes.grid_item_restaurant_name}>
+                {restaurant.name}
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className={classes.SouthCampus_title}>South Campus</div>
       <div className={classes.SouthCampus_reviews_grid}>
         {SouthCampusRestaurants.map((restaurant, index) => (
-          <div className={classes.grid_item} key={index}>
-            <Link to={"/locations/" + restaurant.id}>
+          <Link to={"/locations/" + restaurant.id}>
+            <div className={classes.grid_item} key={index}>
               <img src={restaurant.img} alt="N/A" />
-            </Link>
-            <div className={classes.grid_item_restaurant_name}>
-              {restaurant.name}
+              <div className={classes.grid_item_restaurant_name}>
+                {restaurant.name}
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

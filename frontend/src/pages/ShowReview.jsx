@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import BackButton from "../components/BackButton";
 import Spinner from "../components/Spinner";
 import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
@@ -21,16 +20,6 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (!loggedIn)
-  //     setOpenPopup(true);
-  //   else if (response){
-  //     await submitComment(id, response);
-  //     setResponse("");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!loggedIn) setOpenPopup(true);
@@ -43,7 +32,6 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
         .then((res) => {
           setComments(res.data.comments);
           setLoading(false);
-          console.log(comments);
         })
         .catch((error) => {
           console.log(error);
@@ -79,7 +67,6 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
 
   return (
     <div className="p-4 mt-16">
-      <BackButton />
       {loading ? (
         <Spinner />
       ) : (
@@ -120,10 +107,8 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
                   <p>{review.restaurant.name}</p>
                 </Link>
               </div>
-              <h1>{review.title}</h1>
-              <h2>
-                {"Rating: " + review.rating + "★"}
-              </h2>
+              <h1 className="review-title">{review.title}</h1>
+              <h2>{"Rating: " + review.rating + "★"}</h2>
               <p className="content">{review.text}</p>
               <div className="review-username">
                 <p className="text-xl mr-4 mt-2 text-gray-500">
@@ -240,18 +225,19 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
                         <div className="comments_username">
                           {comment.user.username}
                         </div>
-                        {comment.user.imageUrl
-                          ?  <div className="comments_profile_pic">
-                              <img
+                        {comment.user.imageUrl ? (
+                          <div className="comments_profile_pic">
+                            <img
                               src={comment.user.imageUrl}
                               border-radius={"50%"}
                               alt={"image can't load"}
-                              />
-                              </div>
-                          :  <div className="comments_default_profile_pic">
-                              <CgProfile/>
-                            </div>
-                        }
+                            />
+                          </div>
+                        ) : (
+                          <div className="comments_default_profile_pic">
+                            <CgProfile />
+                          </div>
+                        )}
                       </div>
                       <div className="comments_description">{comment.body}</div>
                     </div>

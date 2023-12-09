@@ -55,7 +55,6 @@ const setContentType = (req, res, next) => {
   }
   next()
 }
-console.log(express.static("uploads")); 
 app.use("/uploads/profile", setContentType, express.static(profileImageDir))
 app.use("/uploads/review", setContentType, express.static(reviewImageDir))
 app.use(express.json());
@@ -65,7 +64,6 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  console.log(req);
   return res.status(222).send("TasteUCLA");
 });
 app.use("/auth", authRoutes);
