@@ -42,6 +42,8 @@ body {
 .content {
   color: #060606;
   margin-right: 30px;
+  overflow-wrap: break-word;
+  width: 650px;
 }
 
 .container h1 {
