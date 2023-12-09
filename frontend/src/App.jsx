@@ -37,34 +37,33 @@ const App = () => {
     console.log(login);
   };
 
-  async function updateProfileInfo(picture, bio) {
-    console.log(token);
-    console.log(picture);
-    await axios.patch(
-      "http://localhost:5555/users/me",
-      {
-        profile_picture: picture,
-        bio: bio,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
+  async function updateProfileInfo(formData) {
+    console.log("I AM AT UPDATE PROFILE");
+    console.log(formData);
     await axios
-      .get("http://localhost:5555/users/me", {
+      .post("http://localhost:5555/users/me", formData, {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((res) => {
-        setUserData(res.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error);
+      .then(() => {
+        axios
+          .get("http://localhost:5555/users/me", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setUserData(res.data);
+            navigate("/");
+            console.log(res.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching reviews:", error);
+          });
       });
+    console.log("I HAVE PATCHED MYSELF");
   }
 
   async function submitComment(reviewID, comment) {
@@ -168,7 +167,7 @@ const App = () => {
         reviews = res.data.reviews;
       })
       .catch((error) => {
-        console.error("Error fetching reviews:", error)
+        console.error("Error fetching reviews:", error);
       });
     return reviews;
   }
@@ -181,7 +180,7 @@ const App = () => {
         changeLoginState={changeLoginState}
         logoutUser={logoutUser}
       />
-      <BackButton/>
+      <BackButton />
       <Routes>
         <Route path="/" element={<Home loggedIn={login} />} />
         <Route
@@ -195,8 +194,20 @@ const App = () => {
             />
           }
         />
-        <Route path="/reviews/details/:id" element={<ShowReview submitComment={submitComment} loggedIn={login} userData={userData}/>} />
-        <Route path="/reviews/me" element={<MyReviews getMyReviews={getMyReviews}/>} />
+        <Route
+          path="/reviews/details/:id"
+          element={
+            <ShowReview
+              submitComment={submitComment}
+              loggedIn={login}
+              userData={userData}
+            />
+          }
+        />
+        <Route
+          path="/reviews/me"
+          element={<MyReviews getMyReviews={getMyReviews} />}
+        />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
         <Route path="/profile/:id" element={<UserProfile />} />

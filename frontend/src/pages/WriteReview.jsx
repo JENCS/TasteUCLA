@@ -189,24 +189,6 @@ const WriteReview = ({
     } else {
       createReview(formData);
     }
-
-    // setLoading(true);
-    // axios
-    //   .post("/api/reviews", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //   .then(() => {
-    //     setLoading(false);
-    //     navigate("/");
-    //   })
-    //   .catch((error) => {
-    //     setLoading(false);
-    //     alert("An error occurred. Please check the console.");
-    //     console.log(error);
-    //   });
   };
 
   return (
@@ -214,71 +196,6 @@ const WriteReview = ({
       <BackButton />
       <h1 className="header">Write a Review</h1>
       {loading ? <Spinner /> : ""}
-      {/* {displayCloseRestaurant && (
-        <div className="choose-restaurant-container">
-          <label>{restaurant}</label>
-          <div className="remove-restaurant-btn">
-            <IoMdClose onClick={removeRestaurant} />
-          </div>
-        </div>
-      )}
-      {!displayCloseRestaurant && (
-        <Link to="/locations">
-          <div className="choose-restaurant-container">
-            <label>Choose Restaurant</label>
-          </div>
-        </Link>
-      )} */}
-      <div>
-        {/* <div className="title-rating">
-          <div className="title-container">
-            <label>Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="title-input"
-            />
-          </div>
-          <div className="rating-container">
-            <label>Rating</label>
-            <input
-              type="number"
-              step=".1"
-              min="0"
-              max="10"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-              className="rating-input"
-            />
-          </div>
-        </div>
-        <div className="photo-container">
-          <label>Photo (optional)</label>
-          <div className="photo-input">
-            <input type="file" onChange={uploadImage} />
-            {photo && (
-              <div className="uploaded-img">
-                <img src={photo} />
-                <button onClick={removeImage}>Delete</button>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="description-container">
-          <label>Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="description-input"
-          ></textarea>
-        </div>
-        <div className="submit-container">
-          <button onClick={handleSubmitReview} className="submit-btn">
-            Submit
-          </button>
-        </div> */}
-      </div>
       <div className="error_message">{errorMessage}</div>
       {openPopUp && (
         <Popup
@@ -301,7 +218,7 @@ const WriteReview = ({
         </Popup>
       )}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method="post" enctype="multipart/form-data">
         <div className="restaurant-dropdown">
           <select
             value={selectedRestaurant}
@@ -354,6 +271,7 @@ const WriteReview = ({
               type="file"
               accept="image/*"
               onChange={(e) => uploadImage(e)}
+              name="imageUrl"
             />
             {image && <button onClick={removeImage}>Delete</button>}
           </div>
