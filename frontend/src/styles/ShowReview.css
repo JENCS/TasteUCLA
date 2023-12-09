@@ -68,14 +68,14 @@ body {
   margin-top: 30px;
 }
 
-.restaurant-logo {
+/* .restaurant-logo {
   position: absolute;
   margin-left: 50vw;
   display: flex;
   justify-content: flex-end;
   padding-right: 150px;
   background-color: blue;
-}
+} */
 
 /* .restaurant-logo > img {
   max-width: 100px;
