@@ -96,6 +96,7 @@
     font-size: 16px;
     overflow: hidden;
     white-space: nowrap;
+    margin-left: 15px;
 }
 
 .grid_item_title{
@@ -103,11 +104,12 @@
     color: #051d31;
     font-size: 24px;
     margin: 10px;
+    margin-left: 15px;
 }
 
 .grid_item_img{
     display: flex;
-    width: 100px;
+    min-width: 100px;
     height: 100px;
     margin: 5px;
     border-radius: 12px;
