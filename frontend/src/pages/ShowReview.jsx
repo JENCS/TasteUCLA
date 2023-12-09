@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 import Popup from "reactjs-popup";
 import Button from "@mui/material/Button";
 import "reactjs-popup/dist/index.css";
+import { CgProfile } from "react-icons/cg";
 
 const ShowReview = ({ submitComment, loggedIn, userData }) => {
   const [review, setReview] = useState({});
@@ -120,6 +121,9 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
                 </Link>
               </div>
               <h1>{review.title}</h1>
+              <h2>
+                {"Rating: " + review.rating + "★"}
+              </h2>
               <p className="content">{review.text}</p>
               <div className="review-username">
                 <p className="text-xl mr-4 mt-2 text-gray-500">
@@ -236,7 +240,18 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
                         <div className="comments_username">
                           {comment.user.username}
                         </div>
-                        <span className="comments_profile_pic"></span>
+                        {comment.user.imageUrl
+                          ?  <div className="comments_profile_pic">
+                              <img
+                              src={comment.user.imageUrl}
+                              border-radius={"50%"}
+                              alt={"image can't load"}
+                              />
+                              </div>
+                          :  <div className="comments_default_profile_pic">
+                              <CgProfile/>
+                            </div>
+                        }
                       </div>
                       <div className="comments_description">{comment.body}</div>
                     </div>
