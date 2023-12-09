@@ -45,13 +45,9 @@ const WriteReview = ({
           );
           if (foundRestaurant) {
             restaurantToReview = "";
-            //console.log("selected: ", selectedRestaurant, "found", foundRestaurant.name)
             setPreSelected(true);
             const i = getRestIndex(foundRestaurant.name, fetchedRestaurants);
-            //console.log(i)
-            //console.log(fetchedRestaurants[i])
             setSelectedRestaurant(fetchedRestaurants[i].name);
-            //fetchedRestaurants = fetchedRestaurants.filter(r => r.name !== restaurantToReview);
           } else {
             setSelectedRestaurant("");
           }
@@ -65,8 +61,6 @@ const WriteReview = ({
       }
     };
     fetchRestaurants();
-    //restaurantToReview = "";
-    console.log(preSelected);
   }, [restaurantToReview]);
 
   function getRestIndex(name, rests) {
@@ -85,7 +79,6 @@ const WriteReview = ({
   }
 
   function removeRestaurant() {
-    console.log("removing restaurant...");
     setMyRestaurant(null);
   }
 
@@ -101,20 +94,16 @@ const WriteReview = ({
     if (image) {
       formData.append("image", image);
     }
-    //console.log("form", formData.get("restaurant"));
 
-    //console.log(title);
     if (
       title.length == 0 ||
       selectedRestaurant === "" ||
       isNaN(rating) ||
       text === ""
     ) {
-      //console.log("here!")
       setErrorMessage(
         "Please ensure all required fields are completed before submitting."
       );
-      //return;
     } else {
       createReview(formData);
     }
@@ -129,7 +118,6 @@ const WriteReview = ({
         <Popup
           open={openPopUp}
           closeOnDocumentClick={false}
-          //onClose={() => setOpenPopUp(false)}
         >
           <div className="popup-content">
             <p>Please sign in to comment.</p>
@@ -155,13 +143,11 @@ const WriteReview = ({
           >
             <option value="">Select a Restaurant</option>
             {restaurants.map((restaurant, index) => (
-              //(console.log(index, "rest: ", restaurant))
               <option key={index} value={restaurant.name}>
                 {restaurant.name}
               </option>
             ))}
           </select>
-          {/* <IoIosArrowDown className="dropdown-arrow" /> */}
         </div>
         <div className="title-rating">
           <div className="title-container">

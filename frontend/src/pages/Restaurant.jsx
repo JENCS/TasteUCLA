@@ -169,13 +169,13 @@ function Restaurant({ loggedIn, setMyRestaurant }) {
                       {"Created at: " + review.createdAt}
                     </div>
 
-                    <Button
+                    <Link
                       name="review-button"
                       style={{ width: "120px", paddingTop: "5px" }}
-                      href={`/reviews/details/${review._id}`}
+                      to={`/reviews/details/${review._id}`}
                     >
                       View Details
-                    </Button>
+                    </Link>
                   </div>
                 </div>
                 <div>

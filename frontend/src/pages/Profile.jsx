@@ -12,10 +12,6 @@ export default function Profile({ userData, updateProfileInfo }) {
   function uploadImage(e) {
     setFile(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
-    // const promise = e.target.files[0].arrayBuffer();
-    // promise.then((value) => {
-    //   setImage(Buffer.from(value));
-    // });
   }
   function removeImage(e) {
     setFile(null);
@@ -23,24 +19,14 @@ export default function Profile({ userData, updateProfileInfo }) {
   async function saveProfile(event) {
     event.preventDefault();
 
-    console.log("I AM SAVING PROFILE");
     const formData = new FormData();
     formData.append("bio", bio);
 
-    console.log(bio);
-    console.log(image);
-
     if (image) {
-      console.log("I AM APPENDING IMAGE");
       formData.append("imageUrl", image);
     }
 
-    console.log("I AM UPDATING PROFILE");
-    console.log(...formData);
     await updateProfileInfo(formData);
-  }
-  function deleteAccount() {
-    console.log("deleting user...");
   }
 
   return (

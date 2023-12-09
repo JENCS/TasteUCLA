@@ -30,13 +30,9 @@ const App = () => {
 
   const changeLoginState = (state) => {
     setLogin(state);
-    console.log("changed");
-    console.log(login);
   };
 
   async function updateProfileInfo(formData) {
-    console.log("I AM AT UPDATE PROFILE");
-    console.log(formData);
     await axios
       .post("http://localhost:5555/users/me", formData, {
         headers: {
@@ -52,15 +48,12 @@ const App = () => {
             },
           })
           .then((res) => {
-            setUserData(res.data);
             navigate("/");
-            console.log(res.data);
           })
           .catch((error) => {
             console.error("Error fetching reviews:", error);
           });
       });
-    console.log("I HAVE PATCHED MYSELF");
   }
 
   async function submitComment(reviewID, comment) {
@@ -101,8 +94,6 @@ const App = () => {
         navigate("/");
         changeLoginState(true);
         setToken(response.data.accessToken);
-        console.log(response.data.accessToken);
-        // changeToken(response.data.accessToken);
 
         await axios
           .get("http://localhost:5555/users/me", {
@@ -112,7 +103,6 @@ const App = () => {
           })
           .then((res) => {
             setUserData(res.data);
-            console.log(res.data);
           })
           .catch((error) => {
             console.error("Error fetching reviews:", error);
@@ -201,7 +191,7 @@ const App = () => {
         />
         <Route
           path="/reviews/me"
-          element={<MyReviews getMyReviews={getMyReviews} />}
+          element={<MyReviews getMyReviews={getMyReviews} loggedIn={login} />}
         />
         <Route path="/reviews/edit/:id" element={<EditReview />} />
         <Route path="/reviews/delete/:id" element={<DeleteReview />} />
