@@ -17,9 +17,6 @@ import Locations from "./pages/Locations";
 import Restaurant from "./pages/Restaurant";
 import SearchResults from "./pages/SearchResults.jsx";
 import axios from "axios";
-//import BackButton from "./components/BackButton.jsx";
-
-// get(path.join("http://localhost:5555", imageUrl))
 
 const App = () => {
   const [login, setLogin] = useState(false);

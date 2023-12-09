@@ -65,9 +65,6 @@ export default function Profile({ userData, updateProfileInfo }) {
           <button type="submit" className="save-profile-btn">
             Save Profile
           </button>
-          {/* <button className="delete-account-btn" onClick={deleteAccount}>
-            Delete Account
-          </button> */}
         </div>
       </form>
     </div>

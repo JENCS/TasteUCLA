@@ -12,15 +12,6 @@ export default function UserProfile() {
 
   const { id } = useParams();
 
-  //   useEffect(() => {
-  //     if (userData.profile_picture) {
-  //       setFile(
-  //         "data:image/png;base64," +
-  //           Buffer.from(userData.profile_picture).toString("base64")
-  //       );
-  //     }
-  //   }, []);
-
   useEffect(() => {
     axios
       .get(`http://localhost:5555/users/${id}`)
@@ -34,13 +25,7 @@ export default function UserProfile() {
         console.error("Error fetching search results", error);
         //setLoading(false);
       });
-  }, []);
-
-  // "data:image/png;base64," + Buffer.from(userData.profile_picture).toString("base64")
-
-  // const mimeType = "image/png";
-  // const b64 = Buffer.from(userData.profile_picture).toString("base64");
-  // setImageDisplay(`data:${mimeType};base64,${b64}`);
+  }, [id]);
 
   return (
     <div className="profile-page">
