@@ -35,12 +35,30 @@ export default function Profile({ userData, updateProfileInfo }) {
   function removeImage(e) {
     setFile(null);
   }
-  function saveProfile() {
-    if (file) {
-      updateProfileInfo(image, bio);
-    } else {
-      updateProfileInfo(null, bio);
+  async function saveProfile(event) {
+    event.preventDefault();
+
+    console.log("I AM SAVING PROFILE");
+    const formData = new FormData();
+    formData.append("bio", bio);
+
+    console.log(bio);
+    console.log(image);
+
+    if (image) {
+      console.log("I AM APPENDING IMAGE");
+      formData.append("imageUrl", image);
     }
+
+    console.log("I AM UPDATING PROFILE");
+    console.log(...formData);
+    await updateProfileInfo(formData);
+
+    // if (file) {
+    //   updateProfileInfo(image, bio);
+    // } else {
+    //   updateProfileInfo(null, bio);
+    // }
   }
   function deleteAccount() {
     console.log("deleting user...");
@@ -48,38 +66,45 @@ export default function Profile({ userData, updateProfileInfo }) {
 
   return (
     <div className="profile-page">
-      <div className="user-info">
-        <h1>{username}</h1>
-      </div>
-      <div className="img-container-profile">
-        {!file && <CgProfile className="default-profile-img" />}
-        {file && (
-          <div className="crop-img">
-            <img src={file} className="jiwejfijwe" />
-          </div>
-        )}
-        <label className="custom-file-upload">
-          <input type="file" onChange={uploadImage} />
-          Upload Photo
-        </label>
-        <p onClick={removeImage}>Delete photo</p>
-      </div>
-      <div className="bio-container">
-        <label>Bio</label>
-        <textarea
-          className="bio"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-        ></textarea>
-      </div>
-      <div className="lower-btns">
-        <button className="save-profile-btn" onClick={saveProfile}>
-          Save Profile
-        </button>
-        <button className="delete-account-btn" onClick={deleteAccount}>
-          Delete Account
-        </button>
-      </div>
+      <form onSubmit={saveProfile} method="post" enctype="multipart/form-data">
+        <div className="user-info">
+          <h1>{username}</h1>
+        </div>
+        <div className="img-container-profile">
+          {!file && <CgProfile className="default-profile-img" />}
+          {file && (
+            <div className="crop-img">
+              <img src={file} className="jiwejfijwe" />
+            </div>
+          )}
+          <label className="custom-file-upload">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => uploadImage(e)}
+              name="imageUrl"
+            />
+            Upload Photo
+          </label>
+          <p onClick={removeImage}>Delete photo</p>
+        </div>
+        <div className="bio-container">
+          <label>Bio</label>
+          <textarea
+            className="bio"
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+          ></textarea>
+        </div>
+        <div className="lower-btns">
+          <button type="submit" className="save-profile-btn">
+            Save Profile
+          </button>
+          {/* <button className="delete-account-btn" onClick={deleteAccount}>
+            Delete Account
+          </button> */}
+        </div>
+      </form>
     </div>
   );
 }

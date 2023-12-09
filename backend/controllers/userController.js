@@ -36,9 +36,10 @@ const createUser = asyncHandler(async (req, res) => {
 });
 
 // @desc Update a user
-// @route PATCH /users
+// @route POST /users
 // @access Private
 const updateUser = asyncHandler(async (req, res) => {
+  console.log("I AM AT UPDATE USER");
   const username = req.user;
   const user = await User.findOne({ username }).exec();
   if (!user) {
@@ -48,7 +49,9 @@ const updateUser = asyncHandler(async (req, res) => {
   if (bio) {
     user.bio = bio;
   }
-  user.imageUrl = req.file ? "http://localhost:5555/" + req.file.path : null
+  console.log("PRINTING REQ FILE");
+  console.log(req.file);
+  user.imageUrl = req.file ? "http://localhost:5555/" + req.file.path : null;
   const updatedUser = await user.save();
   res.json({ message: `${updatedUser.username} updated` });
 });
@@ -72,20 +75,23 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 const getUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).select("-password")
-    .populate("reviews").lean();
+  const user = await User.findById(id)
+    .select("-password")
+    .populate("reviews")
+    .lean();
   res.status(202).json(user);
 });
 
 const getProfile = asyncHandler(async (req, res) => {
-  const username = req.user
+  const username = req.user;
   const foundUser = await User.findOne({ username })
     .select("-password")
     .populate({
-      path: 'reviews',
-      model: 'Review'
-    }).lean()
-  res.status(202).json(foundUser)
-})
+      path: "reviews",
+      model: "Review",
+    })
+    .lean();
+  res.status(202).json(foundUser);
+});
 
 export { getAllUsers, createUser, updateUser, deleteUser, getUser, getProfile };
