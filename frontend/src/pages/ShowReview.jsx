@@ -83,29 +83,35 @@ const ShowReview = ({ submitComment, loggedIn, userData }) => {
         <Spinner />
       ) : (
         <div className="show-review-page">
-          <div className="review-image">
-            <img
-              src={review.imageUrl}
-              alt="Review image"
-              // style={{
-              //   width: "500px",
-              //   height: "500px",
-              //   objectFit: "cover",
-              //   borderRadius: "8px",
-              // }}
-            />
-          </div>
           <div className-="restaurant-logo">
             <img
               src={"/logos/" + restaurant._id + ".png"}
-              // style={{
-              //   width: "200px",
-              //   height: "200px",
-              //   objectFit: "cover",
-              //   borderRadius: "8px",
-              // }}
+              style={{
+                width: "200px",
+                height: "200px",
+                objectFit: "cover",
+                borderRadius: "8px",
+                position: "absolute",
+                left: "80vw",
+              }}
             />
           </div>
+          {review.imageUrl && (
+            <div className="review-image">
+              <img
+                src={review.imageUrl}
+                alt="Review image"
+                style={{
+                  width: "300px",
+                  height: "300px",
+                  objectFit: "cover",
+                  position: "absolute",
+                  left: "50vw",
+                  top: "15vh",
+                }}
+              />
+            </div>
+          )}
           <div className="row">
             <div className="container">
               <div className="restaurant-name">
