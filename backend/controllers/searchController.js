@@ -71,7 +71,13 @@ async function searchDatabase(restaurantQuery, userQuery, reviewQuery) {
     }
     
     if (reviewQuery !== '') {
-        const reviews = await Review.find({}).select("-image").lean();
+        const reviews = await Review.find({}).select("-image").lean()
+            .populate("restaurant")
+            .lean()
+            .populate("user")
+            .lean()
+            .populate("comments")
+            .lean();
         const re = new RegExp(reviewQuery , "gi");
 
         for (let i in reviews) {
