@@ -1,7 +1,7 @@
 # TasteUCLA
 UCLA CS35L Fall 2023 Group Project
 
-Professor Eggert
+Professor Paul Eggert
 
 Team JENCS
   - Tanisaka, Nanako
@@ -20,8 +20,8 @@ TasteUCLA uses a MERN stack, using [MongoDB](https://www.mongodb.com/), [Express
 $ git clone https://github.com/JENCS/TasteUCLA
 ```
 
-### Launch the backend and database server:
-#### To allow the backend server to connect to MongoDB, we must include a file named: `/TasteUCLA/backend/.env` in the root of the backend server. First, create two access tokens for the access and refresh tokens you will put into your ".env" file to connect to the MongoDB database by running the following command twice in a node environment and saving the two outputs:
+### Setup the backend and database server
+To allow the backend server to connect to MongoDB, we must include a file named: `/TasteUCLA/backend/.env` in the root of the backend server. First, create two access tokens for the access and refresh tokens you will put into your ".env" file to connect to the MongoDB database by running the following command twice in a node environment and saving the two outputs:
 ```node
 > require('crypto').randomBytes(64).toString('hex')
 ```
@@ -34,7 +34,7 @@ ACCESS_TOKEN_SECRET=<TOKEN 1 HERE>
 REFRESH_TOKEN_SECRET=<TOKEN 2 HERE>
 ```
 
-### Launch the frontend server:
+### Launch the frontend server
 ```bash
 $ cd TasteUCLA/frontend
 $ npm install
@@ -42,7 +42,7 @@ $ npm run build
 $ npm run preview
 ```
 
-#### Launch the backend server
+### Launch the backend server
 ```bash
 $ cd TasteUCLA/backend
 $ npm install
