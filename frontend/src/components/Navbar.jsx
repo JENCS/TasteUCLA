@@ -194,7 +194,7 @@ export default function Navbar({
                     <h3>Users</h3>
                     {searchResults.users.map((user, index) => {
                       // Redirect to profile page if the user search him/herself
-                      return user.username === userData.username ? (
+                      return userData && user.username === userData.username ? (
                         <Link to={`/profile`}>
                           <p>{user.username}</p>
                         </Link>
